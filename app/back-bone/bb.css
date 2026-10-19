@@ -1,0 +1,32 @@
+/* back_bone deep dive. Keyframes copied from design/canvas/BackBone.dc.html, prefixed with b-. */
+.p-bb .b-dot { width: 10px; height: 10px; border-radius: 3px; background: #2a2a40; animation: b-dot 6s ease-in-out infinite; }
+@keyframes b-dot { 0%, 70%, 100% { background: #2a2a40; } 8%, 30% { background: var(--c); } }
+.p-bb .b-tile { border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation: b-tile 6s ease-in-out infinite; }
+@keyframes b-tile { 0%, 70%, 100% { border-color: #2a2a40; } 8%, 30% { border-color: var(--c); } }
+.p-bb .b-lanefill { height: 10px; border-radius: 5px; animation: b-lanefill var(--d, 3s) cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+@keyframes b-lanefill { 0% { width: 0; } 70%, 100% { width: 100%; } }
+.p-bb .b-tick { position: absolute; inset: 0; animation: b-tick 5s linear infinite; transform-origin: 50% 50%; }
+@keyframes b-tick { to { transform: rotate(360deg); } }
+.p-bb .b-step { animation: b-step 9s ease-in-out infinite; }
+@keyframes b-step { 0%, 15%, 100% { opacity: 0.4; } 2%, 13% { opacity: 1; } }
+.p-bb .b-live { animation: b-live 2s ease-in-out infinite; }
+@keyframes b-live { 0%, 100% { box-shadow: 0 0 0 0 rgba(143, 205, 240, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(143, 205, 240, 0); } }
+
+.p-bb .map-flow { overflow-x: auto; padding-bottom: 8px; }
+.p-bb .stack-col { display: flex; flex-direction: column; gap: 6px; flex: none; }
+.p-bb .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; }
+.p-bb .tile-head { display: flex; justify-content: space-between; }
+.p-bb .tile-head b { font-weight: 650; font-size: 15px; }
+.p-bb .dots { display: flex; flex-wrap: wrap; gap: 4px; }
+.p-bb .tile-note { font-size: 12px; line-height: 18px; color: var(--text-subtle); }
+.p-bb .clock { position: relative; width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--line-strong); }
+.p-bb .clock .hand { position: absolute; left: 58px; top: 10px; width: 2px; height: 50px; background: var(--gold); border-radius: 1px; }
+.p-bb .clock .hub { position: absolute; left: 53px; top: 53px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); }
+.p-bb .lanes { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+.p-bb .lane { display: flex; flex-direction: column; gap: 8px; }
+.p-bb .lane__head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.p-bb .lane__head b { font: 600 13px/18px var(--font-mono); }
+.p-bb .lane__track { height: 10px; border-radius: 5px; background: var(--raised); overflow: hidden; }
+.p-bb .platform { display: flex; flex-direction: column; align-items: stretch; }
+.p-bb .platform .stem { width: 2px; height: 28px; background: var(--line-strong); align-self: center; }
+@media (prefers-reduced-motion: reduce) { .p-bb .b-lanefill { width: 100%; } .p-bb .b-step { opacity: 1; } }
