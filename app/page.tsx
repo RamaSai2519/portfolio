@@ -1,355 +1,388 @@
 import Link from "next/link";
 import "./home.css";
-import { BrowserFrame } from "@/components/frame";
 import { Colophon, Ph, Wire, Wordmark } from "@/components/chrome";
+import { CandleChart } from "@/components/candle-chart";
+import { JourneyChrome } from "@/components/journey";
+import { LiveFrame } from "@/components/live-frame";
+import { Stage, type StageAction } from "@/components/stage";
 import { contact, repos, sites } from "@/lib/site";
 import shotJourneymen from "@/design/content/assets/screenshots/journeymen.png";
 import shotLedger from "@/design/content/assets/screenshots/ledger.png";
 import shotMohan from "@/design/content/assets/screenshots/mohan-visweswar.png";
 import shotEpoch from "@/design/content/assets/screenshots/gitam-epoch.png";
 
-const index = [
-  { href: "/emporos", tag: "flagship · trading", color: "var(--gold)", name: "Emporos", line: "Nifty options desk with a 16-rule risk engine" },
-  { href: sites.journeymen, tag: "flagship · site", color: "var(--gold)", name: "Journeymen", line: "GitHub-verified developer certification." },
-  { href: "/ark-i", tag: "sukoon · ai", color: "var(--purple)", name: "ARK-I", line: "WhatsApp assistant, one model plus six specialists" },
-  { href: "/mark8", tag: "sukoon · ai", color: "var(--purple)", name: "mark8", line: "Scores 100–500 support calls a day" },
-  { href: "/back-bone", tag: "sukoon · backend", color: "var(--sky)", name: "back_bone", line: "83 endpoints and a 5-minute scheduler" },
-  { href: repos.resume, tag: "tool", color: "var(--brand)", name: "resume_builder", line: "YAML to a one-page, ATS-safe PDF" },
-  { href: sites.ledger, tag: "site", color: "var(--text-subtle)", name: "Ledger", line: "One shared ledger for a couple or roommates" },
-  { href: sites.mohan, tag: "client site", color: "var(--text-subtle)", name: "Mohan Visweswar", line: "Insurance and financial consultant, built for the client" },
-  { href: sites.epoch, tag: "site", color: "var(--text-subtle)", name: "GITAM Epoch", line: "GitHub Community Club and its annual fest" },
+type Project = { id: string; num: string; name: string; tag: string; line: string; action: StageAction };
+
+// Tour order: flagships, then the Sukoon systems, then the other sites and the tool.
+const projects: Project[] = [
+  { id: "emporos", num: "01", name: "Emporos", tag: "flagship · trading", line: "Nifty options desk with a 16-rule risk engine", action: { href: "/emporos", label: "Deep dive" } },
+  { id: "journeymen", num: "02", name: "Journeymen", tag: "flagship · site", line: "GitHub-verified developer certification.", action: { href: sites.journeymen, label: "Visit journeymen.in", external: true } },
+  { id: "ark-i", num: "03", name: "ARK-I", tag: "sukoon · ai", line: "WhatsApp assistant, one model plus six specialists", action: { href: "/ark-i", label: "Deep dive" } },
+  { id: "mark8", num: "04", name: "mark8", tag: "sukoon · ai", line: "Scores 100–500 support calls a day", action: { href: "/mark8", label: "Deep dive" } },
+  { id: "back-bone", num: "05", name: "back_bone", tag: "sukoon · backend", line: "83 endpoints and a 5-minute scheduler", action: { href: "/back-bone", label: "Deep dive" } },
+  { id: "ledger", num: "06", name: "Ledger", tag: "site", line: "One shared ledger for a couple or roommates", action: { href: sites.ledger, label: "Visit Ledger", external: true } },
+  { id: "mohan", num: "07", name: "Mohan Visweswar", tag: "client site", line: "Insurance and financial consultant, built for the client", action: { href: sites.mohan, label: "Visit the site", external: true } },
+  { id: "epoch", num: "08", name: "GITAM Epoch", tag: "community site", line: "GitHub Community Club and its annual fest", action: { href: sites.epoch, label: "Visit Epoch", external: true } },
+  { id: "resume-builder", num: "09", name: "resume_builder", tag: "tool", line: "YAML to a one-page, ATS-safe PDF", action: { href: repos.resume, label: "View the code", external: true } },
 ];
+const P = Object.fromEntries(projects.map((p) => [p.id, p])) as Record<string, Project>;
 
 const rubric = [
-  { name: "opening greeting", pts: 10, color: "var(--sky)" },
-  { name: "expert / user time split", pts: 15, color: "var(--purple)" },
-  { name: "user sentiment", pts: 20, color: "var(--brand)" },
-  { name: "flow of conversation", pts: 15, color: "var(--purple)" },
-  { name: "time spent on call", pts: 10, color: "var(--sky)" },
-  { name: "chance of a call back", pts: 20, color: "var(--gold)" },
-  { name: "closing greeting", pts: 10, color: "var(--sky)" },
+  { name: "opening greeting", pts: 10 },
+  { name: "expert / user time split", pts: 15 },
+  { name: "user sentiment", pts: 20 },
+  { name: "flow of conversation", pts: 15 },
+  { name: "time spent on call", pts: 10 },
+  { name: "chance of a call back", pts: 20 },
+  { name: "closing greeting", pts: 10 },
 ];
 
-const lanes = [
-  { name: "schedules", color: "var(--brand)" },
-  { name: "event reminders", color: "var(--sky)" },
-  { name: "expert status", color: "var(--purple)" },
-  { name: "emails · db backup", color: "var(--gold)" },
+// hand grouping of back_bone's 83 /actions/* routes
+const domains: [string, number, string][] = [
+  ["payments", 11, "var(--sky)"], ["content · ai", 10, "var(--purple)"], ["games", 10, "var(--gold)"], ["experts", 9, "var(--brand)"],
+  ["users", 8, "var(--link)"], ["calls", 7, "var(--danger)"], ["events", 7, "var(--sky)"], ["admin", 7, "var(--purple)"],
+  ["whatsapp", 6, "var(--brand)"], ["push", 5, "var(--gold)"], ["auth", 3, "var(--link)"],
 ];
 
-const subs = ["experts", "schedules", "sukoon", "events", "partners", "user"];
+const lanes: [string, string][] = [["schedules", "var(--brand)"], ["event reminders", "var(--sky)"], ["expert status", "var(--purple)"], ["emails · db backup", "var(--gold)"]];
 
-// [bottom px, height px, down candle?] for the Emporos mini chart: 5-candle move, 5-candle build-up, breakout
-const mini: [number, number, boolean][] = [
-  [8, 18, false], [20, 18, false], [32, 18, false], [44, 18, false], [56, 18, false],
-  [74, 10, true], [76, 14, false], [73, 10, true], [78, 12, false], [75, 12, true],
-];
+function Scene({ p, flip, children, copy, length }: { p: Project; flip?: boolean; children: React.ReactNode; copy: React.ReactNode; length?: number }) {
+  return (
+    <Stage id={p.id} className={`tour ${flip ? "tour--flip" : ""}`} name={p.name} num={p.num} action={p.action} length={length} label={p.name}>
+      <div className="tour__in">
+        <div className="tour__copy">
+          <div className="tour__eyebrow"><span className="tour__num">{p.num}</span><span className="dp-label">{p.tag}</span></div>
+          {copy}
+        </div>
+        <div className="tour__fig">{children}</div>
+      </div>
+    </Stage>
+  );
+}
 
 export default function Home() {
   return (
     <div className="p-home">
-      <header className="wrap site-header">
-        <Wordmark href="#top" />
-        <nav aria-label="Sections">
-          <a className="dp-btn dp-btn--ghost" href="#work">work</a>
-          <a className="dp-btn dp-btn--ghost" href="#sites">sites</a>
-          <a className="dp-btn dp-btn--ghost" href="#systems">systems</a>
-          <a className="dp-btn dp-btn--ghost" href="#contact">contact</a>
-        </nav>
+      <header className="top">
+        <div className="wrap site-header">
+          <Wordmark href="#top" />
+          <nav aria-label="Sections">
+            <a className="dp-btn dp-btn--ghost" href="#index">tour</a>
+            <a className="dp-btn dp-btn--ghost" href="#all-work">all work</a>
+            <a className="dp-btn dp-btn--ghost" href="#contact">contact</a>
+          </nav>
+        </div>
       </header>
+
+      <JourneyChrome items={projects.map(({ id, num, name }) => ({ id, num, name }))} />
 
       <main id="main">
         {/* HERO */}
-        <section id="top" className="wrap hero-home">
-          <div className="hero-home__copy rise">
-            <span className="dp-pill dp-pill--brand" style={{ alignSelf: "flex-start" }}>
-              <i className="dp-dot dp-dot--live live" />
-              <Ph>open to work: confirm</Ph>
-            </span>
-            <h1 className="h-home">I ship websites and the systems behind them<span className="dotg">.</span></h1>
-            <p className="lede" style={{ maxWidth: 560 }}>
-              Five sites live in production, and the systems behind them: a trading engine, an LLM assistant, a call scorer, a platform backend and a résumé typesetter.
-            </p>
-            <div className="hero-stats">
-              <div><b className="c-brand">10k</b><span className="dp-label">active users at Sukoon</span></div>
-              <div><b className="c-purple">4k</b><span className="dp-label">paying members</span></div>
-              <div><b className="c-gold">100–500</b><span className="dp-label">calls scored a day</span></div>
+        <section id="top" className="hero-full">
+          <div className="hero-full__in">
+            <div className="hero-full__copy rise">
+              <span className="dp-pill" style={{ alignSelf: "flex-start" }}><Ph>open to work: confirm</Ph></span>
+              <h1 className="h-home">I ship websites and the systems behind them<span className="dotg">.</span></h1>
+              <p className="lede">Five sites live in production, and the systems behind them: a trading engine, an LLM assistant, a call scorer, a platform backend and a résumé typesetter.</p>
+              <div className="hero-cta">
+                <a className="dp-btn dp-btn--primary" href="#index">Start the tour</a>
+                <a className="tlink" href={contact.github}>github.com/RamaSai2519 ↗</a>
+              </div>
             </div>
-            <div className="row">
-              <a className="dp-btn dp-btn--primary" href="#work">See the work</a>
-              <a className="dp-btn dp-btn--secondary" href={contact.github}>github.com/RamaSai2519</a>
+            <div className="hero-stats rise rise--d" aria-label="Sukoon Unlimited figures">
+              <div><b>10k</b><span className="dp-label">active users at Sukoon</span></div>
+              <div><b>4k</b><span className="dp-label">paying members</span></div>
+              <div><b>100–500</b><span className="dp-label">calls scored a day</span></div>
             </div>
-          </div>
-          <div className="dp-code hero-log rise rise--d">
-            <div className="dp-code__bar" aria-hidden="true"><i /><i /><i /><span>git log --graph --oneline</span></div>
-            <ol className="dp-graph">
-              <li style={{ ["--node" as string]: "var(--brand)" }}><h3>journeymen.in</h3><p>main · site</p></li>
-              <li style={{ ["--node" as string]: "var(--brand)" }}><h3>emporos · ledger</h3><p>main · sub-domains</p></li>
-              <li style={{ ["--node" as string]: "var(--sky)" }}><h3>mohanvisweswar.in · gitam epoch</h3><p>client · community</p></li>
-              <li style={{ ["--node" as string]: "var(--purple)" }}><h3>ARK-I · mark8 · back_bone</h3><p>sukoon · systems</p></li>
-              <li style={{ ["--node" as string]: "var(--purple)" }}><h3>resume_builder</h3><p>tools · systems</p></li>
-            </ol>
           </div>
         </section>
 
-        {/* INDEX */}
-        <section id="work" className="wrap section section--tight">
+        {/* INDEX: overview at the start */}
+        <section id="index" className="index">
           <div className="sec-head sec-head--row">
             <div className="sec-head__titles">
-              <span className="dp-label">00 — index</span>
-              <h2 className="h-display">All work</h2>
+              <span className="dp-label">00 — the tour</span>
+              <h2 className="h-display">Nine projects, one at a time</h2>
             </div>
-            <span className="dp-label">{index.length} projects · 4 deep dives</span>
+            <span className="scroll-cue dp-label"><i aria-hidden="true" />scroll to start</span>
           </div>
-          <div className="index">
-            {index.map((p) =>
-              p.href.startsWith("/") ? (
-                <Link key={p.name} className="dp-card" href={p.href}>
-                  <span className="dp-label" style={{ color: p.color }}>{p.tag}</span>
-                  <h3>{p.name}</h3>
-                  <p>{p.line}</p>
-                </Link>
-              ) : (
-                <a key={p.name} className="dp-card" href={p.href} target="_blank" rel="noopener">
-                  <span className="dp-label" style={{ color: p.color }}>{p.tag}</span>
-                  <h3>{p.name}</h3>
-                  <p>{p.line}</p>
+          <ol>
+            {projects.map((p) => (
+              <li key={p.id}>
+                <a href={`#${p.id}`}>
+                  <span className="n">{p.num}</span>
+                  <b>{p.name}</b>
+                  <span className="go" aria-hidden="true">↓</span>
+                  <span className="line">{p.line}</span>
                 </a>
-              ),
-            )}
-          </div>
+              </li>
+            ))}
+          </ol>
         </section>
 
-        {/* SITES */}
-        <section id="sites" className="wrap section">
-          <div className="sec-head sec-head--row">
-            <div className="sec-head__titles">
-              <span className="dp-label">01 — shipped</span>
-              <h2 className="h-display">Live on the web</h2>
+        {/* 01 EMPOROS */}
+        <Scene
+          p={P.emporos}
+          length={2.2}
+          copy={
+            <>
+              <h2>A trading desk that refuses to guess<span className="dotg">.</span></h2>
+              <p>Emporos trades Nifty weekly options through Angel One. It records the market every minute, paper-trades 24 books and trades one for real, only when five locks agree and sixteen risk rules pass.</p>
+              <div className="tags" data-step={14}><span className="dp-pill">python · asyncio</span><span className="dp-pill">angel one</span><span className="dp-pill">aws</span><span className="dp-pill">next.js</span></div>
+              <div className="tour__links" data-step={15}><Link className="tlink" href="/emporos/demo">Demo dashboard (coming) →</Link></div>
+            </>
+          }
+        >
+          <div className="canvas-box" role="img" aria-label="As you scroll, the live book's setup draws candle by candle: a five-candle move, a five-candle build-up, a breakout, entry at its peak, a Rs 2,000 floor and a trailing stop. The order then passes sixteen risk rules and five locks.">
+            <div className="tags" style={{ justifyContent: "space-between" }}><span className="dp-label">live book · O-N5-B5 · nifty 1 min</span><span className="dp-label">last entry 15:12 · out by 15:15</span></div>
+            <CandleChart from={0} />
+            <div className="flow flow--stack">
+              <div className="node lit" data-step={10} data-fx="state">setup · 5 + 5</div>
+              <Wire />
+              <div className="node lit lit--gold" data-step={12} data-fx="state">16 risk rules</div>
+              <Wire delay={0.8} />
+              <div className="node lit lit--brand" data-step={13} data-fx="state">limit order</div>
             </div>
-            <span className="dp-label">hover a frame to scroll faster</span>
+            <div className="locks-row">
+              <span className="dp-label">live gate</span>
+              {["live flag", "override", "hash ack", "kill switch", "dry / real"].map((l, i) => (
+                <span key={l} className="chip lit lit--brand" data-step={13 + Math.floor(i / 2)} data-fx="state">{l}</span>
+              ))}
+            </div>
           </div>
-          <div className="sites">
-            <BrowserFrame
-              className="s3"
-              href={sites.journeymen}
-              url="www.journeymen.in"
-              title="Journeymen"
-              badge={<span className="dp-pill dp-pill--gold">flagship</span>}
-              frameH={300}
-              shot={shotJourneymen}
-              shotAlt="Full-page screenshot of journeymen.in"
-              scrollDur={18}
-            >
-              <p>GitHub-verified developer certification. A submitted project is checked against its GitHub commit history, run through AI consistency checks and graded; anything odd goes to a human review queue. Built by a two-person team.</p>
-            </BrowserFrame>
+        </Scene>
 
-            <BrowserFrame
-              className="s3"
-              href="/emporos"
-              url="emporos.journeymen.in"
-              title="Emporos"
-              badge={<span className="dp-pill dp-pill--gold">flagship</span>}
-              frameH={300}
-              overlay={<span className="dp-pill dp-pill--overlay"><Ph>demo dashboard preview: blocked until the demo exists</Ph></span>}
-              mock={
-                <div className="mock emp-mock" style={{ animationDelay: "-4s" }} aria-hidden="true">
-                  <div className="bar1"><i style={{ width: "25%", background: "var(--purple)" }} /><i style={{ width: "30%", background: "var(--line)" }} /></div>
-                  <div className="grid">
-                    {Array.from({ length: 12 }, (_, i) => <i key={i} className={[0, 3, 5, 10].includes(i) ? "p" : ""} />)}
-                  </div>
-                </div>
-              }
-            >
-              <p>My Nifty weekly options desk: it records the market every minute, paper-trades 24 books and trades one for real behind five locks. The live dashboard is private; a public demo is on the way.</p>
-            </BrowserFrame>
+        {/* 02 JOURNEYMEN */}
+        <Scene
+          p={P.journeymen}
+          flip
+          copy={
+            <>
+              <h2>A résumé is a claim. This is the record<span className="dotg">.</span></h2>
+              <p>GitHub-verified developer certification. A submitted project is checked against its GitHub commit history, run through AI consistency checks and graded; anything odd goes to a human review queue.</p>
+              <div className="tags" data-step={1}><span className="dp-pill">next.js</span><span className="dp-pill">python cli</span><span className="dp-pill">flask on lambda</span><span className="dp-pill">sqs grading worker</span><span className="dp-pill">terraform</span></div>
+              <p className="small" data-step={2}>Built by a two-person team.</p>
+            </>
+          }
+        >
+          <LiveFrame src={sites.journeymen} url="www.journeymen.in" title="journeymen.in, live" poster={shotJourneymen} />
+        </Scene>
 
-            <BrowserFrame className="s2" href={sites.ledger} url="ledger.journeymen.in" title="Ledger" frameH={220} shot={shotLedger} shotAlt="Full-page screenshot of ledger.journeymen.in" scrollDur={18}>
-              <p>One shared ledger for a couple or roommates. Bank SMS turns into categorized transactions, budgets track what&rsquo;s left, and every entry shows who logged it.</p>
-            </BrowserFrame>
-
-            <BrowserFrame className="s2" href={sites.mohan} url="mohanvisweswar.in" title="Mohan Visweswar" frameH={220} shot={shotMohan} shotAlt="Full-page screenshot of mohanvisweswar.in" scrollDur={14}>
-              <p>Built for Chandika Mohan Visweswar, an insurance and financial consultant: motor, health, travel, marine, business, cattle and home cover, loans and investments.</p>
-            </BrowserFrame>
-
-            <BrowserFrame className="s2" href={sites.epoch} url="gitamepoch.vercel.app" title="GITAM Epoch" frameH={220} shot={shotEpoch} shotAlt="Full-page screenshot of gitamepoch.vercel.app" scrollDur={22}>
-              <p>The GitHub Community Club at GITAM Bengaluru and Epoch, its annual fest: registration, Epoch Coins, QR scanning, a shop and a live leaderboard. I&rsquo;m a core contributor.</p>
-            </BrowserFrame>
-          </div>
-        </section>
-
-        {/* SYSTEMS */}
-        <section id="systems" className="wrap section">
-          <div className="sec-head">
-            <span className="dp-label">02 — solved</span>
-            <h2 className="h-display">Systems, drawn running</h2>
-          </div>
-
-          {/* Emporos */}
-          <article className="sys sys--flag">
-            <div className="sys__copy">
-              <div className="tags" style={{ alignItems: "center" }}><span className="dp-label c-gold">emporos · trading engine</span><span className="dp-pill dp-pill--gold">flagship</span></div>
-              <h3>Sixteen risk rules before every order.</h3>
-              <p className="small">Records Nifty options every minute, finds a breakout one closed candle at a time, paper-trades 24 books and trades one for real behind five locks. Limit orders only, intent written before the broker call.</p>
-              <div className="tags"><span className="dp-pill dp-pill--gold">angel one</span><span className="dp-pill">python · asyncio</span><span className="dp-pill dp-pill--sky">aws</span><span className="dp-pill dp-pill--purple">next.js</span></div>
-              <div className="tags"><Link className="dp-btn dp-btn--primary" href="/emporos">Deep dive</Link><Link className="dp-btn dp-btn--ghost" href="/emporos/demo">Demo dashboard</Link></div>
-            </div>
-            <div className="sys__fig stage" role="img" aria-label="Animated diagram: a five-candle move and a five-candle build-up on the Nifty chart end in a breakout, which passes the risk engine before a limit order reaches Angel One">
-              <div className="mini-chart">
-                <div className="range" style={{ left: 70, width: 64 }} />
-                {mini.map(([b, h, dn], i) => <i key={i} className={dn ? "dn" : ""} style={{ height: h, marginBottom: b }} />)}
-                <i className="live" style={{ height: 30, marginBottom: 80 }} />
-                <span className="dp-label lbl c-brand">breakout → buy</span>
-              </div>
-              <div className="flow flow--stack">
-                <div className="node node--purple">setup · 5 + 5 candles</div>
-                <Wire />
-                <div className="node node--gold">16 risk rules</div>
-                <Wire delay={0.8} />
-                <div className="node node--brand">limit order</div>
-              </div>
-            </div>
-          </article>
-
-          {/* ARK-I */}
-          <article className="sys">
-            <div className="sys__copy">
-              <span className="dp-label c-purple">ARK-I · adaptive resource kernel</span>
-              <h3>One model remembers. Six forget on purpose.</h3>
-              <p className="small">A stateful main model holds the whole conversation and calls short-lived, stateless sub-models through function calls. Ran the WhatsApp assistant for Sukoon Unlimited, with about 100 people chatting to it every day.</p>
-              <div className="tags"><span className="dp-pill dp-pill--purple">gpt-4o tools</span><span className="dp-pill">flask</span><span className="dp-pill">mongodb</span><span className="dp-pill dp-pill--sky">whatsapp</span></div>
-              <div className="tags"><Link className="dp-btn dp-btn--primary" href="/ark-i">Deep dive</Link><a className="dp-btn dp-btn--ghost" href={repos.arki}>RamaSai2519/ARK-I</a></div>
-            </div>
-            <div className="sys__fig stage ark-fig" role="img" aria-label="Animated diagram: a user message flows to MainGPT, which calls a controller that dispatches to six sub-models in turn">
-              <div className="node-col">
-                <div className="ark-user">
-                  <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></svg>
-                </div>
-                <span className="dp-label">user</span>
-              </div>
+        {/* 03 ARK-I */}
+        <Scene
+          p={P["ark-i"]}
+          copy={
+            <>
+              <h2>One model remembers. Six forget on purpose<span className="dotg">.</span></h2>
+              <p>A stateful gpt-4o model holds the whole conversation and calls short-lived, stateless sub-models through function calls. It ran the WhatsApp assistant for Sukoon Unlimited, with about 100 people chatting to it every day.</p>
+              <div className="tags" data-step={9}><span className="dp-pill">gpt-4o tools</span><span className="dp-pill">flask</span><span className="dp-pill">mongodb</span><span className="dp-pill">whatsapp</span></div>
+              <div className="tour__links" data-step={10}><a className="tlink" href={repos.arki}>RamaSai2519/ARK-I ↗</a></div>
+            </>
+          }
+        >
+          <div className="canvas-box" role="img" aria-label="As you scroll, a WhatsApp message travels to Flask, then MainGPT, which keeps history in MongoDB, then the controller, which calls the six sub-models in turn">
+            <div className="flow flow--stack">
+              <div className="node-col" data-step={0}><div className="ark-user"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" /></svg></div><span className="dp-label">whatsapp</span></div>
               <Wire color="var(--sky)" />
-              <div className="node-col">
-                <div className="node node--brand node--strong live" style={{ fontSize: 14, lineHeight: "18px", padding: "14px 16px", borderRadius: 14 }}>MainGPT</div>
-                <div className="vwire" style={{ height: 28 }}><i className="pkt" style={{ ["--pkt" as string]: "var(--brand)" }} /></div>
-                <span className="dp-pill" style={{ fontSize: 11 }}>mongo · history</span>
-              </div>
-              <Wire delay={0.6} />
-              <div className="node" style={{ fontSize: 13, lineHeight: "18px", padding: "14px 12px", borderRadius: 14 }}>controller</div>
-              <Wire color="var(--purple)" delay={1.2} style={{ flexBasis: 24 }} />
-              <div className="ark-subs">
-                {subs.map((s, i) => <span key={s} className="h-blink" style={{ animationDelay: `${i * 0.6}s` }}>{s}</span>)}
-              </div>
+              <div className="node-col"><div className="node lit lit--sky" data-step={1} data-fx="state">flask /ark</div><span className="dp-label">gunicorn</span></div>
+              <Wire color="var(--sky)" delay={0.6} />
+              <div className="node-col"><div className="node lit lit--brand node--strong" data-step={2} data-fx="state" style={{ fontSize: 15, padding: "16px 18px" }}>MainGPT</div><span className="dp-label">mongo · history</span></div>
+              <Wire delay={1.2} />
+              <div className="node-col"><div className="node lit" data-step={3} data-fx="state">controller</div><span className="dp-label">routes</span></div>
             </div>
-          </article>
+            <div className="ark-subs">
+              {["ExpertsGPT", "SchedulesGPT", "SukoonGPT", "EventsGPT", "PartnersGPT", "UserGPT"].map((s, i) => (
+                <span key={s} className="node lit" data-step={4 + i} data-fx="state">{s}</span>
+              ))}
+            </div>
+          </div>
+        </Scene>
 
-          {/* mark8 */}
-          <article className="sys sys--rev">
-            <div className="sys__fig stage" role="img" aria-label="Animated diagram: all day, each support call is validated, analysed and scored on a seven-part, 100-point rubric">
-              <div className="tags" style={{ justifyContent: "space-between", alignItems: "center" }}>
-                <span className="dp-pill dp-pill--gold"><i className="dp-dot live" style={{ background: "var(--gold)" }} />realtime · all day</span>
-                <span className="dp-label">100–500 calls / day</span>
-              </div>
-              <div className="flow flow--stack">
-                <div className="node">calls</div>
-                <Wire color="var(--gold)" />
-                <div className="node">validate</div>
-                <Wire color="var(--gold)" delay={0.8} />
-                <div className="node node--purple">analyse</div>
-                <Wire color="var(--gold)" delay={1.6} />
-                <div className="node node--brand">score</div>
-              </div>
-              <div className="bars">
-                {rubric.map((r, i) => (
-                  <div key={r.name} className="bar">
-                    <div className="bar__head"><span className="dp-label">{r.name}</span><span className="dp-label c-text">{r.pts}</span></div>
-                    <div className="bar__track"><div className="h-fill" style={{ ["--w" as string]: `${r.pts * 5}%`, background: r.color, animationDelay: `${i * 0.25}s` }} /></div>
-                  </div>
-                ))}
-              </div>
-              <div className="tags"><span className="dp-pill">→ user persona</span><span className="dp-pill">→ expert persona</span><span className="dp-pill dp-pill--brand">→ score / 100</span></div>
+        {/* 04 MARK8 */}
+        <Scene
+          p={P.mark8}
+          flip
+          copy={
+            <>
+              <h2>Every support call, read and scored as it happens<span className="dotg">.</span></h2>
+              <p>Ran all day on Sukoon Unlimited&rsquo;s support line, 100 to 500 calls a day. Each call is checked, tagged against 12 topic families, given a user and an expert persona, and scored out of 100.</p>
+              <div className="tags" data-step={11}><span className="dp-pill">llm scoring</span><span className="dp-pill">flask + quart</span><span className="dp-pill">pm2</span></div>
+              <div className="tour__links" data-step={12}><a className="tlink" href={repos.mark8}>RamaSai2519/mark8 ↗</a></div>
+            </>
+          }
+        >
+          <div className="canvas-box" role="img" aria-label="As you scroll, a call is validated, analysed and scored, and the seven rubric parameters fill to their weights, 100 points in total">
+            <div className="tags" style={{ justifyContent: "space-between" }}><span className="dp-pill dp-pill--gold">realtime · all day</span><span className="dp-label">100–500 calls / day</span></div>
+            <div className="flow flow--stack">
+              <div className="node lit lit--gold" data-step={0} data-fx="state">call ends</div>
+              <Wire color="var(--gold)" />
+              <div className="node lit" data-step={1} data-fx="state">successful · recorded · 2 min+</div>
+              <Wire color="var(--gold)" delay={0.8} />
+              <div className="node lit lit--brand" data-step={2} data-fx="state">score / 100</div>
             </div>
-            <div className="sys__copy">
-              <span className="dp-label c-gold">mark8 · realtime call analyst</span>
-              <h3>Every support call, read and scored as it happens.</h3>
-              <p className="small">Ran all day on Sukoon&rsquo;s support line, 100 to 500 calls a day: tags each call against 12 topic families, updates user and expert personas, and scores it out of 100. The same server handles bulk scheduling, WhatsApp queues, FCM pushes and PDF invoices.</p>
-              <div className="tags"><span className="dp-pill dp-pill--gold">llm scoring</span><span className="dp-pill">flask + quart</span><span className="dp-pill">pm2</span></div>
-              <div className="tags"><Link className="dp-btn dp-btn--primary" href="/mark8">Deep dive</Link><a className="dp-btn dp-btn--ghost" href={repos.mark8}>RamaSai2519/mark8</a></div>
-            </div>
-          </article>
-
-          {/* back_bone */}
-          <article className="sys">
-            <div className="sys__copy">
-              <span className="dp-label c-sky">back_bone · sukoon platform backend</span>
-              <h3>83 endpoints and a five-minute heartbeat.</h3>
-              <p className="small">The Flask-on-Lambda API behind Sukoon: users, experts, calls, payments, WhatsApp, events and games, plus a scheduler that places due calls and sends reminders every five minutes.</p>
-              <div className="tags"><span className="dp-pill dp-pill--sky">aws lambda</span><span className="dp-pill">flask</span><span className="dp-pill dp-pill--brand">mongodb</span><span className="dp-pill dp-pill--gold">cashfree</span></div>
-              <div className="tags"><Link className="dp-btn dp-btn--primary" href="/back-bone">Deep dive</Link><a className="dp-btn dp-btn--ghost" href={repos.backbone}>RamaSai2519/back_bone</a></div>
-            </div>
-            <div className="sys__fig stage" role="img" aria-label="Animated diagram: the scheduler fires every five minutes and its job groups fill side by side">
-              <div className="tags" style={{ justifyContent: "space-between" }}><span className="dp-pill dp-pill--gold">rate(5 minutes)</span><span className="dp-label">gamesProcessor + scheduler</span></div>
-              <div className="bars bars--one">
-                {lanes.map((l, i) => (
-                  <div key={l.name} className="bar">
-                    <span className="dp-label" style={{ color: l.color }}>{l.name}</span>
-                    <div className="bar__track"><div className="h-fill" style={{ ["--w" as string]: "100%", background: l.color, animationDelay: `${i * 0.3}s` }} /></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </article>
-
-          {/* resume_builder */}
-          <article className="sys">
-            <div className="sys__copy">
-              <span className="dp-label c-brand">resume_builder · yaml → pdf</span>
-              <h3>Binary-searches the type until it fits one page.</h3>
-              <p className="small">Résumés live in YAML and render through headless Chromium to ATS-safe HTML and PDF, with an ATS report and a keyword-gap check that never invents experience.</p>
-              <div className="tags"><span className="dp-pill dp-pill--brand">playwright</span><span className="dp-pill">3 themes</span><span className="dp-pill dp-pill--sky">ats report</span></div>
-              <div className="tags">
-                <a className="dp-btn dp-btn--secondary" href={contact.resume} download>Download a résumé it built</a>
-                <a className="dp-btn dp-btn--ghost" href={repos.resume}>RamaSai2519/resume_builder</a>
-              </div>
-            </div>
-            <div className="sys__fig stage rb-fig" role="img" aria-label="Animated diagram: YAML content is rendered to a page whose type scale shrinks and grows until it fits exactly one page, then scored for ATS checks">
-              <div className="dp-code">
-                <div className="dp-code__bar" aria-hidden="true"><i /><i /><i /><span>resume.yaml</span></div>
-                <pre><span className="k">name</span>: <span className="s">Rama Sathya Sai</span>{"\n"}<span className="k">experience</span>:{"\n"}  - <span className="k">role</span>: <span className="s">…</span>{"\n"}    <span className="k">bullets</span>: [<span className="n">…</span>]{"\n"}<span className="k">theme</span>: <span className="f">google</span></pre>
-              </div>
-              <Wire style={{ flex: "0 1 40px" }} />
-              <div className="rb-page" aria-hidden="true">
-                <div className="h-fit">
-                  <i className="nm" /><i style={{ width: "80%" }} />
-                  <i className="hd" /><i /><i style={{ width: "90%" }} /><i style={{ width: "75%" }} />
-                  <i className="hd" /><i /><i style={{ width: "85%" }} /><i style={{ width: "92%" }} /><i style={{ width: "70%" }} />
-                  <i className="hd" /><i /><i style={{ width: "80%" }} />
+            <div className="bars">
+              {rubric.map((r, i) => (
+                <div key={r.name} className="bar">
+                  <div className="bar__head"><span className="dp-label">{r.name}</span><span className="dp-label c-text">{r.pts}</span></div>
+                  <div className="bar__track"><div className="bar__fill" data-step={3 + i} data-fx="fill" style={{ ["--w" as string]: `${r.pts * 5}%`, background: r.pts === 20 ? "var(--gold)" : "var(--purple)" }} /></div>
                 </div>
-                <div className="rb-flag h-overflow">overflow</div>
-                <div className="rb-flag h-fitok">1 page</div>
-              </div>
-              <Wire delay={1.2} style={{ flex: "0 1 40px" }} />
-              <div className="node-col" style={{ gap: 10 }}>
-                <svg aria-hidden="true" width="96" height="96" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#1b1b2e" strokeWidth="10" /><circle className="h-spin" cx="50" cy="50" r="42" fill="none" stroke="#3fc84e" strokeWidth="10" strokeLinecap="round" strokeDasharray="264" strokeDashoffset="40" transform="rotate(-90 50 50)" /></svg>
-                <span className="dp-label">ats check</span>
-              </div>
+              ))}
             </div>
-          </article>
-        </section>
+          </div>
+        </Scene>
+
+        {/* 05 BACK_BONE */}
+        <Scene
+          p={P["back-bone"]}
+          copy={
+            <>
+              <h2>83 endpoints and a five-minute heartbeat<span className="dotg">.</span></h2>
+              <p>The Flask-on-Lambda API behind Sukoon Unlimited: users, experts, calls, payments, WhatsApp, events and games, plus a scheduler that places due calls and sends reminders every five minutes.</p>
+              <div className="tags" data-step={14}><span className="dp-pill">aws lambda</span><span className="dp-pill">flask</span><span className="dp-pill">mongodb</span><span className="dp-pill">cashfree</span></div>
+              <div className="tour__links" data-step={15}><a className="tlink" href={repos.backbone}>RamaSai2519/back_bone ↗</a></div>
+            </>
+          }
+        >
+          <div className="canvas-box" role="img" aria-label="As you scroll, back_bone's 83 endpoints light up domain by domain, then the scheduler's job groups fill side by side">
+            <div className="tags" style={{ justifyContent: "space-between" }}><span className="dp-label">83 /actions routes · grouped by hand</span><span className="dp-pill dp-pill--gold">rate(5 minutes)</span></div>
+            <div className="ep-groups">
+              {domains.map(([d, n, c], i) => (
+                <div key={d} className="ep-group" data-step={i} data-fx="state" style={{ ["--c" as string]: c }}>
+                  <div className="ep-dots" aria-hidden="true">{Array.from({ length: n }, (_, k) => <i key={k} />)}</div>
+                  <span className="dp-label">{d} · {n}</span>
+                </div>
+              ))}
+            </div>
+            <div className="bars bars--one">
+              {lanes.map(([l, c], i) => (
+                <div key={l} className="bar">
+                  <span className="dp-label" style={{ color: c }}>{l}</span>
+                  <div className="bar__track"><div className="bar__fill" data-step={11 + i} data-fx="fill" style={{ ["--w" as string]: "100%", background: c }} /></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Scene>
+
+        {/* 06 LEDGER */}
+        <Scene
+          p={P.ledger}
+          flip
+          copy={
+            <>
+              <h2>One ledger for two<span className="dotg">.</span></h2>
+              <p>A shared ledger for a couple or roommates. Bank SMS turns into categorized transactions, budgets track what&rsquo;s left, and every entry shows who logged it.</p>
+              <div className="tags" data-step={1}><span className="dp-pill">lambda · http api</span><span className="dp-pill">mongodb atlas</span><span className="dp-pill">fcm</span><span className="dp-pill">sms parser</span></div>
+            </>
+          }
+        >
+          <LiveFrame src={sites.ledger} url="ledger.journeymen.in" title="Ledger, live" poster={shotLedger} />
+        </Scene>
+
+        {/* 07 MOHAN VISWESWAR */}
+        <Scene
+          p={P.mohan}
+          copy={
+            <>
+              <h2>A consultant&rsquo;s practice, online<span className="dotg">.</span></h2>
+              <p>Built for Chandika Mohan Visweswar, an insurance and financial consultant: motor, health, travel, marine, business, cattle and home cover, loans and investments, with an enquiry form.</p>
+              <div className="tags" data-step={1}><span className="dp-pill">next.js</span><span className="dp-pill">enquiry form</span><span className="dp-pill">ga4 · clarity</span></div>
+            </>
+          }
+        >
+          <LiveFrame src={sites.mohan} url="www.mohanvisweswar.in" title="mohanvisweswar.in, live" poster={shotMohan} />
+        </Scene>
+
+        {/* 08 GITAM EPOCH */}
+        <Scene
+          p={P.epoch}
+          flip
+          copy={
+            <>
+              <h2>A club site and its fest<span className="dotg">.</span></h2>
+              <p>The GitHub Community Club at GITAM Bengaluru and Epoch, its annual fest: registration, Epoch Coins, QR scanning, a shop and a live leaderboard, built by students in the open. I&rsquo;m a core contributor.</p>
+              <div className="tags" data-step={1}><span className="dp-pill">supabase</span><span className="dp-pill">qr scanning</span><span className="dp-pill">live leaderboard</span></div>
+            </>
+          }
+        >
+          <LiveFrame src={sites.epoch} url="gitamepoch.vercel.app" title="GITAM Epoch, live" poster={shotEpoch} />
+        </Scene>
+
+        {/* 09 RESUME_BUILDER */}
+        <Scene
+          p={P["resume-builder"]}
+          copy={
+            <>
+              <h2>Binary-searches the type until it fits one page<span className="dotg">.</span></h2>
+              <p>Résumés live in YAML and render through headless Chromium to ATS-safe HTML and PDF, with an ATS report and a keyword-gap check that never invents experience.</p>
+              <div className="tags" data-step={4}><span className="dp-pill">playwright</span><span className="dp-pill">3 themes</span><span className="dp-pill">ats report</span></div>
+              <div className="tour__links" data-step={5}><a className="tlink" href={contact.resume} download>Download a résumé it built ↓</a></div>
+            </>
+          }
+        >
+          <div className="canvas-box rb-fig" role="img" aria-label="As you scroll, YAML content renders to a page whose type scale shrinks until it fits exactly one page, and the ATS check fills">
+            <div className="dp-code" data-step={0}>
+              <div className="dp-code__bar" aria-hidden="true"><i /><i /><i /><span>resume.yaml</span></div>
+              <pre><span className="k">name</span>: <span className="s">Rama Sathya Sai</span>{"\n"}<span className="k">experience</span>:{"\n"}  - <span className="k">role</span>: <span className="s">…</span>{"\n"}    <span className="k">bullets</span>: [<span className="n">…</span>]{"\n"}<span className="k">theme</span>: <span className="f">google</span></pre>
+            </div>
+            <div className="rb-page" aria-hidden="true" data-step={1}>
+              <div className="sheet">
+                <i className="nm" /><i style={{ width: "80%" }} />
+                <i className="hd" /><i /><i style={{ width: "90%" }} /><i style={{ width: "75%" }} />
+                <i className="hd" /><i /><i style={{ width: "85%" }} /><i style={{ width: "92%" }} /><i style={{ width: "70%" }} />
+                <i className="hd" /><i /><i style={{ width: "80%" }} /><i /><i style={{ width: "60%" }} />
+              </div>
+              <div className="rb-flag rb-flag--bad" data-step={1} data-fx="fade">overflow</div>
+              <div className="rb-flag rb-flag--ok" data-step={3} data-fx="fade">1 page</div>
+            </div>
+            <div className="node-col ats" data-step={2}>
+              <svg aria-hidden="true" width="110" height="110" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#1b1b2e" strokeWidth="10" /><circle className="prog" cx="50" cy="50" r="42" fill="none" stroke="#b48be6" strokeWidth="10" strokeLinecap="round" strokeDasharray="264" transform="rotate(-90 50 50)" /></svg>
+              <span className="dp-label">ats check</span>
+            </div>
+          </div>
+        </Scene>
+
+        {/* RECAP: overview at the end */}
+        <div className="recap-wrap">
+          <section id="all-work" className="recap">
+            <div className="sec-head">
+              <span className="dp-label">10 — all work</span>
+              <h2 className="h-display">Everything, at a glance</h2>
+            </div>
+            <div className="recap__grid">
+              {projects.map((p) => {
+                const inner = (
+                  <>
+                    <span className="dp-label">{p.num} · {p.tag}</span>
+                    <h3>{p.name}</h3>
+                    <p>{p.line}</p>
+                    <span className="recap__go">{p.action.label} {p.action.external ? "↗" : "→"}</span>
+                  </>
+                );
+                return p.action.external ? (
+                  <a key={p.id} className="dp-card" href={p.action.href} target="_blank" rel="noopener">{inner}</a>
+                ) : (
+                  <Link key={p.id} className="dp-card" href={p.action.href}>{inner}</Link>
+                );
+              })}
+            </div>
+          </section>
+        </div>
       </main>
 
       {/* CONTACT */}
       <footer id="contact" className="contact">
         <div className="wrap contact__inner">
           <div className="sec-head">
-            <span className="dp-label">03 — merge</span>
+            <span className="dp-label">11 — merge</span>
             <h2 className="h-display">Let&rsquo;s build the next one<span className="dotg">.</span></h2>
             <p className="small">Write to <a href={`mailto:${contact.email}`}>{contact.email}</a>.</p>
           </div>
-          <div className="row">
+          <div className="row" style={{ alignItems: "center", gap: "12px 24px" }}>
             <a className="dp-btn dp-btn--primary" href={`mailto:${contact.email}`}>Email me</a>
-            <a className="dp-btn dp-btn--secondary" href={contact.github}>GitHub</a>
-            <a className="dp-btn dp-btn--secondary" href={contact.linkedin}>LinkedIn</a>
-            <a className="dp-btn dp-btn--secondary" href={contact.resume} download>Résumé (PDF)</a>
+            <a className="tlink" href={contact.github}>GitHub ↗</a>
+            <a className="tlink" href={contact.linkedin}>LinkedIn ↗</a>
+            <a className="tlink" href={contact.resume} download>Résumé (PDF) ↓</a>
           </div>
         </div>
         <p className="wrap colophon"><Ph>résumé PDF is a placeholder: built by resume_builder from its example YAML, phone number removed</Ph></p>

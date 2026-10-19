@@ -1,20 +1,17 @@
-/* ARK-I deep dive. Keyframes copied from design/canvas/ARK-I.dc.html, prefixed with a-. */
-.p-ark .a-blink { border: 1px solid var(--line); background: var(--raised); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; animation: a-blink 4.8s ease-in-out infinite; }
-.p-ark .a-blink b { font: 600 14px/18px var(--font-mono); color: var(--purple); }
-.p-ark .a-blink span { font-size: 12px; line-height: 16px; color: var(--text-subtle); }
-@keyframes a-blink { 0%, 60%, 100% { background: #1b1b2e; border-color: #2a2a40; } 8%, 30% { background: #2a1f40; border-color: #b48be6; } }
-.p-ark .a-step { animation: a-step 8.4s ease-in-out infinite; }
-@keyframes a-step { 0%, 14%, 100% { opacity: 0.45; } 2%, 12% { opacity: 1; } }
-.p-ark .a-bub { animation: a-bub 8.4s ease-in-out infinite both; }
-@keyframes a-bub { 0% { opacity: 0; transform: translateY(8px); } 6%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-
+/* ARK-I deep dive: scroll-driven sections. */
 .p-ark .arch-flow { overflow-x: auto; padding-bottom: 8px; }
 .p-ark .wa { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--sky); display: flex; align-items: center; justify-content: center; color: var(--sky); }
-.p-ark .subs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 12px; }
+.p-ark .subs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)); gap: 12px; }
+.p-ark .sub { border: 1px solid var(--line); background: var(--raised); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.p-ark .sub b { font: 600 14px/18px var(--font-mono); color: var(--text-muted); }
+.p-ark .sub span { font-size: 12px; line-height: 16px; color: var(--text-subtle); }
+.js .p-ark .sub.on { background: var(--purple-soft); border-color: var(--purple); }
+.js .p-ark .sub.on b, .p-ark .sub:not([data-step]) b { color: var(--purple); }
 .p-ark .msg { max-width: 80%; border-radius: 14px; padding: 12px 14px; font-size: 14px; line-height: 22px; color: var(--text); }
 .p-ark .msg--me { align-self: flex-end; background: var(--brand-soft); border-radius: 14px 14px 4px 14px; }
 .p-ark .msg--bot { align-self: flex-start; background: var(--raised); border-radius: 14px 14px 14px 4px; }
 .p-ark .choice { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--space-5); }
 .p-ark .choice > div { display: flex; flex-direction: column; gap: 14px; }
 .p-ark .choice h3 { font-size: 22px; }
-@media (prefers-reduced-motion: reduce) { .p-ark .a-step { opacity: 1; } }
+.p-ark .query { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 1fr); gap: var(--space-5); align-items: stretch; }
+@media (max-width: 899px) { .p-ark .query { grid-template-columns: minmax(0, 1fr); } }

@@ -1,26 +1,20 @@
-/* mark8 deep dive. Keyframes copied from design/canvas/Mark8.dc.html, prefixed with m-. */
-.p-mark8 .m-fill { height: 8px; border-radius: 4px; width: var(--w); animation: m-fill 4.5s var(--ease) infinite; }
-@keyframes m-fill { 0% { width: 0; } 55%, 100% { width: var(--w); } }
-@keyframes m-topic { 0%, 30%, 100% { background: #12121f; border-color: #2a2a40; } 6%, 22% { background: #2a1f40; border-color: #b48be6; } }
-.p-mark8 .m-ping { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; background: var(--surface); animation: m-ping 3s ease-in-out infinite; }
-.p-mark8 .m-ping b { font: 600 13px/18px var(--font-mono); color: var(--text); overflow-wrap: anywhere; }
-.p-mark8 .m-ping span { font-size: 12px; line-height: 16px; color: var(--text-subtle); }
-@keyframes m-ping { 0%, 70%, 100% { border-color: #2a2a40; background: #12121f; } 10%, 30% { border-color: #3fc84e; background: #10301a; } }
-.p-mark8 .m-ticker { display: flex; gap: 12px; padding: 10px 12px; width: max-content; animation: m-ticker 18s linear infinite; }
-@keyframes m-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.p-mark8 .m-live { animation: m-live 2s ease-in-out infinite; }
-@keyframes m-live { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 201, 51, 0.4); } 50% { box-shadow: 0 0 0 8px rgba(255, 201, 51, 0); } }
-
+/* mark8 deep dive: scroll-driven sections. */
 .p-mark8 .ticker-wrap { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-pill); background: var(--bg); }
 .p-mark8 .ticker-wrap .dp-pill { white-space: nowrap; }
+.p-mark8 .m-ticker { display: flex; gap: 12px; padding: 10px 12px; width: max-content; animation: m-ticker 24s linear infinite; }
+@keyframes m-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .p-mark8 .pipe-flow { overflow-x: auto; padding-bottom: 8px; }
-.p-mark8 .rubric { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 16px 32px; }
-.p-mark8 .rubric .bar { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.p-mark8 .rubric .bar__head { display: flex; justify-content: space-between; gap: 8px; }
-.p-mark8 .rubric .bar__track { height: 8px; border-radius: 4px; background: var(--raised); }
-.p-mark8 .topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; }
-.p-mark8 .topic { animation: m-topic 7s ease-in-out infinite; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.p-mark8 .rubric { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px 32px; }
+.p-mark8 .bar { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.p-mark8 .bar__head { display: flex; justify-content: space-between; gap: 8px; }
+.p-mark8 .bar__track { height: 8px; border-radius: 4px; background: var(--raised); overflow: hidden; }
+.p-mark8 .bar__fill { height: 8px; border-radius: 4px; width: var(--w); }
+.p-mark8 .topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; }
+.p-mark8 .topic { border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius-lg); padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--text); }
 .p-mark8 .topic h3 { font-size: 17px; color: inherit; }
-.p-mark8 .topic .dp-label { color: inherit; opacity: 0.7; }
-.p-mark8 .routes { flex: 2 1 520px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 12px; }
+.js .p-mark8 .topic.on { border-color: var(--purple); background: var(--purple-soft); }
+.p-mark8 .route { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; background: var(--surface); }
+.p-mark8 .route b { font: 600 13px/18px var(--font-mono); color: var(--text); overflow-wrap: anywhere; }
+.p-mark8 .route span { font-size: 12px; line-height: 16px; color: var(--text-subtle); }
+.p-mark8 .routes { flex: 2 1 520px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 12px; }
 @media (prefers-reduced-motion: reduce) { .p-mark8 .ticker-wrap { overflow-x: auto; } }
