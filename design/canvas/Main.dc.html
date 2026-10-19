@@ -79,7 +79,7 @@ a{color:#8ab4ff}a:hover{color:#b9d1ff}
 <li style="--node: #3fc84e"><h3 style="font-size: 16px">journeymen.in</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">main · site</p></li>
 <li style="--node: #3fc84e"><h3 style="font-size: 16px">emporos · ledger</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">main · sub-domains</p></li>
 <li style="--node: #8fcdf0"><h3 style="font-size: 16px">mohanvisweswar.in · gitam epoch</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">client · sites</p></li>
-<li style="--node: #b48be6"><h3 style="font-size: 16px">ARK-I · mark8</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">ai · systems</p></li>
+<li style="--node: #b48be6"><h3 style="font-size: 16px">ARK-I · mark8 · back_bone</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">ai · systems</p></li>
 <li style="--node: #b48be6"><h3 style="font-size: 16px">resume_builder · smr_app</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">tools · systems</p></li>
 </ol>
 </div>
@@ -287,6 +287,24 @@ a{color:#8ab4ff}a:hover{color:#b9d1ff}
 </div>
 </article>
 
+<!-- back_bone -->
+<article style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span class="dp-label" style="color: #8fcdf0">back_bone · sukoon platform backend</span>
+<h3 style="font-size: 28px; font-weight: 800; font-stretch: 115%">83 endpoints and a five-minute heartbeat.</h3>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #b6b8c8">The Flask-on-Lambda API behind Sukoon: users, experts, calls, payments, WhatsApp, events and games, plus a scheduler that places due calls and sends reminders every five minutes.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--sky">aws lambda</span><span class="dp-pill">flask</span><span class="dp-pill dp-pill--brand">mongodb</span><span class="dp-pill dp-pill--gold">cashfree</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="dp-btn dp-btn--primary" href="BackBone.dc.html">Deep dive</a><a class="dp-btn dp-btn--ghost" href="https://github.com/RamaSai2519/back_bone">RamaSai2519/back_bone</a></div>
+</div>
+<div role="img" aria-label="Animated diagram: the scheduler fires every five minutes and four job lanes fill in parallel next to a grid of 83 endpoint squares" style="flex: 2 1 520px; min-width: 0; background: #0a0a14; border: 1px solid #2a2a40; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--gold">rate(5 minutes)</span><span class="dp-label">gamesProcessor + scheduler</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label" style="color: #3fc84e">schedules</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 100%; height: 6px; border-radius: 3px; background: #3fc84e"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label" style="color: #8fcdf0">event reminders</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 100%; height: 6px; border-radius: 3px; background: #8fcdf0; animation-delay: .3s"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label" style="color: #b48be6">expert status</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 100%; height: 6px; border-radius: 3px; background: #b48be6; animation-delay: .6s"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label" style="color: #ffc933">emails · db backup</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 100%; height: 6px; border-radius: 3px; background: #ffc933; animation-delay: .9s"></div></div></div>
+</div>
+</article>
+
 <!-- resume_builder -->
 <article style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
 <div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
@@ -369,7 +387,7 @@ a{color:#8ab4ff}a:hover{color:#b9d1ff}
 </footer>
 </main>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4800}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5300}}'>
 class Component extends DCLogic {
 renderVals() {
 return {};

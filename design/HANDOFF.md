@@ -4,15 +4,15 @@ Copy everything below the line into the next agent.
 
 ---
 
-You are building the production portfolio site for **Rama Sathya Sai** (GitHub: RamaSai2519) in the repo `RamaSai2519/portfolio`. The design is already done. Turn it into a real site, fill every placeholder from the real projects, and add a public demo of the Emporos dashboard that also serves as its live preview.
+You are building the production portfolio site for **Rama Sathya Sai** (GitHub: RamaSai2519) in the repo `RamaSai2519/portfolio`. The design is already done: 5 pages. Turn it into a real site, fill every placeholder from the real projects, and add a public demo of the Emporos dashboard that also serves as its live preview.
 
 ## 1. Sources of truth
 
-- **Design canvas (visual spec):** https://claude.ai/artifact/PuHDzKEy8FkhqkSK6mezmf. It has 4 pages.
+- **Design canvas (visual spec):** https://claude.ai/artifact/PuHDzKEy8FkhqkSK6mezmf. It has 5 pages.
 - **The same files in this repo:** `design/canvas/`
   - `Main.dc.html` is the home page: hero, site gallery, the systems section, contact.
   - `Emporos.dc.html` is the flagship case study, built from the Emporos engine code.
-  - `ARK-I.dc.html` and `Mark8.dc.html` are the two deep dives.
+  - `ARK-I.dc.html`, `Mark8.dc.html` and `BackBone.dc.html` are the three Sukoon deep dives.
   - These are HTML templates for the canvas tool, not app code. Ignore the `<x-dc>`, `<helmet>` and `data-dc-script` wrappers and rebuild the markup and CSS in the real site.
 - **Design system "Commit":** `design/canvas/ds/commit/` (`README.md`, `tokens.json`, `components/bundle.css`). The canonical copy is at https://claude.ai/code/artifact/59d324bc-0609-4215-9cb9-22eacc8b9b7b.
   - It is dark-only: ground `#0a0a14`, one action colour (git-green `#3fc84e`), purple, sky and gold accents.
@@ -54,13 +54,16 @@ You are building the production portfolio site for **Rama Sathya Sai** (GitHub: 
 - `RamaSai2519/mark8`: the call scorer plus the operations server. Look at:
   - `mark/model`, `mark/helper/prompts.py` and `mark/texts/*.txt`
   - `app.py` (Flask and Quart mounted under Starlette)
-- `RamaSai2519/back_bone`: the Sukoon backend, Flask on AWS Amplify/Lambda (`gamesProcessor` API and `scheduler`). It isn't in the design yet. It is a strong candidate for a fourth Sukoon system, or a "Sukoon platform" page tying ARK-I, mark8 and back_bone together. Propose this to the user.
+- `RamaSai2519/back_bone`: the Sukoon backend, Flask on AWS Amplify/Lambda (`gamesProcessor` API and `scheduler`). It is designed in `BackBone.dc.html`. Check its figures against the code:
+  - 83 `/actions/*` routes in `gamesProcessor/src/index.py`, grouped into 11 domains by hand: payments 11, content/AI 10, games 10, experts 9, users 8, calls 7, events 7, admin 7, WhatsApp 6, push 5, auth 3
+  - a scheduler Lambda on `rate(5 minutes)` that runs 4 job groups in a ThreadPoolExecutor
+  - due calls and WhatsApp nudges sent back through `/actions/call` and `/actions/send_whatsapp`
 - `RamaSai2519/resume_builder`: YAML to one-page ATS-safe PDF via headless Chromium, using a binary search on type scale.
 
 ## 4. Tasks
 
 1. **Pick the stack and scaffold** the site in this repo. A static Next.js or Astro site deployed on Vercel fits; Emporos's dashboard already uses Next.js on Vercel. Confirm with the user if unsure.
-2. **Build the 4 pages** to match the canvas, using the Commit tokens.
+2. **Build the 5 pages** to match the canvas, using the Commit tokens.
    - Keep the CSS-only animations: packets on wires, sequential highlights, the candle chart, the risk-guard wall, the live-gate locks.
    - Respect `prefers-reduced-motion`.
    - Pages must be responsive down to phone width.
@@ -94,7 +97,7 @@ You are building the production portfolio site for **Rama Sathya Sai** (GitHub: 
    - contact email and LinkedIn URL
    - whether to offer a downloadable résumé (resume_builder could generate it)
    - Journeymen's one-liner
-8. **Deep-dive pages for others.** resume_builder, back_bone/Sukoon and Journeymen can follow the same pattern if the user wants them.
+8. **Deep-dive pages for others.** resume_builder and Journeymen can follow the same pattern if the user wants them.
 
 ## 5. Ground rules
 

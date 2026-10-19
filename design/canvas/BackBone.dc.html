@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>back_bone — deep dive</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/commit/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@100..125,200..900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{--bg:#0a0a14;--surface:#12121f;--raised:#1b1b2e;--overlay:#23233a;--line:#2a2a40;--line-strong:#666884;--text:#f2f3f7;--text-muted:#b6b8c8;--text-subtle:#8c8ea6;--brand:#3fc84e;--brand-hover:#5ee06b;--brand-soft:#10301a;--on-brand:#0a0a14;--purple:#b48be6;--purple-soft:#2a1f40;--sky:#8fcdf0;--sky-soft:#13293a;--gold:#ffc933;--link:#8ab4ff;--selection:#3a2a5c;--font-display:"Mona Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--font-sans:"Mona Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Consolas,monospace;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:128px;--radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-xl:18px;--radius-2xl:24px;--radius-pill:9999px;--shadow-lift:6px 6px 0 #3fc84e;--shadow-press:2px 2px 0 #3fc84e;--shadow-menu:0 16px 40px rgba(0,0,0,.55);--shadow-pulse:0 0 0 8px rgba(63,200,78,.18)}
+body{margin:0;padding:0 !important;background:#0a0a14}
+a{color:#8ab4ff}a:hover{color:#b9d1ff}
+.rise{animation:rise 800ms cubic-bezier(.23,1,.32,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.wire{position:relative;height:2px;background:#666884;flex:1 1 32px;min-width:24px}
+.pkt{position:absolute;top:-4px;left:0;width:10px;height:10px;border-radius:50%;background:#8fcdf0;animation:flow 2.4s linear infinite}
+@keyframes flow{from{left:0}to{left:calc(100% - 10px)}}
+.dot{width:10px;height:10px;border-radius:3px;background:#2a2a40;animation:dot 6s ease-in-out infinite}
+@keyframes dot{0%,70%,100%{background:#2a2a40}8%,30%{background:var(--c)}}
+.tile{animation:tile 6s ease-in-out infinite}
+@keyframes tile{0%,70%,100%{border-color:#2a2a40}8%,30%{border-color:var(--c)}}
+.lanefill{animation:lanefill var(--d,3s) cubic-bezier(.4,0,.2,1) infinite}
+@keyframes lanefill{0%{width:0}70%,100%{width:100%}}
+.tick{animation:tick 5s linear infinite;transform-origin:50% 50%}
+@keyframes tick{to{transform:rotate(360deg)}}
+.step{animation:step 9s ease-in-out infinite}
+@keyframes step{0%,15%,100%{opacity:.4}2%,13%{opacity:1}}
+.live{animation:live 2s ease-in-out infinite}
+@keyframes live{0%,100%{box-shadow:0 0 0 0 rgba(143,205,240,.4)}50%{box-shadow:0 0 0 10px rgba(143,205,240,0)}}
+@media (prefers-reduced-motion:reduce){.rise,.pkt,.dot,.tile,.lanefill,.tick,.step,.live{animation:none !important}.lanefill{width:100%}.step{opacity:1}}
+</style>
+</helmet>
+<main style="background: #0a0a14; color: #f2f3f7; font-family: var(--font-sans); min-height: 100vh">
+
+<header style="max-width: 1120px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; letter-spacing: -0.03em; font-size: 22px; color: #f2f3f7; text-decoration: none">rama sathya sai<span style="color: #3fc84e">.</span></a>
+<nav aria-label="Projects" style="display: flex; flex-wrap: wrap; gap: 4px">
+<a class="dp-btn dp-btn--ghost" href="Main.dc.html">all work</a>
+<a class="dp-btn dp-btn--ghost" href="ARK-I.dc.html">ARK-I</a>
+<a class="dp-btn dp-btn--ghost" href="Mark8.dc.html">mark8</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 64px 24px 64px; display: flex; flex-direction: column; gap: 32px">
+<div class="rise" style="display: flex; flex-direction: column; gap: 20px; max-width: 800px">
+<span class="dp-label" style="color: #8fcdf0">back_bone · the sukoon platform backend</span>
+<h1 style="font-size: clamp(44px, 6.5vw, 76px); line-height: 0.98">Everything Sukoon did ran through two Lambdas<span style="color: #3fc84e">.</span></h1>
+<p style="margin: 0; font-size: 18px; line-height: 28px; color: #b6b8c8">Users, experts, calls, payments, WhatsApp, events, games and content: one Flask API serves the app and the admin desk, and a scheduler wakes every five minutes to book calls, send reminders and keep experts online.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="dp-btn dp-btn--primary" href="https://github.com/RamaSai2519/back_bone">View the code</a>
+<a class="dp-btn dp-btn--secondary" href="#map">See the map</a>
+</div>
+</div>
+<div class="rise" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; animation-delay: 150ms">
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 40px; line-height: 42px; color: #8fcdf0">83</span><span class="dp-label">rest endpoints</span></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 40px; line-height: 42px; color: #3fc84e">2</span><span class="dp-label">lambda functions</span></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 40px; line-height: 42px; color: #ffc933">5 min</span><span class="dp-label">scheduler heartbeat</span></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 40px; line-height: 42px; color: #b48be6">10k</span><span class="dp-label">active users served</span></div>
+</div>
+</section>
+
+<!-- MAP -->
+<section id="map" style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">01 — the api, by domain</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">83 endpoints, one square each</h2>
+<p style="margin: 0; font-size: 16px; line-height: 26px; color: #b6b8c8; max-width: 700px">gamesProcessor is a Flask-RESTful app behind API Gateway, adapted to Lambda with aws-wsgi. Each square below is one <span style="font-family: var(--font-mono); color: #f2f3f7">/actions/…</span> route.</p>
+</div>
+<div role="img" aria-label="Animated map: the app, admin desk and partner webhooks reach API Gateway and the gamesProcessor Lambda, which serves 83 endpoints grouped into eleven domains" style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; align-items: center; overflow-x: auto; padding-bottom: 8px">
+<div style="display: flex; flex-direction: column; gap: 6px; flex: none">
+<span class="dp-pill">sukoon app</span><span class="dp-pill">admin desk</span><span class="dp-pill">whatsapp · calls · cashfree</span>
+</div>
+<div class="wire"><i class="pkt"></i></div>
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: center; flex: none"><div style="padding: 14px 16px; border-radius: 12px; background: #1b1b2e; border: 1px solid #666884; font: 500 13px/18px var(--font-mono)">api gateway</div><span class="dp-label">jwt · cors</span></div>
+<div class="wire"><i class="pkt" style="animation-delay: .8s"></i></div>
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: center; flex: none"><div class="live" style="padding: 16px 18px; border-radius: 12px; background: #13293a; border: 2px solid #8fcdf0; color: #8fcdf0; font: 600 14px/18px var(--font-mono)">gamesProcessor</div><span class="dp-label">flask on lambda</span></div>
+<div class="wire"><i class="pkt" style="animation-delay: 1.6s; background: #3fc84e"></i></div>
+<div style="display: flex; flex-direction: column; gap: 6px; flex: none">
+<span class="dp-pill dp-pill--brand">mongodb</span><span class="dp-pill">s3</span><span class="dp-pill dp-pill--gold">slack · fcm · openai</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+<div class="tile" style="--c: #8fcdf0; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">Payments</span><span class="dp-label">11</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #8fcdf0"></i><i class="dot" style="--c: #8fcdf0; animation-delay: .1s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: .2s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: .3s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: .4s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: .5s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: .6s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: .7s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: .8s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: .9s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: 1s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">cashfree orders and webhooks, plans, balance, offers</span></div>
+<div class="tile" style="--c: #b48be6; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: .5s"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">Content and AI</span><span class="dp-label">10</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #b48be6; animation-delay: .5s"></i><i class="dot" style="--c: #b48be6; animation-delay: .6s"></i><i class="dot" style="--c: #b48be6; animation-delay: .7s"></i><i class="dot" style="--c: #b48be6; animation-delay: .8s"></i><i class="dot" style="--c: #b48be6; animation-delay: .9s"></i><i class="dot" style="--c: #b48be6; animation-delay: 1s"></i><i class="dot" style="--c: #b48be6; animation-delay: 1.1s"></i><i class="dot" style="--c: #b48be6; animation-delay: 1.2s"></i><i class="dot" style="--c: #b48be6; animation-delay: 1.3s"></i><i class="dot" style="--c: #b48be6; animation-delay: 1.4s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">chat, blog, songs, photos, shorts, dall-e, prompts</span></div>
+<div class="tile" style="--c: #ffc933; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: 1s"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">Games</span><span class="dp-label">10</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #ffc933; animation-delay: 1s"></i><i class="dot" style="--c: #ffc933; animation-delay: 1.1s"></i><i class="dot" style="--c: #ffc933; animation-delay: 1.2s"></i><i class="dot" style="--c: #ffc933; animation-delay: 1.3s"></i><i class="dot" style="--c: #ffc933; animation-delay: 1.4s"></i><i class="dot" style="--c: #ffc933; animation-delay: 1.5s"></i><i class="dot" style="--c: #ffc933; animation-delay: 1.6s"></i><i class="dot" style="--c: #ffc933; animation-delay: 1.7s"></i><i class="dot" style="--c: #ffc933; animation-delay: 1.8s"></i><i class="dot" style="--c: #ffc933; animation-delay: 1.9s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">quiz and card games, leaderboard, winners, rewards</span></div>
+<div class="tile" style="--c: #3fc84e; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: 1.5s"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">Experts</span><span class="dp-label">9</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #3fc84e; animation-delay: 1.5s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 1.6s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 1.7s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 1.8s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 1.9s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 2s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 2.1s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 2.2s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 2.3s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">profiles, applicants, slots, schedules, scores, vacations</span></div>
+<div class="tile" style="--c: #8ab4ff; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: 2s"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">Users</span><span class="dp-label">8</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #8ab4ff; animation-delay: 2s"></i><i class="dot" style="--c: #8ab4ff; animation-delay: 2.1s"></i><i class="dot" style="--c: #8ab4ff; animation-delay: 2.2s"></i><i class="dot" style="--c: #8ab4ff; animation-delay: 2.3s"></i><i class="dot" style="--c: #8ab4ff; animation-delay: 2.4s"></i><i class="dot" style="--c: #8ab4ff; animation-delay: 2.5s"></i><i class="dot" style="--c: #8ab4ff; animation-delay: 2.6s"></i><i class="dot" style="--c: #8ab4ff; animation-delay: 2.7s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">profiles, engagement, referrals, clubs, beta testers</span></div>
+<div class="tile" style="--c: #ff7a7a; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: 2.5s"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">Calls and escalation</span><span class="dp-label">7</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #ff7a7a; animation-delay: 2.5s"></i><i class="dot" style="--c: #ff7a7a; animation-delay: 2.6s"></i><i class="dot" style="--c: #ff7a7a; animation-delay: 2.7s"></i><i class="dot" style="--c: #ff7a7a; animation-delay: 2.8s"></i><i class="dot" style="--c: #ff7a7a; animation-delay: 2.9s"></i><i class="dot" style="--c: #ff7a7a; animation-delay: 3s"></i><i class="dot" style="--c: #ff7a7a; animation-delay: 3.1s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">place calls, call-platform webhooks, escalations</span></div>
+<div class="tile" style="--c: #8fcdf0; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: 3s"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">Events</span><span class="dp-label">7</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #8fcdf0; animation-delay: 3s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: 3.1s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: 3.2s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: 3.3s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: 3.4s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: 3.5s"></i><i class="dot" style="--c: #8fcdf0; animation-delay: 3.6s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">workshops, registrations, contributions, interests</span></div>
+<div class="tile" style="--c: #b48be6; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: 3.5s"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">Admin and analytics</span><span class="dp-label">7</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #b48be6; animation-delay: 3.5s"></i><i class="dot" style="--c: #b48be6; animation-delay: 3.6s"></i><i class="dot" style="--c: #b48be6; animation-delay: 3.7s"></i><i class="dot" style="--c: #b48be6; animation-delay: 3.8s"></i><i class="dot" style="--c: #b48be6; animation-delay: 3.9s"></i><i class="dot" style="--c: #b48be6; animation-delay: 4s"></i><i class="dot" style="--c: #b48be6; animation-delay: 4.1s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">dashboard stats, leads, logs, remarks, histories</span></div>
+<div class="tile" style="--c: #3fc84e; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: 4s"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">WhatsApp</span><span class="dp-label">6</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #3fc84e; animation-delay: 4s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 4.1s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 4.2s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 4.3s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 4.4s"></i><i class="dot" style="--c: #3fc84e; animation-delay: 4.5s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">send, templates, webhooks, history</span></div>
+<div class="tile" style="--c: #ffc933; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: 4.5s"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">Push</span><span class="dp-label">5</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #ffc933; animation-delay: 4.5s"></i><i class="dot" style="--c: #ffc933; animation-delay: 4.6s"></i><i class="dot" style="--c: #ffc933; animation-delay: 4.7s"></i><i class="dot" style="--c: #ffc933; animation-delay: 4.8s"></i><i class="dot" style="--c: #ffc933; animation-delay: 4.9s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">fcm tokens and templates, byteplus</span></div>
+<div class="tile" style="--c: #8ab4ff; border: 1px solid #2a2a40; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; animation-delay: 5s"><div style="display: flex; justify-content: space-between"><span style="font-weight: 650; font-size: 15px">Auth</span><span class="dp-label">3</span></div><div style="display: flex; flex-wrap: wrap; gap: 4px"><i class="dot" style="--c: #8ab4ff; animation-delay: 5s"></i><i class="dot" style="--c: #8ab4ff; animation-delay: 5.1s"></i><i class="dot" style="--c: #8ab4ff; animation-delay: 5.2s"></i></div><span style="font-size: 12px; line-height: 18px; color: #8c8ea6">otp send and verify, admin login</span></div>
+</div>
+</div>
+</section>
+
+<!-- SCHEDULER -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">02 — the scheduler</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">Every five minutes, four lanes at once</h2>
+<p style="margin: 0; font-size: 16px; line-height: 26px; color: #b6b8c8; max-width: 700px">A CloudWatch rule fires the scheduler Lambda. A thread pool runs four job groups side by side, and due calls and messages go back through the API's own <span style="font-family: var(--font-mono); color: #f2f3f7">/actions/call</span> and <span style="font-family: var(--font-mono); color: #f2f3f7">/actions/send_whatsapp</span>, so there is one path for everything.</p>
+</div>
+<div role="img" aria-label="Animated scheduler: a clock fires every five minutes and four job groups run in parallel: schedules, event reminders, expert status, and email reading with database backup" style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+<div style="flex: none; display: flex; flex-direction: column; align-items: center; gap: 12px">
+<div style="position: relative; width: 120px; height: 120px; border-radius: 50%; border: 2px solid #666884">
+<div class="tick" style="position: absolute; inset: 0"><div style="position: absolute; left: 59px; top: 10px; width: 2px; height: 50px; background: #ffc933; border-radius: 1px"></div></div>
+<div style="position: absolute; left: 54px; top: 54px; width: 12px; height: 12px; border-radius: 50%; background: #ffc933"></div>
+</div>
+<span class="dp-pill dp-pill--gold">rate(5 minutes)</span>
+</div>
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><span style="font: 600 13px/18px var(--font-mono); color: #3fc84e">schedules_jobs</span><span class="dp-label">recurring → one-off → place calls · whatsapp nudges</span></div><div style="height: 10px; border-radius: 5px; background: #1b1b2e; overflow: hidden"><div class="lanefill" style="--d: 3.2s; height: 10px; border-radius: 5px; background: #3fc84e"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><span style="font: 600 13px/18px var(--font-mono); color: #8fcdf0">events_reminders_jobs</span><span class="dp-label">list upcoming → remind</span></div><div style="height: 10px; border-radius: 5px; background: #1b1b2e; overflow: hidden"><div class="lanefill" style="--d: 2.6s; height: 10px; border-radius: 5px; background: #8fcdf0"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><span style="font: 600 13px/18px var(--font-mono); color: #b48be6">experts_jobs</span><span class="dp-label">auto online → status check</span></div><div style="height: 10px; border-radius: 5px; background: #1b1b2e; overflow: hidden"><div class="lanefill" style="--d: 2.2s; height: 10px; border-radius: 5px; background: #b48be6"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><span style="font: 600 13px/18px var(--font-mono); color: #ffc933">misc_jobs</span><span class="dp-label">read lead emails → back up db</span></div><div style="height: 10px; border-radius: 5px; background: #1b1b2e; overflow: hidden"><div class="lanefill" style="--d: 4s; height: 10px; border-radius: 5px; background: #ffc933"></div></div></div>
+</div>
+</div>
+</section>
+
+<!-- A CALL'S LIFE -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">03 — one call, across the platform</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">Booked here, placed here, scored by mark8</h2>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch">
+<ol class="dp-graph" style="flex: 1 1 420px; min-width: 0; background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px">
+<li class="step" style="--node: #8ab4ff"><h3>A senior books a slot</h3><p>In the app, or through ARK-I on WhatsApp.</p></li>
+<li class="step" style="--node: #3fc84e; animation-delay: 1.5s"><h3>The schedule is stored</h3><p>Recurring bookings expand into one-off schedules.</p></li>
+<li class="step" style="--node: #ffc933; animation-delay: 3s"><h3>A scheduler tick finds it due</h3><p>Nudges both people on WhatsApp and pings Slack.</p></li>
+<li class="step" style="--node: #ff7a7a; animation-delay: 4.5s"><h3>The call is placed</h3><p>Through /actions/call; the call platform reports back over webhooks.</p></li>
+<li class="step" style="--node: #b48be6; animation-delay: 6s"><h3>mark8 reads and scores it</h3><p>Topics, personas and a conversation score land on the call.</p></li>
+<li class="step" style="--node: #8fcdf0; animation-delay: 7.5s"><h3>Problems escalate</h3><p>Escalations reach the team before anyone has to ask.</p></li>
+</ol>
+<div style="flex: 1 1 340px; min-width: 0; background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 20px">
+<span class="dp-label">the sukoon platform</span>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 0">
+<a class="dp-card" href="ARK-I.dc.html" style="padding: 14px 18px; gap: 4px; align-self: stretch; border-color: #b48be6"><span style="font: 600 14px/18px var(--font-mono); color: #b48be6">ARK-I</span><span style="font-size: 13px; color: #b6b8c8">talks to seniors on WhatsApp</span></a>
+<div style="width: 2px; height: 28px; background: #666884"></div>
+<div style="padding: 18px; border-radius: 14px; background: #13293a; border: 2px solid #8fcdf0; align-self: stretch; display: flex; flex-direction: column; gap: 4px"><span style="font: 600 15px/20px var(--font-mono); color: #8fcdf0">back_bone</span><span style="font-size: 13px; color: #b6b8c8">the data and every action</span></div>
+<div style="width: 2px; height: 28px; background: #666884"></div>
+<a class="dp-card" href="Mark8.dc.html" style="padding: 14px 18px; gap: 4px; align-self: stretch; border-color: #ffc933"><span style="font: 600 14px/18px var(--font-mono); color: #ffc933">mark8</span><span style="font-size: 13px; color: #b6b8c8">reads and scores every call</span></a>
+</div>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--sky">python · flask-restful</span><span class="dp-pill">aws lambda · amplify · api gateway</span><span class="dp-pill">aws-wsgi</span><span class="dp-pill dp-pill--brand">mongodb</span><span class="dp-pill">s3</span><span class="dp-pill">jwt · bcrypt</span><span class="dp-pill dp-pill--gold">cashfree</span><span class="dp-pill">firebase fcm</span><span class="dp-pill dp-pill--purple">openai</span><span class="dp-pill">slack</span><span class="dp-pill">graphql</span></div>
+</section>
+
+<footer style="border-top: 1px solid #2a2a40">
+<div style="max-width: 1120px; margin: 0 auto; padding: 48px 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center">
+<a class="dp-btn dp-btn--secondary" href="Mark8.dc.html">Previous: mark8</a>
+<a class="dp-btn dp-btn--primary" href="Main.dc.html">Back to all work</a>
+</div>
+</footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3000}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
