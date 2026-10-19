@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ARK-I — deep dive</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/commit/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@100..125,200..900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{--bg:#0a0a14;--surface:#12121f;--raised:#1b1b2e;--overlay:#23233a;--line:#2a2a40;--line-strong:#666884;--text:#f2f3f7;--text-muted:#b6b8c8;--text-subtle:#8c8ea6;--brand:#3fc84e;--brand-hover:#5ee06b;--brand-soft:#10301a;--on-brand:#0a0a14;--purple:#b48be6;--purple-soft:#2a1f40;--sky:#8fcdf0;--sky-soft:#13293a;--gold:#ffc933;--link:#8ab4ff;--selection:#3a2a5c;--font-display:"Mona Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--font-sans:"Mona Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Consolas,monospace;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:128px;--radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-xl:18px;--radius-2xl:24px;--radius-pill:9999px;--shadow-lift:6px 6px 0 #3fc84e;--shadow-press:2px 2px 0 #3fc84e;--shadow-menu:0 16px 40px rgba(0,0,0,.55);--shadow-pulse:0 0 0 8px rgba(63,200,78,.18)}
+body{margin:0;padding:0 !important;background:#0a0a14}
+a{color:#8ab4ff}a:hover{color:#b9d1ff}
+.rise{animation:rise 800ms cubic-bezier(.23,1,.32,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.wire{position:relative;height:2px;background:#666884;flex:1 1 40px;min-width:32px}
+.pkt{position:absolute;top:-4px;left:0;width:10px;height:10px;border-radius:50%;background:#3fc84e;animation:flow 2.4s linear infinite}
+@keyframes flow{from{left:0}to{left:calc(100% - 10px)}}
+.vwire{position:relative;width:2px;background:#666884;min-height:28px;margin:0 auto}
+.vpkt{position:absolute;left:-4px;top:0;width:10px;height:10px;border-radius:50%;background:#b48be6;animation:vflow 2.4s linear infinite}
+@keyframes vflow{from{top:0}to{top:calc(100% - 10px)}}
+.blink{animation:blink 4.8s ease-in-out infinite}
+@keyframes blink{0%,60%,100%{background:#1b1b2e;border-color:#2a2a40}8%,30%{background:#2a1f40;border-color:#b48be6}}
+.step{animation:step 8.4s ease-in-out infinite}
+@keyframes step{0%,14%,100%{opacity:.45}2%,12%{opacity:1}}
+.bub{animation:bub 8.4s ease-in-out infinite both}
+@keyframes bub{0%{opacity:0;transform:translateY(8px)}6%,92%{opacity:1;transform:none}100%{opacity:0}}
+.live{animation:live 2s ease-in-out infinite}
+@keyframes live{0%,100%{box-shadow:0 0 0 0 rgba(63,200,78,.35)}50%{box-shadow:0 0 0 8px rgba(63,200,78,0)}}
+@media (prefers-reduced-motion:reduce){.rise,.pkt,.vpkt,.blink,.step,.bub,.live{animation:none !important}.step{opacity:1}}
+</style>
+</helmet>
+<main style="background: #0a0a14; color: #f2f3f7; font-family: var(--font-sans); min-height: 100vh">
+
+<header style="max-width: 1120px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; letter-spacing: -0.03em; font-size: 22px; color: #f2f3f7; text-decoration: none">rama sathya sai<span style="color: #3fc84e">.</span></a>
+<nav aria-label="Projects" style="display: flex; flex-wrap: wrap; gap: 4px">
+<a class="dp-btn dp-btn--ghost" href="Main.dc.html">all work</a>
+<a class="dp-btn dp-btn--ghost" href="Emporos.dc.html">emporos</a>
+<a class="dp-btn dp-btn--ghost" href="Mark8.dc.html">mark8</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 64px 24px 64px; display: flex; flex-direction: column; gap: 32px">
+<div class="rise" style="display: flex; flex-direction: column; gap: 20px; max-width: 760px">
+<span class="dp-label" style="color: #b48be6">ARK-I · adaptive resource kernel, implementation</span>
+<h1 style="font-size: clamp(44px, 6.5vw, 76px); line-height: 0.98">One model remembers. Six forget on purpose<span style="color: #3fc84e">.</span></h1>
+<p style="margin: 0; font-size: 18px; line-height: 28px; color: #b6b8c8">The WhatsApp assistant behind Sukoon, a senior support and wellness service. A stateful main model holds every conversation and delegates each task to a short-lived sub-model that does one job and disappears.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="dp-btn dp-btn--primary" href="https://github.com/RamaSai2519/ARK-I">View the code</a>
+<a class="dp-btn dp-btn--secondary" href="#flow">Watch a query</a>
+</div>
+</div>
+<div class="rise" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; animation-delay: 150ms">
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 40px; line-height: 42px; color: #3fc84e">10k</span><span class="dp-label">active Sukoon users</span></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 40px; line-height: 42px; color: #b48be6">4k</span><span class="dp-label">paying members</span></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 40px; line-height: 42px; color: #8fcdf0">~100</span><span class="dp-label">people chatting daily</span></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 40px; line-height: 42px; color: #ffc933">6</span><span class="dp-label">stateless sub-models</span></div>
+</div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">01 — architecture</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">A kernel with six specialists</h2>
+</div>
+<div role="img" aria-label="Animated architecture: WhatsApp and API traffic reaches a Flask server, then MainGPT, which keeps history in MongoDB and alerts Slack, and calls a controller that routes to six sub-models, each backed by its own API" style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 40px 32px; display: flex; flex-direction: column; gap: 0">
+<div style="display: flex; align-items: center; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: none">
+<div style="width: 64px; height: 64px; border-radius: 50%; border: 2px solid #8fcdf0; display: flex; align-items: center; justify-content: center; color: #8fcdf0"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg></div>
+<span class="dp-label">whatsapp · api</span>
+</div>
+<div class="wire"><i class="pkt" style="background: #8fcdf0"></i></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: none">
+<div style="padding: 16px 18px; border-radius: 14px; background: #1b1b2e; border: 1px solid #666884; font: 500 14px/18px var(--font-mono)">flask /ark</div>
+<span class="dp-label">gunicorn · async reply</span>
+</div>
+<div class="wire"><i class="pkt" style="background: #8fcdf0; animation-delay: .6s"></i></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; flex: none">
+<div class="live" style="padding: 20px 24px; border-radius: 14px; background: #10301a; border: 2px solid #3fc84e; font: 600 16px/20px var(--font-mono); color: #3fc84e">MainGPT</div>
+<span class="dp-label" style="color: #3fc84e">stateful · gpt-4 tools</span>
+</div>
+<div class="wire"><i class="pkt" style="animation-delay: 1.2s"></i></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: none">
+<div style="padding: 16px 18px; border-radius: 14px; background: #1b1b2e; border: 1px solid #666884; font: 500 14px/18px var(--font-mono)">controller</div>
+<span class="dp-label">routes · lifecycle</span>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; margin-top: 24px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">main model keeps</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span class="dp-pill dp-pill--brand">mongodb · full history</span>
+<span class="dp-pill">rate limits</span>
+<span class="dp-pill dp-pill--gold">slack alerts</span>
+</div>
+</div>
+<div style="flex: 2 1 520px; display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">controller dispatches to</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px">
+<div class="blink" style="border: 1px solid #2a2a40; background: #1b1b2e; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font: 600 14px/18px var(--font-mono); color: #b48be6">ExpertsGPT</span><span style="font-size: 12px; color: #8c8ea6">experts api</span></div>
+<div class="blink" style="border: 1px solid #2a2a40; background: #1b1b2e; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; animation-delay: .8s"><span style="font: 600 14px/18px var(--font-mono); color: #b48be6">SchedulesGPT</span><span style="font-size: 12px; color: #8c8ea6">schedules api</span></div>
+<div class="blink" style="border: 1px solid #2a2a40; background: #1b1b2e; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; animation-delay: 1.6s"><span style="font: 600 14px/18px var(--font-mono); color: #b48be6">SukoonGPT</span><span style="font-size: 12px; color: #8c8ea6">service knowledge</span></div>
+<div class="blink" style="border: 1px solid #2a2a40; background: #1b1b2e; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; animation-delay: 2.4s"><span style="font: 600 14px/18px var(--font-mono); color: #b48be6">EventsGPT</span><span style="font-size: 12px; color: #8c8ea6">events api</span></div>
+<div class="blink" style="border: 1px solid #2a2a40; background: #1b1b2e; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; animation-delay: 3.2s"><span style="font: 600 14px/18px var(--font-mono); color: #b48be6">PartnersGPT</span><span style="font-size: 12px; color: #8c8ea6">partners api</span></div>
+<div class="blink" style="border: 1px solid #2a2a40; background: #1b1b2e; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; animation-delay: 4s"><span style="font: 600 14px/18px var(--font-mono); color: #b48be6">UserGPT</span><span style="font-size: 12px; color: #8c8ea6">user profile</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ONE QUERY -->
+<section id="flow" style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">02 — one query, end to end</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">Seven hops, one reply</h2>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch">
+<ol class="dp-graph" style="flex: 1 1 380px; min-width: 0; background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px">
+<li class="step" style="--node: #8fcdf0"><h3>User writes on WhatsApp</h3><p>The webhook hands the message to Flask.</p></li>
+<li class="step" style="--node: #3fc84e; animation-delay: 1.2s"><h3>MainGPT reads the context</h3><p>The whole conversation is loaded from MongoDB.</p></li>
+<li class="step" style="--node: #3fc84e; animation-delay: 2.4s"><h3>It picks a tool</h3><p>A function call names the sub-model it needs.</p></li>
+<li class="step" style="--node: #666884; animation-delay: 3.6s"><h3>Controller spins it up</h3><p>Fresh, stateless, scoped to this one query.</p></li>
+<li class="step" style="--node: #b48be6; animation-delay: 4.8s"><h3>Sub-model fetches and answers</h3><p>Calls its API, returns a structured result, and is gone.</p></li>
+<li class="step" style="--node: #3fc84e; animation-delay: 6s"><h3>MainGPT writes the reply</h3><p>Results are merged into one answer in the user's thread.</p></li>
+<li class="step" style="--node: #8fcdf0; animation-delay: 7.2s"><h3>Sent back on WhatsApp</h3><p>History is saved; Slack hears about anything odd.</p></li>
+</ol>
+<div style="flex: 1 1 340px; min-width: 0; background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="dp-label">example thread</span><span class="dp-pill dp-pill--sky">illustrative</span></div>
+<div class="bub" style="align-self: flex-end; max-width: 80%; background: #10301a; color: #f2f3f7; border-radius: 14px 14px 4px 14px; padding: 12px 14px; font-size: 14px; line-height: 22px">Can I talk to a yoga expert tomorrow evening?</div>
+<div class="bub" style="align-self: flex-start; animation-delay: 1.4s"><span class="dp-pill dp-pill--purple">tool → ExpertsGPT</span></div>
+<div class="bub" style="align-self: flex-start; animation-delay: 2.6s"><span class="dp-pill dp-pill--purple">tool → SchedulesGPT</span></div>
+<div class="bub" style="align-self: flex-start; max-width: 80%; background: #1b1b2e; color: #f2f3f7; border-radius: 14px 14px 14px 4px; padding: 12px 14px; font-size: 14px; line-height: 22px; animation-delay: 4.2s">[Reply naming an available expert and open slots]</div>
+<div class="bub" style="align-self: flex-end; max-width: 80%; background: #10301a; color: #f2f3f7; border-radius: 14px 14px 4px 14px; padding: 12px 14px; font-size: 14px; line-height: 22px; animation-delay: 5.6s">Book the 6 pm one.</div>
+<div class="bub" style="align-self: flex-start; animation-delay: 6.8s"><span class="dp-pill dp-pill--brand">tool → SchedulesGPT · booked</span></div>
+</div>
+</div>
+</section>
+
+<!-- STATE -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">03 — the design choice</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">Why only one model keeps state</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px">
+<div style="background: #12121f; border: 1px solid #3fc84e; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+<span class="dp-pill dp-pill--brand" style="align-self: flex-start">stateful · long-lived</span>
+<h3 style="font-size: 22px">MainGPT</h3>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #b6b8c8">Owns the conversation. One place reads and writes history, so context never forks across models.</p>
+</div>
+<div style="background: #12121f; border: 1px solid #b48be6; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+<span class="dp-pill dp-pill--purple" style="align-self: flex-start">stateless · one query</span>
+<h3 style="font-size: 22px">Sub-models</h3>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #b6b8c8">Get a small prompt and a schema, call one API, return. Short prompts keep them cheap; adding a skill means adding one module.</p>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--purple">python</span><span class="dp-pill">flask</span><span class="dp-pill">gunicorn</span><span class="dp-pill dp-pill--brand">openai function calling</span><span class="dp-pill">mongodb</span><span class="dp-pill dp-pill--sky">whatsapp webhooks</span><span class="dp-pill dp-pill--gold">slack</span><span class="dp-pill">pm2</span></div>
+</section>
+
+<footer style="border-top: 1px solid #2a2a40">
+<div style="max-width: 1120px; margin: 0 auto; padding: 48px 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center">
+<a class="dp-btn dp-btn--secondary" href="Main.dc.html">Back to all work</a>
+<a class="dp-btn dp-btn--primary" href="Mark8.dc.html">Next: mark8</a>
+</div>
+</footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3200}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
