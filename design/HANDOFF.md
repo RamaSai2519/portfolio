@@ -10,7 +10,7 @@ You are building the production portfolio site for **Rama Sathya Sai** (GitHub: 
 
 - **Design canvas (visual spec):** https://claude.ai/artifact/PuHDzKEy8FkhqkSK6mezmf. It has 5 pages.
 - **The same files in this repo:** `design/canvas/`
-  - `Main.dc.html` is the home page: hero, site gallery, the systems section, contact.
+  - `Main.dc.html` is the home page: hero, an "All work" index of all 10 projects, site gallery, the systems section (Emporos engine, ARK-I, mark8, back_bone, resume_builder, smr_app), contact.
   - `Emporos.dc.html` is the flagship case study, built from the Emporos engine code.
   - `ARK-I.dc.html`, `Mark8.dc.html` and `BackBone.dc.html` are the three Sukoon deep dives.
   - These are HTML templates for the canvas tool, not app code. Ignore the `<x-dc>`, `<helmet>` and `data-dc-script` wrappers and rebuild the markup and CSS in the real site.
