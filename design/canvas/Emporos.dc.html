@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Emporos — case study</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/commit/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@100..125,200..900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{--bg:#0a0a14;--surface:#12121f;--raised:#1b1b2e;--overlay:#23233a;--line:#2a2a40;--line-strong:#666884;--text:#f2f3f7;--text-muted:#b6b8c8;--text-subtle:#8c8ea6;--brand:#3fc84e;--brand-hover:#5ee06b;--brand-soft:#10301a;--on-brand:#0a0a14;--purple:#b48be6;--purple-soft:#2a1f40;--sky:#8fcdf0;--sky-soft:#13293a;--gold:#ffc933;--link:#8ab4ff;--selection:#3a2a5c;--font-display:"Mona Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--font-sans:"Mona Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Consolas,monospace;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:128px;--radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-xl:18px;--radius-2xl:24px;--radius-pill:9999px;--shadow-lift:6px 6px 0 #3fc84e;--shadow-press:2px 2px 0 #3fc84e;--shadow-menu:0 16px 40px rgba(0,0,0,.55);--shadow-pulse:0 0 0 8px rgba(63,200,78,.18)}
+body{margin:0;padding:0 !important;background:#0a0a14}
+a{color:#8ab4ff}a:hover{color:#b9d1ff}
+.rise{animation:rise 800ms cubic-bezier(.23,1,.32,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.wire{position:relative;height:2px;background:#666884;flex:1 1 32px;min-width:24px}
+.pkt{position:absolute;top:-4px;left:0;width:10px;height:10px;border-radius:50%;background:#3fc84e;animation:flow 2.4s linear infinite}
+@keyframes flow{from{left:0}to{left:calc(100% - 10px)}}
+.cand{animation:cand 10s ease-out infinite both}
+@keyframes cand{0%{opacity:0;transform:scaleY(.2)}4%{opacity:1;transform:none}90%{opacity:1}100%{opacity:0}}
+.flash{animation:flash 10s ease-out infinite both}
+@keyframes flash{0%{opacity:0;box-shadow:0 0 0 0 rgba(63,200,78,.6)}4%{opacity:1;box-shadow:0 0 0 10px rgba(63,200,78,0)}90%{opacity:1}100%{opacity:0}}
+.step{animation:step 10s ease-in-out infinite}
+@keyframes step{0%,100%{opacity:.35}4%,90%{opacity:1}}
+.guard{animation:guard 8s ease-in-out infinite}
+@keyframes guard{0%,4%{background:#12121f;border-color:#2a2a40;color:#8c8ea6}8%,85%{background:#10301a;border-color:#3fc84e;color:#3fc84e}100%{background:#12121f;border-color:#2a2a40;color:#8c8ea6}}
+.lock{animation:lock 7.5s ease-in-out infinite}
+@keyframes lock{0%,6%{border-color:#666884;color:#8c8ea6;background:#12121f}12%,88%{border-color:#3fc84e;color:#3fc84e;background:#10301a}100%{border-color:#666884;color:#8c8ea6;background:#12121f}}
+.mock{animation:mockscroll 16s ease-in-out infinite alternate}
+@keyframes mockscroll{0%,15%{transform:translateY(0)}85%,100%{transform:translateY(-35%)}}
+.live{animation:live 2s ease-in-out infinite}
+@keyframes live{0%,100%{box-shadow:0 0 0 0 rgba(63,200,78,.35)}50%{box-shadow:0 0 0 8px rgba(63,200,78,0)}}
+.spin{animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.rise,.pkt,.cand,.flash,.step,.guard,.lock,.mock,.live,.spin{animation:none !important}.step{opacity:1}}
+</style>
+</helmet>
+<main style="background: #0a0a14; color: #f2f3f7; font-family: var(--font-sans); min-height: 100vh">
+
+<header style="max-width: 1120px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between">
+<a href="Main.dc.html" style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; letter-spacing: -0.03em; font-size: 22px; color: #f2f3f7; text-decoration: none">rama sathya sai<span style="color: #3fc84e">.</span></a>
+<nav aria-label="Projects" style="display: flex; flex-wrap: wrap; gap: 4px">
+<a class="dp-btn dp-btn--ghost" href="Main.dc.html">all work</a>
+<a class="dp-btn dp-btn--ghost" href="ARK-I.dc.html">ARK-I</a>
+<a class="dp-btn dp-btn--ghost" href="Mark8.dc.html">mark8</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 64px 24px 48px; display: flex; flex-direction: column; gap: 32px">
+<div class="rise" style="display: flex; flex-direction: column; gap: 20px; max-width: 800px">
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--gold">flagship</span><span class="dp-pill">emporos.journeymen.in</span></div>
+<h1 style="font-size: clamp(44px, 6.5vw, 76px); line-height: 0.98">A trading desk that refuses to guess<span style="color: #3fc84e">.</span></h1>
+<p style="margin: 0; font-size: 18px; line-height: 28px; color: #b6b8c8">Emporos trades Nifty weekly options through Angel One. It records the market every minute, paper-trades 24 versions of one breakout rule, and trades one of them for real, but only when five separate locks agree and sixteen risk rules pass.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="dp-btn dp-btn--primary" href="https://emporos.journeymen.in/">Open the demo dashboard</a>
+<a class="dp-btn dp-btn--secondary" href="#engine">Watch the engine</a>
+</div>
+</div>
+<div class="rise" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; animation-delay: 150ms">
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 36px; line-height: 40px; color: #8fcdf0">1 min</span><span class="dp-label">quote cadence</span></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 36px; line-height: 40px; color: #b48be6">24</span><span class="dp-label">paper books</span></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 36px; line-height: 40px; color: #3fc84e">1</span><span class="dp-label">live book</span></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 36px; line-height: 40px; color: #ffc933">16</span><span class="dp-label">risk rules per order</span></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 36px; line-height: 40px; color: #f2f3f7">30 s</span><span class="dp-label">broker reconcile</span></div>
+</div>
+</section>
+
+<!-- DEMO DASHBOARD -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px">
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 24px; overflow: hidden">
+<div style="display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid #2a2a40">
+<i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i>
+<span style="flex: 1; min-width: 0; margin-left: 8px; padding: 6px 14px; border-radius: 9999px; background: #0a0a14; font: 500 12px/16px var(--font-mono); color: #8c8ea6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">[emporos demo dashboard url]</span>
+<span class="dp-pill dp-pill--brand"><i class="dp-dot dp-dot--live live"></i>demo data</span>
+</div>
+<div style="height: 460px; overflow: hidden; background: #0e0e1a; position: relative">
+<div class="mock" style="padding: 20px 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between">
+<div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="dp-pill dp-pill--brand">overview</span><span class="dp-pill">live desk</span><span class="dp-pill">setup watch</span><span class="dp-pill">history</span><span class="dp-pill">orders</span></div>
+<div style="display: flex; gap: 8px"><span class="dp-pill dp-pill--sky">dry</span><span class="dp-pill" style="color: #ff7a7a">kill switch · off</span></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+<div style="height: 84px; border-radius: 12px; background: #1b1b2e"></div><div style="height: 84px; border-radius: 12px; background: #1b1b2e"></div><div style="height: 84px; border-radius: 12px; background: #10301a"></div><div style="height: 84px; border-radius: 12px; background: #1b1b2e"></div>
+</div>
+<div style="height: 200px; border-radius: 12px; background: #12121f; border: 1px solid #2a2a40; display: flex; align-items: flex-end; gap: 6px; padding: 16px">
+<div style="flex: 1; height: 30%; background: #2a2a40; border-radius: 3px"></div><div style="flex: 1; height: 42%; background: #2a2a40; border-radius: 3px"></div><div style="flex: 1; height: 38%; background: #2a2a40; border-radius: 3px"></div><div style="flex: 1; height: 55%; background: #2a2a40; border-radius: 3px"></div><div style="flex: 1; height: 50%; background: #2a2a40; border-radius: 3px"></div><div style="flex: 1; height: 52%; background: #2a2a40; border-radius: 3px"></div><div style="flex: 1; height: 49%; background: #2a2a40; border-radius: 3px"></div><div style="flex: 1; height: 80%; background: #3fc84e; border-radius: 3px"></div><div style="flex: 1; height: 86%; background: #2a2a40; border-radius: 3px"></div><div style="flex: 1; height: 90%; background: #2a2a40; border-radius: 3px"></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="height: 140px; border-radius: 12px; background: #1b1b2e"></div><div style="height: 140px; border-radius: 12px; background: #1b1b2e"></div>
+</div>
+<div style="height: 26px; border-radius: 6px; background: #1b1b2e"></div><div style="height: 26px; border-radius: 6px; background: #12121f; border: 1px solid #2a2a40"></div><div style="height: 26px; border-radius: 6px; background: #1b1b2e"></div><div style="height: 26px; border-radius: 6px; background: #12121f; border: 1px solid #2a2a40"></div>
+</div>
+<span class="dp-pill" style="position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); background: #23233a">[live demo dashboard loads here]</span>
+</div>
+</div>
+</section>
+
+<!-- ENGINE: THE DAY -->
+<section id="engine" style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">01 — the rule, one closed candle at a time</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">Move, build-up, breakout</h2>
+<p style="margin: 0; font-size: 16px; line-height: 26px; color: #b6b8c8; max-width: 700px">The setup detector is fed one Nifty 1-minute candle after it closes and nothing else, so it cannot see the future: no look-ahead is a fact of its signature, not a promise.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch">
+<div role="img" aria-label="Animated candle chart: three rising candles form a move, five sideways candles form a range, then a candle closes above the range, a call option is bought, and a later candle touches the profit floor" style="flex: 3 1 520px; min-width: 0; background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px"><span class="dp-label">nifty · 1 min</span><span class="dp-label">09:15 → decision before 12:00</span></div>
+<div style="overflow-x: auto">
+<div style="position: relative; height: 260px; min-width: 420px; display: flex; align-items: flex-end; gap: 10px; padding: 0 24px; border-bottom: 1px solid #2a2a40">
+<div class="cand" style="position: absolute; left: 108px; bottom: 114px; width: 130px; height: 42px; border: 1px dashed #b48be6; background: rgba(180,139,230,.08); border-radius: 4px; animation-delay: 2.9s"></div>
+<div class="cand" style="position: absolute; left: 248px; right: 0; bottom: 214px; border-top: 2px dashed #ffc933; animation-delay: 3.9s"><span style="position: absolute; right: 0; top: -22px; font: 500 11px/16px var(--font-mono); color: #ffc933">P* floor</span></div>
+<div class="cand" style="width: 18px; height: 36px; margin-bottom: 30px; background: #3fc84e; border-radius: 2px; flex: none"></div>
+<div class="cand" style="width: 18px; height: 34px; margin-bottom: 58px; background: #3fc84e; border-radius: 2px; flex: none; animation-delay: .35s"></div>
+<div class="cand" style="width: 18px; height: 36px; margin-bottom: 84px; background: #3fc84e; border-radius: 2px; flex: none; animation-delay: .7s"></div>
+<div class="cand" style="width: 18px; height: 16px; margin-bottom: 118px; background: #ff7a7a; border-radius: 2px; flex: none; animation-delay: 1.05s"></div>
+<div class="cand" style="width: 18px; height: 22px; margin-bottom: 126px; background: #3fc84e; border-radius: 2px; flex: none; animation-delay: 1.4s"></div>
+<div class="cand" style="width: 18px; height: 18px; margin-bottom: 120px; background: #ff7a7a; border-radius: 2px; flex: none; animation-delay: 1.75s"></div>
+<div class="cand" style="width: 18px; height: 20px; margin-bottom: 132px; background: #3fc84e; border-radius: 2px; flex: none; animation-delay: 2.1s"></div>
+<div class="cand" style="width: 18px; height: 26px; margin-bottom: 124px; background: #ff7a7a; border-radius: 2px; flex: none; animation-delay: 2.45s"></div>
+<div class="flash" style="width: 18px; height: 60px; margin-bottom: 140px; background: #3fc84e; border-radius: 2px; flex: none; animation-delay: 3.2s"></div>
+<div class="cand" style="width: 18px; height: 22px; margin-bottom: 188px; background: #3fc84e; border-radius: 2px; flex: none; opacity: .7; animation-delay: 4.3s"></div>
+<div class="cand" style="width: 18px; height: 20px; margin-bottom: 196px; background: #3fc84e; border-radius: 2px; flex: none; animation-delay: 4.7s"></div>
+<div class="cand" style="width: 18px; height: 26px; margin-bottom: 200px; background: #ffc933; border-radius: 2px; flex: none; animation-delay: 5.1s"></div>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span class="dp-pill dp-pill--brand">move · ≥3 closes, ≥0.10% of spot</span>
+<span class="dp-pill dp-pill--purple">build-up · ≥5 candles, width ≤60% of move</span>
+<span class="dp-pill dp-pill--brand">breakout close → CE, below → PE</span>
+<span class="dp-pill dp-pill--gold">floor touch → exit in candle</span>
+</div>
+</div>
+<ol class="dp-graph" style="flex: 2 1 320px; min-width: 0; background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 28px">
+<li class="step" style="--node: #8fcdf0; animation-delay: 3.4s"><h3>Pick the option</h3><p>Nearest expiry, highest open interest within ATM ± 2 strikes.</p></li>
+<li class="step" style="--node: #b48be6; animation-delay: 3.8s"><h3>Check the depth</h3><p>Buy share of the book must be at least 0.90, from a row no older than 90 s.</p></li>
+<li class="step" style="--node: #3fc84e; animation-delay: 4.2s"><h3>Size and buy</h3><p>Half the capital, limit order at the live ask.</p></li>
+<li class="step" style="--node: #ffc933; animation-delay: 5.1s"><h3>Lock the floor</h3><p>P* = entry + (Rs 2,000 + costs) / qty. A touch exits in that candle.</p></li>
+<li class="step" style="--node: #ff7a7a; animation-delay: 5.5s"><h3>Or get out</h3><p>Back inside the range, a Rs 10,000 hard stop, or 15:15. One trade a day.</p></li>
+</ol>
+</div>
+</section>
+
+<!-- ORDER PATH -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">02 — the order path</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">Intent first, broker second, never a blind retry</h2>
+</div>
+<div role="img" aria-label="Animated order path: quotes are recorded, the setup detector and option picker produce a signal, the depth gate and risk engine check it, the executor writes intent then places a limit order at Angel One, and a reconciler compares broker state every 30 seconds" style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; align-items: center; overflow-x: auto; padding-bottom: 8px">
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: center; flex: none"><div style="padding: 12px 14px; border-radius: 12px; background: #13293a; border: 1px solid #8fcdf0; color: #8fcdf0; font: 500 12px/16px var(--font-mono)">recorder</div><span class="dp-label">s3 parquet</span></div>
+<div class="wire"><i class="pkt" style="background: #8fcdf0"></i></div>
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: center; flex: none"><div style="padding: 12px 14px; border-radius: 12px; background: #1b1b2e; border: 1px solid #666884; font: 500 12px/16px var(--font-mono)">SetupDetector</div><span class="dp-label">rules 1–3</span></div>
+<div class="wire"><i class="pkt" style="animation-delay: .4s"></i></div>
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: center; flex: none"><div style="padding: 12px 14px; border-radius: 12px; background: #1b1b2e; border: 1px solid #666884; font: 500 12px/16px var(--font-mono)">OptionPicker</div><span class="dp-label">max oi</span></div>
+<div class="wire"><i class="pkt" style="animation-delay: .8s"></i></div>
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: center; flex: none"><div style="padding: 12px 14px; border-radius: 12px; background: #2a1f40; border: 1px solid #b48be6; color: #b48be6; font: 500 12px/16px var(--font-mono)">depth gate</div><span class="dp-label">≥ 0.90</span></div>
+<div class="wire"><i class="pkt" style="animation-delay: 1.2s"></i></div>
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: center; flex: none"><div style="padding: 12px 14px; border-radius: 12px; background: #3a2c06; border: 1px solid #ffc933; color: #ffc933; font: 600 12px/16px var(--font-mono)">risk engine</div><span class="dp-label">16 rules</span></div>
+<div class="wire"><i class="pkt" style="animation-delay: 1.6s"></i></div>
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: center; flex: none"><div style="padding: 12px 14px; border-radius: 12px; background: #1b1b2e; border: 1px solid #666884; font: 500 12px/16px var(--font-mono)">executor</div><span class="dp-label">intent → order</span></div>
+<div class="wire"><i class="pkt" style="animation-delay: 2s"></i></div>
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: center; flex: none"><div class="live" style="padding: 12px 14px; border-radius: 12px; background: #10301a; border: 2px solid #3fc84e; color: #3fc84e; font: 600 12px/16px var(--font-mono)">angel one</div><span class="dp-label">limit only</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; border-top: 1px dashed #2a2a40; padding-top: 20px">
+<svg class="spin" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8fcdf0" stroke-width="1.5"><path d="M21 12a9 9 0 1 1-3-6.7"></path><path d="M21 4v5h-5"></path></svg>
+<span style="font-size: 14px; color: #b6b8c8">Every 30 s the broker's orders, fills and positions are compared with Emporos's own. Any difference stops new entries. An ambiguous order is <span style="font-family: var(--font-mono); color: #ffc933">UNKNOWN</span> until the broker is asked by its tag.</span>
+</div>
+</div>
+</section>
+
+<!-- RISK WALL -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">03 — risk engine</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">Sixteen rules, checked in order, every order</h2>
+<p style="margin: 0; font-size: 16px; line-height: 26px; color: #b6b8c8; max-width: 700px">A pure, ordered list over an immutable snapshot of the account, so every rule is unit-testable. A rejection is always stored with its full context: a signal that silently vanished could not be audited.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px">
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono)">TradingModeGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: .2s">KillSwitchGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: .4s">MarketSessionGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: .6s">StaleDataGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: .8s">BrokerHealthGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 1s">ReconciliationGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 1.2s">DuplicateOrderGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 1.4s">MaxDailyLossGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 1.6s">MaxStrategyLossGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 1.8s">MaxPositionValueGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 2s">MaxOpenPositionsGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 2.2s">MaxCapitalDeployedGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 2.4s">MaxOrderQuantityGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 2.6s">PriceSanityGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 2.8s">AbnormalSpreadGuard</span>
+<span class="guard" style="border: 1px solid #2a2a40; border-radius: 10px; padding: 10px 12px; font: 500 12px/16px var(--font-mono); animation-delay: 3s">OrderRateGuard</span>
+</div>
+</section>
+
+<!-- LIVE GATE -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">04 — the live gate</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">Real money needs five yeses</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px">
+<div class="lock" style="border: 1px solid #666884; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span style="font: 600 13px/18px var(--font-mono)">LIVE_TRADING_ENABLED</span><span style="font-size: 13px; line-height: 20px; color: #b6b8c8">set in SSM</span></div>
+<div class="lock" style="border: 1px solid #666884; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 10px; animation-delay: .6s"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span style="font: 600 13px/18px var(--font-mono)">committed override</span><span style="font-size: 13px; line-height: 20px; color: #b6b8c8">names this book and its limits</span></div>
+<div class="lock" style="border: 1px solid #666884; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 10px; animation-delay: 1.2s"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span style="font: 600 13px/18px var(--font-mono)">behaviour hash ack</span><span style="font-size: 13px; line-height: 20px; color: #b6b8c8">typed by the operator</span></div>
+<div class="lock" style="border: 1px solid #666884; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 10px; animation-delay: 1.8s"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span style="font: 600 13px/18px var(--font-mono)">kill switch clear</span><span style="font-size: 13px; line-height: 20px; color: #b6b8c8">mongo flag + file sentinel, polled every 5 s</span></div>
+<div class="lock" style="border: 1px solid #666884; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 10px; animation-delay: 2.4s"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span style="font: 600 13px/18px var(--font-mono)">dry / real switch</span><span style="font-size: 13px; line-height: 20px; color: #b6b8c8">the operator's, on the dashboard</span></div>
+</div>
+</section>
+
+<!-- STACK -->
+<section style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">05 — where it runs</span>
+<h2 style="font-size: clamp(32px, 4.5vw, 48px); line-height: 1">Only one process can touch the broker</h2>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch">
+<div style="flex: 2 1 480px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
+<div style="background: #10301a; border: 1px solid #3fc84e; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span class="dp-label" style="color: #3fc84e">ec2 · systemd</span><h3 style="font-size: 17px">Trader + recorder</h3><p style="margin: 0; font-size: 13px; line-height: 20px; color: #b6b8c8">The only holder of broker credentials.</p></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span class="dp-label">lambda · api gateway</span><h3 style="font-size: 17px">Control API</h3><p style="margin: 0; font-size: 13px; line-height: 20px; color: #b6b8c8">Overview, live page, orders, command bus.</p></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span class="dp-label">vercel · next.js</span><h3 style="font-size: 17px">Dashboard</h3><p style="margin: 0; font-size: 13px; line-height: 20px; color: #b6b8c8">Reads the API only, holds no secrets.</p></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span class="dp-label">s3 · parquet</span><h3 style="font-size: 17px">Quotes and history</h3><p style="margin: 0; font-size: 13px; line-height: 20px; color: #b6b8c8">Versioned, index and index-option data only.</p></div>
+<div style="background: #12121f; border: 1px solid #2a2a40; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span class="dp-label">mongodb atlas</span><h3 style="font-size: 17px">Live state</h3><p style="margin: 0; font-size: 13px; line-height: 20px; color: #b6b8c8">Orders, append-only order events, acks.</p></div>
+</div>
+<div class="dp-code" style="flex: 1 1 320px; min-width: 0">
+<div class="dp-code__bar"><i></i><i></i><i></i><span>pyproject.toml · import-linter</span></div>
+<pre><span class="c"># layers, lowest first</span>
+<span class="f">core</span>
+ &lt; <span class="f">domain</span>        <span class="c"># pure</span>
+ &lt; <span class="k">persistence</span> / <span class="k">broker</span>
+ &lt; <span class="s">execution</span> / <span class="s">risk</span> / <span class="s">quotes</span>
+   / <span class="s">breakout</span> / <span class="s">livetrade</span>
+ &lt; <span class="n">api</span> / <span class="n">cli</span></pre>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--brand">python · asyncio</span><span class="dp-pill">angel one smartapi</span><span class="dp-pill dp-pill--sky">aws ec2 · lambda · s3 · ssm</span><span class="dp-pill">mongodb atlas</span><span class="dp-pill dp-pill--purple">next.js · vercel</span><span class="dp-pill">playwright · vitest · pytest</span></div>
+</section>
+
+<footer style="border-top: 1px solid #2a2a40">
+<div style="max-width: 1120px; margin: 0 auto; padding: 48px 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center">
+<a class="dp-btn dp-btn--secondary" href="Main.dc.html">Back to all work</a>
+<a class="dp-btn dp-btn--primary" href="ARK-I.dc.html">Next: ARK-I</a>
+</div>
+</footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3200}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

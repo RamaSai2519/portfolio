@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rama Sathya Sai — portfolio</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/commit/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@100..125,200..900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{--bg:#0a0a14;--surface:#12121f;--raised:#1b1b2e;--overlay:#23233a;--line:#2a2a40;--line-strong:#666884;--text:#f2f3f7;--text-muted:#b6b8c8;--text-subtle:#8c8ea6;--brand:#3fc84e;--brand-hover:#5ee06b;--brand-soft:#10301a;--on-brand:#0a0a14;--purple:#b48be6;--purple-soft:#2a1f40;--sky:#8fcdf0;--sky-soft:#13293a;--gold:#ffc933;--link:#8ab4ff;--selection:#3a2a5c;--font-display:"Mona Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--font-sans:"Mona Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Consolas,monospace;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:128px;--radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-xl:18px;--radius-2xl:24px;--radius-pill:9999px;--shadow-lift:6px 6px 0 #3fc84e;--shadow-press:2px 2px 0 #3fc84e;--shadow-menu:0 16px 40px rgba(0,0,0,.55);--shadow-pulse:0 0 0 8px rgba(63,200,78,.18)}
+body{margin:0;padding:0 !important;background:#0a0a14}
+a{color:#8ab4ff}a:hover{color:#b9d1ff}
+.rise{animation:rise 800ms cubic-bezier(.23,1,.32,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.wire{position:relative;height:2px;background:#666884;flex:1 1 40px;min-width:32px}
+.pkt{position:absolute;top:-4px;left:0;width:10px;height:10px;border-radius:50%;background:#3fc84e;animation:flow 2.4s linear infinite}
+@keyframes flow{from{left:0}to{left:calc(100% - 10px)}}
+.vwire{position:relative;width:2px;background:#666884;min-height:28px}
+.vpkt{position:absolute;left:-4px;top:0;width:10px;height:10px;border-radius:50%;background:#b48be6;animation:vflow 2.4s linear infinite}
+@keyframes vflow{from{top:0}to{top:calc(100% - 10px)}}
+.blink{animation:blink 3.6s ease-in-out infinite}
+@keyframes blink{0%,70%,100%{background:#1b1b2e;border-color:#2a2a40;color:#b6b8c8}12%,40%{background:#2a1f40;border-color:#b48be6;color:#f2f3f7}}
+.mock{animation:mockscroll 16s ease-in-out infinite alternate}
+@keyframes mockscroll{0%,12%{transform:translateY(0)}88%,100%{transform:translateY(-55%)}}
+.fill{animation:fillbar 4s cubic-bezier(.23,1,.32,1) infinite}
+@keyframes fillbar{0%{width:0}60%,100%{width:var(--w)}}
+.fit{transform-origin:top center;animation:fit 6s ease-in-out infinite}
+@keyframes fit{0%{transform:scale(1.18)}20%{transform:scale(.84)}40%{transform:scale(1.06)}55%{transform:scale(.96)}70%,100%{transform:scale(1)}}
+.overflow{animation:overflow 6s ease-in-out infinite}
+@keyframes overflow{0%,15%{opacity:1}20%,100%{opacity:0}}
+.fitok{animation:fitok 6s ease-in-out infinite}
+@keyframes fitok{0%,65%{opacity:0;transform:scale(.8)}72%,100%{opacity:1;transform:none}}
+.spin{animation:spin 6s cubic-bezier(.23,1,.32,1) infinite}
+@keyframes spin{0%{stroke-dashoffset:264}60%,100%{stroke-dashoffset:40}}
+.live{animation:live 2s ease-in-out infinite}
+@keyframes live{0%,100%{box-shadow:0 0 0 0 rgba(63,200,78,.35)}50%{box-shadow:0 0 0 8px rgba(63,200,78,0)}}
+.site:hover .mock{animation-duration:6s}
+.s3{grid-column:span 3}.s2{grid-column:span 2}
+@media (max-width:860px){.s3,.s2{grid-column:span 6}}
+@media (prefers-reduced-motion:reduce){.rise,.pkt,.vpkt,.blink,.mock,.fill,.fit,.overflow,.fitok,.spin,.live{animation:none !important}.fill{width:var(--w)}.fitok{opacity:1}.overflow{opacity:0}}
+</style>
+</helmet>
+<main style="background: #0a0a14; color: #f2f3f7; font-family: var(--font-sans); min-height: 100vh">
+
+<!-- NAV -->
+<header style="max-width: 1120px; margin: 0 auto; padding: 24px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between">
+<a href="#top" style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; letter-spacing: -0.03em; font-size: 22px; color: #f2f3f7; text-decoration: none">rama sathya sai<span style="color: #3fc84e">.</span></a>
+<nav aria-label="Sections" style="display: flex; flex-wrap: wrap; gap: 4px">
+<a class="dp-btn dp-btn--ghost" href="#sites">sites</a>
+<a class="dp-btn dp-btn--ghost" href="#systems">systems</a>
+<a class="dp-btn dp-btn--ghost" href="#contact">contact</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section id="top" style="max-width: 1120px; margin: 0 auto; padding: 96px 24px 96px; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
+<div class="rise" style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<span class="dp-pill dp-pill--brand" style="align-self: flex-start"><i class="dp-dot dp-dot--live live"></i>open to work</span>
+<h1 style="font-size: clamp(48px, 7vw, 80px); line-height: 0.98">I ship websites and the systems behind them<span style="color: #3fc84e">.</span></h1>
+<p style="margin: 0; font-size: 18px; line-height: 28px; color: #b6b8c8; max-width: 520px">Five sites live in production. Four engines that orchestrate LLMs, score conversations and typeset resumes.</p>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 520px">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 32px; line-height: 36px; color: #3fc84e">10k</span><span class="dp-label">active users served</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 32px; line-height: 36px; color: #b48be6">4k</span><span class="dp-label">paying members</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 32px; line-height: 36px; color: #ffc933">500</span><span class="dp-label">calls scored / day</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="dp-btn dp-btn--primary" href="#sites">See the work</a>
+<a class="dp-btn dp-btn--secondary" href="https://github.com/RamaSai2519">github.com/RamaSai2519</a>
+</div>
+</div>
+<div class="dp-code rise" style="flex: 1 1 360px; min-width: 0; animation-delay: 150ms">
+<div class="dp-code__bar"><i></i><i></i><i></i><span>git log --graph --oneline</span></div>
+<ol class="dp-graph" style="padding: 24px">
+<li style="--node: #3fc84e"><h3 style="font-size: 16px">journeymen.in</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">main · site</p></li>
+<li style="--node: #3fc84e"><h3 style="font-size: 16px">emporos · ledger</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">main · sub-domains</p></li>
+<li style="--node: #8fcdf0"><h3 style="font-size: 16px">mohanvisweswar.in · gitam epoch</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">client · sites</p></li>
+<li style="--node: #b48be6"><h3 style="font-size: 16px">ARK-I · mark8 · back_bone</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">ai · systems</p></li>
+<li style="--node: #b48be6"><h3 style="font-size: 16px">resume_builder · smr_app</h3><p style="font-family: var(--font-mono); font-size: 12px; color: #8c8ea6">tools · systems</p></li>
+</ol>
+</div>
+</section>
+
+<!-- INDEX -->
+<section id="work" style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">00 — index</span>
+<h2 style="font-size: clamp(36px, 5vw, 56px); line-height: 1">All work</h2>
+</div>
+<span class="dp-label">10 projects · 4 deep dives</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px">
+<a class="dp-card" href="Emporos.dc.html" style="padding: 18px; gap: 8px"><span class="dp-label" style="color: #ffc933">flagship · trading</span><h3 style="font-size: 18px">Emporos</h3><p style="font-size: 13px; line-height: 20px">Nifty options desk with a 16-rule risk engine</p></a>
+<a class="dp-card" href="https://www.journeymen.in/" style="padding: 18px; gap: 8px"><span class="dp-label" style="color: #ffc933">flagship · site</span><h3 style="font-size: 18px">Journeymen</h3><p style="font-size: 13px; line-height: 20px">[One line]</p></a>
+<a class="dp-card" href="ARK-I.dc.html" style="padding: 18px; gap: 8px"><span class="dp-label" style="color: #b48be6">sukoon · ai</span><h3 style="font-size: 18px">ARK-I</h3><p style="font-size: 13px; line-height: 20px">WhatsApp assistant, one model plus six specialists</p></a>
+<a class="dp-card" href="Mark8.dc.html" style="padding: 18px; gap: 8px"><span class="dp-label" style="color: #b48be6">sukoon · ai</span><h3 style="font-size: 18px">mark8</h3><p style="font-size: 13px; line-height: 20px">Scores 100–500 support calls a day</p></a>
+<a class="dp-card" href="BackBone.dc.html" style="padding: 18px; gap: 8px"><span class="dp-label" style="color: #8fcdf0">sukoon · backend</span><h3 style="font-size: 18px">back_bone</h3><p style="font-size: 13px; line-height: 20px">83 endpoints and a 5-minute scheduler</p></a>
+<a class="dp-card" href="https://github.com/RamaSai2519/resume_builder" style="padding: 18px; gap: 8px"><span class="dp-label" style="color: #3fc84e">tool</span><h3 style="font-size: 18px">resume_builder</h3><p style="font-size: 13px; line-height: 20px">YAML to a one-page, ATS-safe PDF</p></a>
+<a class="dp-card" href="https://github.com/roopaksai/smr_app" style="padding: 18px; gap: 8px"><span class="dp-label" style="color: #8fcdf0">app</span><h3 style="font-size: 18px">smr_app</h3><p style="font-size: 13px; line-height: 20px">[One line]</p></a>
+<a class="dp-card" href="https://ledger.journeymen.in/" style="padding: 18px; gap: 8px"><span class="dp-label" style="color: #8c8ea6">site</span><h3 style="font-size: 18px">Ledger</h3><p style="font-size: 13px; line-height: 20px">[One line]</p></a>
+<a class="dp-card" href="https://www.mohanvisweswar.in/" style="padding: 18px; gap: 8px"><span class="dp-label" style="color: #8c8ea6">site</span><h3 style="font-size: 18px">Mohan Visweswar</h3><p style="font-size: 13px; line-height: 20px">[One line]</p></a>
+<a class="dp-card" href="https://gitamepoch.vercel.app/" style="padding: 18px; gap: 8px"><span class="dp-label" style="color: #8c8ea6">site</span><h3 style="font-size: 18px">GITAM Epoch</h3><p style="font-size: 13px; line-height: 20px">[One line]</p></a>
+</div>
+</section>
+
+<!-- SITES -->
+<section id="sites" style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">01 — shipped</span>
+<h2 style="font-size: clamp(36px, 5vw, 56px); line-height: 1">Live on the web</h2>
+</div>
+<span class="dp-label">hover a frame to scroll faster</span>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px">
+
+<!-- journeymen -->
+<a class="dp-card site s3" href="https://www.journeymen.in/" style="padding: 0; gap: 0; overflow: hidden">
+<div style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #2a2a40">
+<i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i>
+<span style="flex: 1; margin-left: 8px; padding: 4px 12px; border-radius: 9999px; background: #0a0a14; font: 500 12px/16px var(--font-mono); color: #8c8ea6">www.journeymen.in</span>
+</div>
+<div style="height: 300px; overflow: hidden; background: #0e0e1a; position: relative">
+<div class="mock" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="height: 14px; width: 30%; border-radius: 4px; background: #3fc84e"></div>
+<div style="height: 40px; width: 85%; border-radius: 6px; background: #2a2a40"></div>
+<div style="height: 40px; width: 60%; border-radius: 6px; background: #2a2a40"></div>
+<div style="height: 120px; border-radius: 10px; background: #1b1b2e"></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px"><div style="height: 90px; border-radius: 8px; background: #1b1b2e"></div><div style="height: 90px; border-radius: 8px; background: #1b1b2e"></div><div style="height: 90px; border-radius: 8px; background: #1b1b2e"></div></div>
+<div style="height: 160px; border-radius: 10px; background: #13293a"></div>
+<div style="height: 12px; width: 70%; border-radius: 4px; background: #2a2a40"></div>
+<div style="height: 12px; width: 50%; border-radius: 4px; background: #2a2a40"></div>
+</div>
+<span class="dp-pill" style="position: absolute; right: 12px; bottom: 12px; background: #23233a">[screenshot]</span>
+</div>
+<div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: center"><h3>Journeymen</h3><span class="dp-pill dp-pill--gold">flagship</span></div>
+<p>[One line: what Journeymen is]</p>
+</div>
+</a>
+
+<!-- emporos -->
+<a class="dp-card site s3" href="Emporos.dc.html" style="padding: 0; gap: 0; overflow: hidden">
+<div style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #2a2a40">
+<i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i>
+<span style="flex: 1; margin-left: 8px; padding: 4px 12px; border-radius: 9999px; background: #0a0a14; font: 500 12px/16px var(--font-mono); color: #8c8ea6">emporos.journeymen.in</span>
+</div>
+<div style="height: 300px; overflow: hidden; background: #0e0e1a; position: relative">
+<div class="mock" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; animation-delay: -4s">
+<div style="display: flex; justify-content: space-between"><div style="height: 14px; width: 25%; border-radius: 4px; background: #b48be6"></div><div style="height: 14px; width: 30%; border-radius: 4px; background: #2a2a40"></div></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+<div style="height: 110px; border-radius: 8px; background: #2a1f40"></div><div style="height: 110px; border-radius: 8px; background: #1b1b2e"></div><div style="height: 110px; border-radius: 8px; background: #1b1b2e"></div><div style="height: 110px; border-radius: 8px; background: #2a1f40"></div>
+<div style="height: 110px; border-radius: 8px; background: #1b1b2e"></div><div style="height: 110px; border-radius: 8px; background: #2a1f40"></div><div style="height: 110px; border-radius: 8px; background: #1b1b2e"></div><div style="height: 110px; border-radius: 8px; background: #1b1b2e"></div>
+<div style="height: 110px; border-radius: 8px; background: #1b1b2e"></div><div style="height: 110px; border-radius: 8px; background: #1b1b2e"></div><div style="height: 110px; border-radius: 8px; background: #2a1f40"></div><div style="height: 110px; border-radius: 8px; background: #1b1b2e"></div>
+</div>
+</div>
+<span class="dp-pill dp-pill--brand" style="position: absolute; right: 12px; bottom: 12px"><i class="dp-dot dp-dot--live live"></i>live demo</span>
+</div>
+<div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: center"><h3>Emporos</h3><span class="dp-pill dp-pill--gold">flagship</span></div>
+<p>[One line: what Emporos does] · try the demo dashboard and see the engine run</p>
+</div>
+</a>
+
+<!-- ledger -->
+<a class="dp-card site s2" href="https://ledger.journeymen.in/" style="padding: 0; gap: 0; overflow: hidden">
+<div style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #2a2a40">
+<i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i>
+<span style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-left: 8px; padding: 4px 12px; border-radius: 9999px; background: #0a0a14; font: 500 12px/16px var(--font-mono); color: #8c8ea6">ledger.journeymen.in</span>
+</div>
+<div style="height: 220px; overflow: hidden; background: #0e0e1a; position: relative">
+<div class="mock" style="padding: 20px; display: flex; flex-direction: column; gap: 10px; animation-delay: -8s">
+<div style="display: flex; gap: 8px; align-items: flex-end; height: 70px"><div style="flex: 1; height: 40%; background: #13293a; border-radius: 4px"></div><div style="flex: 1; height: 70%; background: #13293a; border-radius: 4px"></div><div style="flex: 1; height: 55%; background: #8fcdf0; border-radius: 4px"></div><div style="flex: 1; height: 90%; background: #13293a; border-radius: 4px"></div><div style="flex: 1; height: 65%; background: #13293a; border-radius: 4px"></div></div>
+<div style="height: 22px; border-radius: 4px; background: #1b1b2e"></div><div style="height: 22px; border-radius: 4px; background: #12121f; border: 1px solid #2a2a40"></div><div style="height: 22px; border-radius: 4px; background: #1b1b2e"></div><div style="height: 22px; border-radius: 4px; background: #12121f; border: 1px solid #2a2a40"></div><div style="height: 22px; border-radius: 4px; background: #1b1b2e"></div><div style="height: 22px; border-radius: 4px; background: #12121f; border: 1px solid #2a2a40"></div><div style="height: 22px; border-radius: 4px; background: #1b1b2e"></div><div style="height: 22px; border-radius: 4px; background: #12121f; border: 1px solid #2a2a40"></div>
+</div>
+<span class="dp-pill" style="position: absolute; right: 12px; bottom: 12px; background: #23233a">[screenshot]</span>
+</div>
+<div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 8px">
+<h3>Ledger</h3>
+<p>[One line: what Ledger tracks]</p>
+</div>
+</a>
+
+<!-- mohan -->
+<a class="dp-card site s2" href="https://www.mohanvisweswar.in/" style="padding: 0; gap: 0; overflow: hidden">
+<div style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #2a2a40">
+<i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i>
+<span style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-left: 8px; padding: 4px 12px; border-radius: 9999px; background: #0a0a14; font: 500 12px/16px var(--font-mono); color: #8c8ea6">mohanvisweswar.in</span>
+</div>
+<div style="height: 220px; overflow: hidden; background: #0e0e1a; position: relative">
+<div class="mock" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; align-items: center; animation-delay: -2s">
+<div style="width: 72px; height: 72px; border-radius: 50%; background: #23233a; border: 3px solid #ffc933"></div>
+<div style="height: 18px; width: 60%; border-radius: 4px; background: #2a2a40"></div>
+<div style="height: 10px; width: 40%; border-radius: 4px; background: #2a2a40"></div>
+<div style="height: 90px; width: 100%; border-radius: 8px; background: #1b1b2e"></div>
+<div style="height: 10px; width: 80%; border-radius: 4px; background: #2a2a40"></div>
+<div style="height: 10px; width: 70%; border-radius: 4px; background: #2a2a40"></div>
+<div style="height: 90px; width: 100%; border-radius: 8px; background: #1b1b2e"></div>
+</div>
+<span class="dp-pill" style="position: absolute; right: 12px; bottom: 12px; background: #23233a">[screenshot]</span>
+</div>
+<div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 8px">
+<h3>Mohan Visweswar</h3>
+<p>[One line: who it's for]</p>
+</div>
+</a>
+
+<!-- epoch -->
+<a class="dp-card site s2" href="https://gitamepoch.vercel.app/" style="padding: 0; gap: 0; overflow: hidden">
+<div style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #2a2a40">
+<i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i><i style="width: 10px; height: 10px; border-radius: 50%; background: #666884"></i>
+<span style="flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-left: 8px; padding: 4px 12px; border-radius: 9999px; background: #0a0a14; font: 500 12px/16px var(--font-mono); color: #8c8ea6">gitamepoch.vercel.app</span>
+</div>
+<div style="height: 220px; overflow: hidden; background: #0e0e1a; position: relative">
+<div class="mock" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; animation-delay: -6s">
+<div style="height: 100px; border-radius: 8px; background: #23233a; display: flex; align-items: center; justify-content: center"><div style="width: 48px; height: 48px; border-radius: 50%; background: #ffc933"></div></div>
+<div style="display: flex; gap: 8px"><div style="flex: 1; height: 26px; border-radius: 9999px; background: #10301a"></div><div style="flex: 1; height: 26px; border-radius: 9999px; background: #2a1f40"></div><div style="flex: 1; height: 26px; border-radius: 9999px; background: #13293a"></div></div>
+<div style="height: 60px; border-radius: 8px; background: #1b1b2e"></div>
+<div style="height: 60px; border-radius: 8px; background: #1b1b2e"></div>
+<div style="height: 60px; border-radius: 8px; background: #1b1b2e"></div>
+</div>
+<span class="dp-pill" style="position: absolute; right: 12px; bottom: 12px; background: #23233a">[screenshot]</span>
+</div>
+<div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 8px">
+<h3>GITAM Epoch</h3>
+<p>[One line: the event and your role]</p>
+</div>
+</a>
+
+</div>
+</section>
+
+<!-- SYSTEMS -->
+<section id="systems" style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="dp-label">02 — solved</span>
+<h2 style="font-size: clamp(36px, 5vw, 56px); line-height: 1">Systems, drawn running</h2>
+</div>
+
+<!-- EMPOROS ENGINE -->
+<article style="background: #12121f; border: 1px solid #ffc933; border-radius: 18px; padding: 32px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><span class="dp-label" style="color: #ffc933">emporos · trading engine</span><span class="dp-pill dp-pill--gold">flagship</span></div>
+<h3 style="font-size: 28px; font-weight: 800; font-stretch: 115%">Sixteen risk rules before every order.</h3>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #b6b8c8">Records Nifty options every minute, finds a breakout one closed candle at a time, paper-trades 24 books and trades one for real behind five locks. Limit orders only, intent written before the broker call.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--gold">angel one</span><span class="dp-pill">python · asyncio</span><span class="dp-pill dp-pill--sky">aws</span><span class="dp-pill dp-pill--purple">next.js</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="dp-btn dp-btn--primary" href="Emporos.dc.html">Deep dive</a><a class="dp-btn dp-btn--ghost" href="https://emporos.journeymen.in/">Demo dashboard</a></div>
+</div>
+<div role="img" aria-label="Animated diagram: a breakout on the Nifty chart becomes a signal that passes the depth gate and the risk engine before a limit order reaches Angel One" style="flex: 2 1 520px; min-width: 0; background: #0a0a14; border: 1px solid #2a2a40; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="position: relative; height: 120px; display: flex; align-items: flex-end; gap: 8px; border-bottom: 1px solid #2a2a40">
+<div style="position: absolute; left: 72px; bottom: 50px; width: 108px; height: 24px; border: 1px dashed #b48be6; border-radius: 4px"></div>
+<div style="width: 10px; height: 18px; margin-bottom: 8px; background: #3fc84e; border-radius: 2px; flex: none"></div><div style="width: 10px; height: 18px; margin-bottom: 22px; background: #3fc84e; border-radius: 2px; flex: none"></div><div style="width: 10px; height: 18px; margin-bottom: 36px; background: #3fc84e; border-radius: 2px; flex: none"></div><div style="width: 10px; height: 10px; margin-bottom: 52px; background: #ff7a7a; border-radius: 2px; flex: none"></div><div style="width: 10px; height: 14px; margin-bottom: 56px; background: #3fc84e; border-radius: 2px; flex: none"></div><div style="width: 10px; height: 10px; margin-bottom: 54px; background: #ff7a7a; border-radius: 2px; flex: none"></div><div style="width: 10px; height: 14px; margin-bottom: 58px; background: #3fc84e; border-radius: 2px; flex: none"></div><div style="width: 10px; height: 12px; margin-bottom: 55px; background: #ff7a7a; border-radius: 2px; flex: none"></div><div class="live" style="width: 10px; height: 34px; margin-bottom: 62px; background: #3fc84e; border-radius: 2px; flex: none"></div>
+<span class="dp-label" style="margin-left: auto; align-self: flex-start; color: #3fc84e">breakout → CE</span>
+</div>
+<div style="display: flex; align-items: center">
+<div style="padding: 10px 12px; border-radius: 10px; background: #2a1f40; border: 1px solid #b48be6; color: #b48be6; font: 500 12px/16px var(--font-mono); flex: none">depth ≥ 0.90</div>
+<div class="wire"><i class="pkt"></i></div>
+<div style="padding: 10px 12px; border-radius: 10px; background: #3a2c06; border: 1px solid #ffc933; color: #ffc933; font: 500 12px/16px var(--font-mono); flex: none">16 risk rules</div>
+<div class="wire"><i class="pkt" style="animation-delay: .8s"></i></div>
+<div style="padding: 10px 12px; border-radius: 10px; background: #10301a; border: 1px solid #3fc84e; color: #3fc84e; font: 600 12px/16px var(--font-mono); flex: none">limit order</div>
+</div>
+</div>
+</article>
+
+<!-- ARK-I -->
+<article style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span class="dp-label" style="color: #b48be6">ARK-I · adaptive resource kernel</span>
+<h3 style="font-size: 28px; font-weight: 800; font-stretch: 115%">One model remembers. Six forget on purpose.</h3>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #b6b8c8">A stateful main model holds the whole conversation and calls short-lived, stateless sub-models through function calls. Ran Sukoon's senior-support assistant on WhatsApp, with about 100 people chatting to it every day.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--purple">gpt-4 tools</span><span class="dp-pill">flask</span><span class="dp-pill">mongodb</span><span class="dp-pill dp-pill--sky">whatsapp</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="dp-btn dp-btn--primary" href="ARK-I.dc.html">Deep dive</a><a class="dp-btn dp-btn--ghost" href="https://github.com/RamaSai2519/ARK-I">RamaSai2519/ARK-I</a></div>
+</div>
+<div role="img" aria-label="Animated diagram: a user message flows to MainGPT, which calls a controller that dispatches to six sub-models in turn" style="flex: 2 1 520px; min-width: 0; background: #0a0a14; border: 1px solid #2a2a40; border-radius: 14px; padding: 32px 24px; display: flex; align-items: center; gap: 0">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: none">
+<div style="width: 56px; height: 56px; border-radius: 50%; border: 2px solid #8fcdf0; display: flex; align-items: center; justify-content: center; color: #8fcdf0"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></div>
+<span class="dp-label">user</span>
+</div>
+<div class="wire"><i class="pkt" style="background: #8fcdf0"></i></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; flex: none">
+<div class="live" style="padding: 14px 16px; border-radius: 14px; background: #10301a; border: 2px solid #3fc84e; font: 600 14px/18px var(--font-mono); color: #3fc84e">MainGPT</div>
+<div class="vwire" style="height: 28px"><i class="vpkt" style="background: #3fc84e"></i></div>
+<span class="dp-pill" style="font-size: 11px">mongo · history</span>
+</div>
+<div class="wire"><i class="pkt" style="animation-delay: .6s"></i></div>
+<div style="padding: 14px 12px; border-radius: 14px; background: #1b1b2e; border: 1px solid #666884; font: 500 13px/18px var(--font-mono); color: #f2f3f7; flex: none">controller</div>
+<div class="wire" style="flex-basis: 24px"><i class="pkt" style="background: #b48be6; animation-delay: 1.2s"></i></div>
+<div style="display: flex; flex-direction: column; gap: 6px; flex: none; border-left: 2px solid #666884; padding-left: 12px">
+<span class="blink" style="padding: 5px 10px; border-radius: 9999px; border: 1px solid #2a2a40; font: 500 12px/16px var(--font-mono); background: #1b1b2e; color: #b6b8c8">experts</span>
+<span class="blink" style="padding: 5px 10px; border-radius: 9999px; border: 1px solid #2a2a40; font: 500 12px/16px var(--font-mono); background: #1b1b2e; color: #b6b8c8; animation-delay: .6s">schedules</span>
+<span class="blink" style="padding: 5px 10px; border-radius: 9999px; border: 1px solid #2a2a40; font: 500 12px/16px var(--font-mono); background: #1b1b2e; color: #b6b8c8; animation-delay: 1.2s">sukoon</span>
+<span class="blink" style="padding: 5px 10px; border-radius: 9999px; border: 1px solid #2a2a40; font: 500 12px/16px var(--font-mono); background: #1b1b2e; color: #b6b8c8; animation-delay: 1.8s">events</span>
+<span class="blink" style="padding: 5px 10px; border-radius: 9999px; border: 1px solid #2a2a40; font: 500 12px/16px var(--font-mono); background: #1b1b2e; color: #b6b8c8; animation-delay: 2.4s">partners</span>
+<span class="blink" style="padding: 5px 10px; border-radius: 9999px; border: 1px solid #2a2a40; font: 500 12px/16px var(--font-mono); background: #1b1b2e; color: #b6b8c8; animation-delay: 3s">user</span>
+</div>
+</div>
+</article>
+
+<!-- mark8 -->
+<article style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px; display: flex; flex-wrap: wrap-reverse; gap: 32px; align-items: center">
+<div role="img" aria-label="Animated diagram: all day, each support call is validated, analysed against topic guidelines, profiled and scored, then written back to MongoDB" style="flex: 2 1 520px; min-width: 0; background: #0a0a14; border: 1px solid #2a2a40; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<span class="dp-pill dp-pill--gold"><i class="dp-dot live" style="background: #ffc933"></i>realtime · all day</span>
+<span class="dp-label">100–500 calls / day</span>
+</div>
+<div style="display: flex; align-items: center">
+<div style="padding: 10px 12px; border-radius: 10px; background: #1b1b2e; border: 1px solid #666884; font: 500 12px/16px var(--font-mono); flex: none">calls</div>
+<div class="wire"><i class="pkt" style="background: #ffc933"></i></div>
+<div style="padding: 10px 12px; border-radius: 10px; background: #1b1b2e; border: 1px solid #666884; font: 500 12px/16px var(--font-mono); flex: none">validate</div>
+<div class="wire"><i class="pkt" style="background: #ffc933; animation-delay: .8s"></i></div>
+<div style="padding: 10px 12px; border-radius: 10px; background: #2a1f40; border: 1px solid #b48be6; font: 500 12px/16px var(--font-mono); color: #b48be6; flex: none">analyse</div>
+<div class="wire"><i class="pkt" style="background: #ffc933; animation-delay: 1.6s"></i></div>
+<div style="padding: 10px 12px; border-radius: 10px; background: #10301a; border: 1px solid #3fc84e; font: 500 12px/16px var(--font-mono); color: #3fc84e; flex: none">score</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px">
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label">mental health</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 72%; height: 6px; border-radius: 3px; background: #b48be6"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label">physical health</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 48%; height: 6px; border-radius: 3px; background: #8fcdf0; animation-delay: .3s"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label">wellbeing</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 86%; height: 6px; border-radius: 3px; background: #3fc84e; animation-delay: .6s"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label">family · work</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 34%; height: 6px; border-radius: 3px; background: #ffc933; animation-delay: .9s"></div></div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill">→ user persona</span><span class="dp-pill">→ expert persona</span><span class="dp-pill dp-pill--brand">→ conversationScore</span></div>
+</div>
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span class="dp-label" style="color: #ffc933">mark8 · realtime call analyst</span>
+<h3 style="font-size: 28px; font-weight: 800; font-stretch: 115%">Every support call, read and scored as it happens.</h3>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #b6b8c8">Runs all day on Sukoon's support line, 100 to 500 calls a day: checks each call against topic guidelines, updates user and expert personas, and writes a score back. The same server handles bulk scheduling, WhatsApp queues, FCM pushes and PDF invoices.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--gold">llm scoring</span><span class="dp-pill">flask + quart</span><span class="dp-pill">pm2</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="dp-btn dp-btn--primary" href="Mark8.dc.html">Deep dive</a><a class="dp-btn dp-btn--ghost" href="https://github.com/RamaSai2519/mark8">RamaSai2519/mark8</a></div>
+</div>
+</article>
+
+<!-- back_bone -->
+<article style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span class="dp-label" style="color: #8fcdf0">back_bone · sukoon platform backend</span>
+<h3 style="font-size: 28px; font-weight: 800; font-stretch: 115%">83 endpoints and a five-minute heartbeat.</h3>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #b6b8c8">The Flask-on-Lambda API behind Sukoon: users, experts, calls, payments, WhatsApp, events and games, plus a scheduler that places due calls and sends reminders every five minutes.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--sky">aws lambda</span><span class="dp-pill">flask</span><span class="dp-pill dp-pill--brand">mongodb</span><span class="dp-pill dp-pill--gold">cashfree</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="dp-btn dp-btn--primary" href="BackBone.dc.html">Deep dive</a><a class="dp-btn dp-btn--ghost" href="https://github.com/RamaSai2519/back_bone">RamaSai2519/back_bone</a></div>
+</div>
+<div role="img" aria-label="Animated diagram: the scheduler fires every five minutes and four job lanes fill in parallel next to a grid of 83 endpoint squares" style="flex: 2 1 520px; min-width: 0; background: #0a0a14; border: 1px solid #2a2a40; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--gold">rate(5 minutes)</span><span class="dp-label">gamesProcessor + scheduler</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label" style="color: #3fc84e">schedules</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 100%; height: 6px; border-radius: 3px; background: #3fc84e"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label" style="color: #8fcdf0">event reminders</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 100%; height: 6px; border-radius: 3px; background: #8fcdf0; animation-delay: .3s"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label" style="color: #b48be6">expert status</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 100%; height: 6px; border-radius: 3px; background: #b48be6; animation-delay: .6s"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="dp-label" style="color: #ffc933">emails · db backup</span><div style="height: 6px; border-radius: 3px; background: #1b1b2e"><div class="fill" style="--w: 100%; height: 6px; border-radius: 3px; background: #ffc933; animation-delay: .9s"></div></div></div>
+</div>
+</article>
+
+<!-- resume_builder -->
+<article style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span class="dp-label" style="color: #3fc84e">resume_builder · yaml → pdf</span>
+<h3 style="font-size: 28px; font-weight: 800; font-stretch: 115%">Binary-searches the type until it fits one page.</h3>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #b6b8c8">Resumes live in YAML and render through headless Chromium to ATS-safe HTML and PDF, with an ATS report and a keyword-gap check that never invents experience.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--brand">playwright</span><span class="dp-pill">3 themes</span><span class="dp-pill dp-pill--sky">ats report</span></div>
+<a class="dp-btn dp-btn--ghost" href="https://github.com/RamaSai2519/resume_builder" style="align-self: flex-start; padding-inline: 0">RamaSai2519/resume_builder</a>
+</div>
+<div role="img" aria-label="Animated diagram: YAML content is rendered to a page whose type scale shrinks and grows until it fits exactly one page, then scored for ATS checks" style="flex: 2 1 520px; min-width: 0; background: #0a0a14; border: 1px solid #2a2a40; border-radius: 14px; padding: 24px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center">
+<div class="dp-code" style="flex: 1 1 170px; min-width: 0">
+<div class="dp-code__bar"><i></i><i></i><i></i><span>resume.yaml</span></div>
+<pre style="padding: 16px; font-size: 12px; line-height: 20px"><span class="k">name</span>: <span class="s">Rama Sathya Sai</span>
+<span class="k">experience</span>:
+  - <span class="k">role</span>: <span class="s">…</span>
+    <span class="k">bullets</span>: [<span class="n">…</span>]
+<span class="k">theme</span>: <span class="f">google</span></pre>
+</div>
+<div class="wire" style="flex: 0 1 40px"><i class="pkt"></i></div>
+<div style="position: relative; width: 140px; height: 182px; border-radius: 6px; background: #f2f3f7; overflow: hidden; flex: none">
+<div class="fit" style="padding: 14px; display: flex; flex-direction: column; gap: 6px">
+<div style="height: 10px; width: 60%; background: #0a0a14; border-radius: 2px"></div>
+<div style="height: 4px; width: 80%; background: #8c8ea6; border-radius: 2px"></div>
+<div style="height: 6px; width: 40%; background: #0a0a14; border-radius: 2px; margin-top: 4px"></div>
+<div style="height: 4px; background: #8c8ea6; border-radius: 2px"></div><div style="height: 4px; width: 90%; background: #8c8ea6; border-radius: 2px"></div><div style="height: 4px; width: 75%; background: #8c8ea6; border-radius: 2px"></div>
+<div style="height: 6px; width: 40%; background: #0a0a14; border-radius: 2px; margin-top: 4px"></div>
+<div style="height: 4px; background: #8c8ea6; border-radius: 2px"></div><div style="height: 4px; width: 85%; background: #8c8ea6; border-radius: 2px"></div><div style="height: 4px; width: 92%; background: #8c8ea6; border-radius: 2px"></div><div style="height: 4px; width: 70%; background: #8c8ea6; border-radius: 2px"></div>
+<div style="height: 6px; width: 40%; background: #0a0a14; border-radius: 2px; margin-top: 4px"></div>
+<div style="height: 4px; background: #8c8ea6; border-radius: 2px"></div><div style="height: 4px; width: 80%; background: #8c8ea6; border-radius: 2px"></div>
+</div>
+<div class="overflow" style="position: absolute; left: 0; right: 0; bottom: 0; height: 20px; background: #ff7a7a; font: 600 10px/20px var(--font-mono); color: #0a0a14; text-align: center">overflow</div>
+<div class="fitok" style="position: absolute; left: 0; right: 0; bottom: 0; height: 20px; background: #3fc84e; font: 600 10px/20px var(--font-mono); color: #0a0a14; text-align: center">1 page</div>
+</div>
+<div class="wire" style="flex: 0 1 40px"><i class="pkt" style="animation-delay: 1.2s"></i></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; flex: none">
+<svg aria-hidden="true" width="96" height="96" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#1b1b2e" stroke-width="10"></circle><circle class="spin" cx="50" cy="50" r="42" fill="none" stroke="#3fc84e" stroke-width="10" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="40" transform="rotate(-90 50 50)"></circle></svg>
+<span class="dp-label">ats check</span>
+</div>
+</div>
+</article>
+
+<!-- smr_app -->
+<article style="background: #12121f; border: 1px solid #2a2a40; border-radius: 18px; padding: 32px; display: flex; flex-wrap: wrap-reverse; gap: 32px; align-items: center">
+<div role="img" aria-label="Placeholder diagram for smr_app" style="flex: 2 1 520px; min-width: 0; background: #0a0a14; border: 1px dashed #666884; border-radius: 14px; padding: 32px 24px; display: flex; align-items: center; justify-content: center; gap: 0; min-height: 260px">
+<div style="width: 120px; height: 220px; border-radius: 22px; border: 2px solid #666884; padding: 12px 10px; display: flex; flex-direction: column; gap: 8px; flex: none">
+<div style="height: 10px; width: 50%; border-radius: 4px; background: #8fcdf0"></div>
+<div style="height: 50px; border-radius: 8px; background: #13293a"></div>
+<div style="height: 26px; border-radius: 6px; background: #1b1b2e"></div>
+<div style="height: 26px; border-radius: 6px; background: #1b1b2e"></div>
+<div style="height: 26px; border-radius: 6px; background: #1b1b2e"></div>
+</div>
+<div class="wire" style="flex: 0 1 80px"><i class="pkt" style="background: #8fcdf0"></i></div>
+<div style="padding: 14px 16px; border-radius: 14px; border: 1px dashed #666884; font: 500 13px/18px var(--font-mono); color: #8c8ea6; flex: none">[backend]</div>
+<div class="wire" style="flex: 0 1 80px"><i class="pkt" style="background: #8fcdf0; animation-delay: 1s"></i></div>
+<div style="padding: 14px 16px; border-radius: 14px; border: 1px dashed #666884; font: 500 13px/18px var(--font-mono); color: #8c8ea6; flex: none">[data]</div>
+</div>
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span class="dp-label" style="color: #8fcdf0">smr_app · mobile</span>
+<h3 style="font-size: 28px; font-weight: 800; font-stretch: 115%">[Headline: the problem smr_app solves]</h3>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #b6b8c8">[Two lines on what it does and how]</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="dp-pill dp-pill--sky">[stack]</span><span class="dp-pill">[stack]</span></div>
+<a class="dp-btn dp-btn--ghost" href="https://github.com/roopaksai/smr_app" style="align-self: flex-start; padding-inline: 0">roopaksai/smr_app</a>
+</div>
+</article>
+</section>
+
+<!-- CONTACT -->
+<footer id="contact" style="border-top: 1px solid #2a2a40">
+<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<span class="dp-label">03 — merge</span>
+<h2 style="font-size: clamp(36px, 5vw, 56px); line-height: 1">Let's build the next one<span style="color: #3fc84e">.</span></h2>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="dp-btn dp-btn--primary" href="mailto:[YOUR EMAIL]">Email me</a>
+<a class="dp-btn dp-btn--secondary" href="https://github.com/RamaSai2519">GitHub</a>
+<a class="dp-btn dp-btn--secondary" href="[LINKEDIN URL]">LinkedIn</a>
+</div>
+</div>
+</footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6300}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
