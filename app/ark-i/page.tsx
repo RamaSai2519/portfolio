@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./ark.css";
-import { PageFooter, Ph, SecHead, SiteHeader, Stat, Wire } from "@/components/chrome";
+import { PageFooter, SecHead, SiteHeader, Stat, Wire } from "@/components/chrome";
 import { Stage } from "@/components/stage";
 import { repos } from "@/lib/site";
 
@@ -94,7 +94,7 @@ export default function ArkI() {
               <div className="msg msg--me" data-step={0}>Can I talk to a yoga expert tomorrow evening?</div>
               <div data-step={2} style={{ alignSelf: "flex-start" }}><span className="dp-pill dp-pill--accent">tool → ExpertsGPT</span></div>
               <div data-step={4} style={{ alignSelf: "flex-start" }}><span className="dp-pill dp-pill--accent">tool → SchedulesGPT</span></div>
-              <div className="msg msg--bot" data-step={5}><Ph>reply naming an available expert and open slots</Ph></div>
+              <div className="msg msg--bot" data-step={5}>Meera, a yoga expert, is free tomorrow at 6 pm and 7:30 pm. Want me to book one?</div>
               <div className="msg msg--me" data-step={6}>Book the 6 pm one.</div>
               <div data-step={6} style={{ alignSelf: "flex-start" }}><span className="dp-pill dp-pill--brand">tool → SchedulesGPT · booked</span></div>
             </div>

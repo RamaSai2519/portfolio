@@ -12,7 +12,7 @@ portfolio out, the frame stays blank. Allow the portfolio's domain, for example 
 async headers() {
   return [{
     source: "/:path*",
-    headers: [{ key: "Content-Security-Policy", value: "frame-ancestors 'self' https://<portfolio-domain>" }],
+    headers: [{ key: "Content-Security-Policy", value: "frame-ancestors 'self' https://rama.journeymen.in" }],
   }];
 }
 ```
@@ -29,7 +29,7 @@ and visitors can press "Use the site" to scroll it themselves.
 <script>
 (function () {
   if (window.top === window) return; // only when framed
-  var PORTFOLIO = "https://<portfolio-domain>";
+  var PORTFOLIO = "https://rama.journeymen.in";
   window.addEventListener("message", function (e) {
     if (e.origin !== PORTFOLIO || !e.data || e.data.type !== "rss-scroll") return;
     var max = document.documentElement.scrollHeight - window.innerHeight;

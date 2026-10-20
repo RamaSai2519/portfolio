@@ -147,7 +147,7 @@ export default function Home() {
               <h2>A trading desk that refuses to guess<span className="dotg">.</span></h2>
               <p>Emporos trades Nifty weekly options through Angel One. It records the market every minute, paper-trades 24 books and trades one for real, only when five locks agree and sixteen risk rules pass.</p>
               <div className="tags" data-step={14}><span className="dp-pill">python · asyncio</span><span className="dp-pill">angel one</span><span className="dp-pill">aws</span><span className="dp-pill">next.js</span></div>
-              <div className="tour__links" data-step={15}><Link className="tlink" href="/emporos/demo">Demo dashboard (coming) →</Link></div>
+              <div className="tour__links" data-step={15}><Link className="tlink" href="/emporos/demo">Open the demo dashboard →</Link></div>
             </>
           }
         >

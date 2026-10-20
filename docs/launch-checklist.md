@@ -4,29 +4,23 @@ Open items before the portfolio goes to production. Tick them off here as they c
 
 ## Must fix before going live
 
-- [ ] **Rotate the leaked service-account keys.** The site links to the public `RamaSai2519/mark8` and
-      `RamaSai2519/back_bone` repos, which track Google/Firebase service-account files with `private_key`
-      fields (see `design/content/BRIEF.md` §7 for the exact paths). Revoke the keys in Firebase / Google
-      Cloud first, then remove the files from both repos and from git history.
-- [ ] **Emporos demo placeholders.** Still showing gold `[placeholder]` markers:
-  - the demo dashboard frame on `/emporos` (`app/emporos/page.tsx`, "the desk" section)
-  - the "Demo dashboard (coming)" links on `/` and `/emporos`
-  - the `/emporos/demo` page itself (`app/emporos/demo/page.tsx`)
-
-  Either build the public demo (a demo mode in the private `emporos` repo: fixtures only, no API calls,
-  no credentials, every control inert) or hide these three for launch and bring them back later.
-- [ ] **ARK-I example thread.** The assistant's reply bubble on `/ark-i` (`app/ark-i/page.tsx`) is still
+- [ ] **Emporos demo goes live.** The portfolio side is done: `/emporos/demo` and the "desk" section on
+      `/emporos` show screenshots until the demo is served from the Emporos project at
+      `https://emporos.journeymen.in/demo` (override with `NEXT_PUBLIC_EMPOROS_DEMO_URL`). Then set
+      `NEXT_PUBLIC_EMPOROS_DEMO_LIVE=1` in this project's Vercel env and redeploy. The demo route must send
+      `frame-ancestors 'self' https://rama.journeymen.in` and nothing real may be reachable from it.
+- [x] **ARK-I example thread.** The assistant's reply bubble on `/ark-i` (`app/ark-i/page.tsx`) is still
       `[reply naming an available expert and open slots]`. Use a real anonymised reply or a generic one;
       the thread is already labelled "illustrative".
-- [ ] **Allow the live frames.** Journeymen, Ledger, Mohan Visweswar and GITAM Epoch render blank in the
-      home tour unless each site allows the portfolio's domain in `frame-ancestors` (and sends no
-      `X-Frame-Options` block). The optional scroll bridge makes them scroll with the tour. Both are in
-      `docs/live-embed.md`; they need the final production domain.
+- [ ] **Allow the live frames.** Code changes are made, uncommitted, in the sibling repos (Journeymen
+      `apps/web`, Mohan, Ledger `apps/web`, and `deva` = GITAM Epoch): a `frame-ancestors 'self'
+      https://rama.journeymen.in` header and the scroll bridge (`docs/live-embed.md`). Still to do: commit
+      and deploy each site. Ledger is a static export, so its host (S3/CDN/Pages) must send the
+      `Content-Security-Policy: frame-ancestors` header itself; `next.config.mjs` cannot.
 
 ## Deploy
 
-- [ ] **Vercel project and domain.** Import the repo into Vercel, choose the domain and set it as the
-      production domain. `lib/site.ts` reads `VERCEL_PROJECT_PRODUCTION_URL`, so the Open Graph image and
+- [x] **Vercel project and domain.** Deployed from master at https://rama.journeymen.in/. `lib/site.ts` reads `VERCEL_PROJECT_PRODUCTION_URL`, so the Open Graph image and
       metadata pick it up automatically.
 
 ## Should check
@@ -41,5 +35,5 @@ Open items before the portfolio goes to production. Tick them off here as they c
 
 ## Optional
 
-- [ ] `robots.txt` and `sitemap.xml` (`app/robots.ts`, `app/sitemap.ts`).
-- [ ] Analytics, if wanted.
+- [x] `robots.txt` and `sitemap.xml` (`app/robots.ts`, `app/sitemap.ts`).
+- [ ] Analytics: GA4 chosen. Add the measurement ID to the Vercel env when available (wired in `app/layout.tsx`; set `NEXT_PUBLIC_GA_ID` in Vercel, it is a no-op until then).

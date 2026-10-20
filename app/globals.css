@@ -384,3 +384,10 @@ a.dp-card:hover { background-color: rgba(27, 27, 46, 0.85); }
 .scroll-hint__chev i:nth-child(2) { animation-delay: 0.2s; }
 @keyframes chev { 40% { opacity: 1; } 80%, 100% { opacity: 0.2; } }
 @media (prefers-reduced-motion: reduce) { .scroll-hint__mouse::after { opacity: 1; } .scroll-hint__chev i { opacity: 0.6; } }
+
+/* emporos demo frame */
+.ed { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-2xl); overflow: hidden; }
+.ed .frame__bar { padding: 14px 18px; }
+.ed__frame { display: block; width: 100%; height: 760px; border: 0; background: #0e0e1a; }
+.ed__shot { display: block; width: 100%; height: auto; background: #0e0e1a; }
+@media (max-width: 899px) { .ed__frame { height: 80vh; } }

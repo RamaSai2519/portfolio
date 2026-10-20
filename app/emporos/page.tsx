@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./emporos.css";
-import { PageFooter, Ph, SecHead, SiteHeader, Stat, Wire } from "@/components/chrome";
+import { PageFooter, SecHead, SiteHeader, Stat, Wire } from "@/components/chrome";
 import { CandleChart } from "@/components/candle-chart";
 import { Stage } from "@/components/stage";
+import { EmporosDemoFrame } from "@/components/emporos-demo-frame";
 
 export const metadata: Metadata = {
   title: "Emporos",
@@ -70,7 +71,7 @@ export default function Emporos() {
             <p className="lede">Emporos trades Nifty weekly options through Angel One. It records the market every minute, paper-trades 24 books of one breakout rule, and trades one book for real, but only when five separate locks agree and sixteen risk rules pass.</p>
             <div className="row" style={{ alignItems: "center", gap: "12px 24px" }}>
               <a className="dp-btn dp-btn--primary" href="#engine">Watch the engine</a>
-              <Link className="tlink" href="/emporos/demo">Demo dashboard (coming) →</Link>
+              <Link className="tlink" href="/emporos/demo">Open the demo dashboard →</Link>
             </div>
           </div>
           <div className="stats rise rise--d">
@@ -170,31 +171,13 @@ export default function Emporos() {
           </div>
         </Stage>
 
-        {/* DEMO SLOT: blocked until the public demo exists */}
+        {/* DEMO */}
         <Stage mode="scrub" className="sec" label="Demo dashboard">
-          <SecHead eyebrow="06 — the desk" title="The operator's dashboard" />
-          <div className="demo" data-step={0}>
-            <div className="frame__bar">
-              <i /><i /><i />
-              <span className="frame__url"><Ph>emporos demo dashboard url</Ph></span>
-              <span className="dp-pill dp-pill--gold">demo · pending</span>
-            </div>
-            <div className="demo__view">
-              <div className="demo__mock" aria-hidden="true">
-                <div className="tags" style={{ justifyContent: "space-between", alignItems: "center" }}>
-                  <div className="tags"><span className="dp-pill dp-pill--brand">overview</span><span className="dp-pill">live desk</span><span className="dp-pill">setup watch</span><span className="dp-pill">history</span><span className="dp-pill">orders</span></div>
-                  <div className="tags"><span className="dp-pill dp-pill--sky">dry</span><span className="dp-pill dp-pill--danger">kill switch · off</span></div>
-                </div>
-                <div className="g4"><i style={{ height: 84 }} /><i style={{ height: 84 }} /><i style={{ height: 84, background: "var(--brand-soft)" }} /><i style={{ height: 84 }} /></div>
-                <div className="demo__bars">
-                  {[30, 42, 38, 55, 50, 52, 49, 80, 86, 90].map((h, i) => <i key={i} style={{ height: `${h}%`, ...(i === 7 ? { background: "var(--accent)" } : {}) }} />)}
-                </div>
-                <div className="g2"><i style={{ height: 140 }} /><i style={{ height: 140 }} /></div>
-                <i style={{ height: 26, borderRadius: 6 }} /><i style={{ height: 26, borderRadius: 6, background: "var(--surface)" }} /><i style={{ height: 26, borderRadius: 6 }} />
-              </div>
-              <span className="dp-pill dp-pill--overlay demo__note"><Ph>live demo dashboard loads here: blocked, see /emporos/demo</Ph></span>
-            </div>
-          </div>
+          <SecHead eyebrow="06 — the desk" title="The operator's dashboard">
+            <p className="prose">The real dashboard is private. This is its own set of pages replaying an invented trading day: a simulated Nifty session with fake figures, play, pause and speed controls, and every action switched off.</p>
+          </SecHead>
+          <div data-step={0}><EmporosDemoFrame /></div>
+          <div className="row" style={{ marginTop: 20 }}><Link className="tlink" href="/emporos/demo">About the demo →</Link></div>
         </Stage>
 
         {/* STACK */}
