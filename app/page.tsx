@@ -4,6 +4,7 @@ import { Colophon, Ph, Wire, Wordmark } from "@/components/chrome";
 import { CandleChart } from "@/components/candle-chart";
 import { JourneyChrome } from "@/components/journey";
 import { LiveFrame } from "@/components/live-frame";
+import { Float } from "@/components/float";
 import { Stage, type StageAction } from "@/components/stage";
 import { contact, repos, sites } from "@/lib/site";
 import shotJourneymen from "@/design/content/assets/screenshots/journeymen.png";
@@ -11,19 +12,19 @@ import shotLedger from "@/design/content/assets/screenshots/ledger.png";
 import shotMohan from "@/design/content/assets/screenshots/mohan-visweswar.png";
 import shotEpoch from "@/design/content/assets/screenshots/gitam-epoch.png";
 
-type Project = { id: string; num: string; name: string; tag: string; line: string; action: StageAction };
+type Project = { id: string; num: string; name: string; tag: string; line: string; action: StageAction; color?: string };
 
 // Tour order: flagships, then the Sukoon systems, then the other sites and the tool.
 const projects: Project[] = [
-  { id: "emporos", num: "01", name: "Emporos", tag: "flagship · trading", line: "Nifty options desk with a 16-rule risk engine", action: { href: "/emporos", label: "Deep dive" } },
-  { id: "journeymen", num: "02", name: "Journeymen", tag: "flagship · site", line: "GitHub-verified developer certification.", action: { href: sites.journeymen, label: "Visit journeymen.in", external: true } },
-  { id: "ark-i", num: "03", name: "ARK-I", tag: "sukoon · ai", line: "WhatsApp assistant, one model plus six specialists", action: { href: "/ark-i", label: "Deep dive" } },
-  { id: "mark8", num: "04", name: "mark8", tag: "sukoon · ai", line: "Scores 100–500 support calls a day", action: { href: "/mark8", label: "Deep dive" } },
-  { id: "back-bone", num: "05", name: "back_bone", tag: "sukoon · backend", line: "83 endpoints and a 5-minute scheduler", action: { href: "/back-bone", label: "Deep dive" } },
-  { id: "ledger", num: "06", name: "Ledger", tag: "site", line: "One shared ledger for a couple or roommates", action: { href: sites.ledger, label: "Visit Ledger", external: true } },
-  { id: "mohan", num: "07", name: "Mohan Visweswar", tag: "client site", line: "Insurance and financial consultant, built for the client", action: { href: sites.mohan, label: "Visit the site", external: true } },
-  { id: "epoch", num: "08", name: "GITAM Epoch", tag: "community site", line: "GitHub Community Club and its annual fest", action: { href: sites.epoch, label: "Visit Epoch", external: true } },
-  { id: "resume-builder", num: "09", name: "resume_builder", tag: "tool", line: "YAML to a one-page, ATS-safe PDF", action: { href: repos.resume, label: "View the code", external: true } },
+  { id: "emporos", color: "var(--gold)", num: "01", name: "Emporos", tag: "flagship · trading", line: "Nifty options desk with a 16-rule risk engine", action: { href: "/emporos", label: "Deep dive" } },
+  { id: "journeymen", color: "var(--gold)", num: "02", name: "Journeymen", tag: "flagship · site", line: "GitHub-verified developer certification.", action: { href: sites.journeymen, label: "Visit journeymen.in", external: true } },
+  { id: "ark-i", color: "var(--purple)", num: "03", name: "ARK-I", tag: "sukoon · ai", line: "WhatsApp assistant, one model plus six specialists", action: { href: "/ark-i", label: "Deep dive" } },
+  { id: "mark8", color: "var(--purple)", num: "04", name: "mark8", tag: "sukoon · ai", line: "Scores 100–500 support calls a day", action: { href: "/mark8", label: "Deep dive" } },
+  { id: "back-bone", color: "var(--sky)", num: "05", name: "back_bone", tag: "sukoon · backend", line: "83 endpoints and a 5-minute scheduler", action: { href: "/back-bone", label: "Deep dive" } },
+  { id: "ledger", color: "var(--brand)", num: "06", name: "Ledger", tag: "site", line: "One shared ledger for a couple or roommates", action: { href: sites.ledger, label: "Visit Ledger", external: true } },
+  { id: "mohan", color: "var(--brand)", num: "07", name: "Mohan Visweswar", tag: "client site", line: "Insurance and financial consultant, built for the client", action: { href: sites.mohan, label: "Visit the site", external: true } },
+  { id: "epoch", color: "var(--brand)", num: "08", name: "GITAM Epoch", tag: "community site", line: "GitHub Community Club and its annual fest", action: { href: sites.epoch, label: "Visit Epoch", external: true } },
+  { id: "resume-builder", color: "var(--link)", num: "09", name: "resume_builder", tag: "tool", line: "YAML to a one-page, ATS-safe PDF", action: { href: repos.resume, label: "View the code", external: true } },
 ];
 const P = Object.fromEntries(projects.map((p) => [p.id, p])) as Record<string, Project>;
 
@@ -50,11 +51,13 @@ function Scene({ p, flip, children, copy, length }: { p: Project; flip?: boolean
   return (
     <Stage id={p.id} className={`tour ${flip ? "tour--flip" : ""}`} name={p.name} num={p.num} action={p.action} length={length} label={p.name}>
       <div className="tour__in">
-        <div className="tour__copy">
-          <div className="tour__eyebrow"><span className="tour__num">{p.num}</span><span className="dp-label">{p.tag}</span></div>
-          {copy}
-        </div>
-        <div className="tour__fig">{children}</div>
+        <Float side={flip ? "r" : "l"} className="tour__copy-wrap">
+          <div className="tour__copy">
+            <div className="tour__eyebrow"><span className="tour__num">{p.num}</span><span className="dp-label" style={{ color: p.color }}>{p.tag}</span></div>
+            {copy}
+          </div>
+        </Float>
+        <div className="tour__fig"><Float side={flip ? "l" : "r"}>{children}</Float></div>
       </div>
     </Stage>
   );
@@ -78,27 +81,37 @@ export default function Home() {
 
       <main id="main">
         {/* HERO */}
-        <section id="top" className="hero-full">
+        <Stage id="top" mode="scrub" space="globe" className="hero-full" label="Introduction">
           <div className="hero-full__in">
-            <div className="hero-full__copy rise">
-              <span className="dp-pill" style={{ alignSelf: "flex-start" }}><Ph>open to work: confirm</Ph></span>
-              <h1 className="h-home">I ship websites and the systems behind them<span className="dotg">.</span></h1>
-              <p className="lede">Five sites live in production, and the systems behind them: a trading engine, an LLM assistant, a call scorer, a platform backend and a résumé typesetter.</p>
-              <div className="hero-cta">
-                <a className="dp-btn dp-btn--primary" href="#index">Start the tour</a>
-                <a className="tlink" href={contact.github}>github.com/RamaSai2519 ↗</a>
+            <Float side="l">
+              <div className="hero-full__copy">
+                <span className="dp-pill dp-pill--brand" style={{ alignSelf: "flex-start" }}><i className="dp-dot dp-dot--live live" />open to work</span>
+                <h1 className="h-home">
+                  I ship websites and the{" "}
+                  <span className="ul">
+                    systems
+                    <svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 13 C 70 4, 150 18, 297 7" /></svg>
+                  </span>{" "}
+                  behind them<span className="dotg">.</span>
+                </h1>
+                <p className="lede">Five sites live in production, and the systems behind them: a trading engine, an LLM assistant, a call scorer, a platform backend and a résumé typesetter.</p>
+                <div className="hero-cta">
+                  <a className="dp-btn dp-btn--primary" href="#index">Start the tour</a>
+                  <a className="tlink" href={contact.github}>github.com/RamaSai2519 ↗</a>
+                </div>
               </div>
-            </div>
-            <div className="hero-stats rise rise--d" aria-label="Sukoon Unlimited figures">
-              <div><b>10k</b><span className="dp-label">active users at Sukoon</span></div>
-              <div><b>4k</b><span className="dp-label">paying members</span></div>
-              <div><b>100–500</b><span className="dp-label">calls scored a day</span></div>
+            </Float>
+            <div className="orbit" aria-label="Sukoon Unlimited figures">
+              <div className="chip3d c1"><b>10k</b><span className="dp-label">active users at Sukoon</span></div>
+              <div className="chip3d c2"><b>4k</b><span className="dp-label">paying members</span></div>
+              <div className="chip3d c3"><b>100–500</b><span className="dp-label">calls scored a day</span></div>
+              <div className="chip3d c4"><span className="dp-label c-text" style={{ display: "flex", gap: 8, alignItems: "center" }}><i className="live-dot" />9 projects · 5 live sites</span></div>
             </div>
           </div>
-        </section>
+        </Stage>
 
         {/* INDEX: overview at the start */}
-        <section id="index" className="index">
+        <Stage id="index" mode="scrub" space="lattice" className="index" label="The tour">
           <div className="sec-head sec-head--row">
             <div className="sec-head__titles">
               <span className="dp-label">00 — the tour</span>
@@ -107,18 +120,19 @@ export default function Home() {
             <span className="scroll-cue dp-label"><i aria-hidden="true" />scroll to start</span>
           </div>
           <ol>
-            {projects.map((p) => (
-              <li key={p.id}>
-                <a href={`#${p.id}`}>
+            {projects.map((p, i) => (
+              <li key={p.id} data-step={i}>
+                <a href={`#${p.id}`} data-n={p.num}>
                   <span className="n">{p.num}</span>
                   <b>{p.name}</b>
                   <span className="go" aria-hidden="true">↓</span>
+                  <span className="tag" style={{ color: p.color }}>{p.tag}</span>
                   <span className="line">{p.line}</span>
                 </a>
               </li>
             ))}
           </ol>
-        </section>
+        </Stage>
 
         {/* 01 EMPOROS */}
         <Scene
@@ -344,13 +358,13 @@ export default function Home() {
 
         {/* RECAP: overview at the end */}
         <div className="recap-wrap">
-          <section id="all-work" className="recap">
+          <Stage id="all-work" mode="scrub" space="lattice" className="recap" label="All work">
             <div className="sec-head">
               <span className="dp-label">10 — all work</span>
               <h2 className="h-display">Everything, at a glance</h2>
             </div>
             <div className="recap__grid">
-              {projects.map((p) => {
+              {projects.map((p, i) => {
                 const inner = (
                   <>
                     <span className="dp-label">{p.num} · {p.tag}</span>
@@ -360,18 +374,18 @@ export default function Home() {
                   </>
                 );
                 return p.action.external ? (
-                  <a key={p.id} className="dp-card" href={p.action.href} target="_blank" rel="noopener">{inner}</a>
+                  <a key={p.id} className="dp-card" href={p.action.href} target="_blank" rel="noopener" data-step={i}>{inner}</a>
                 ) : (
-                  <Link key={p.id} className="dp-card" href={p.action.href}>{inner}</Link>
+                  <Link key={p.id} className="dp-card" href={p.action.href} data-step={i}>{inner}</Link>
                 );
               })}
             </div>
-          </section>
+          </Stage>
         </div>
       </main>
 
       {/* CONTACT */}
-      <footer id="contact" className="contact">
+      <footer id="contact" className="contact" data-space="globe">
         <div className="wrap contact__inner">
           <div className="sec-head">
             <span className="dp-label">11 — merge</span>

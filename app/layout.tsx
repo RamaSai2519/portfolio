@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
+import { SpaceField } from "@/components/space-field";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <SpaceField />
         <a className="dp-btn dp-btn--primary skip" href="#main">Skip to content</a>
         {children}
       </body>

@@ -71,7 +71,7 @@ export default function BackBone() {
           <SecHead eyebrow="01 — the api, by domain" title="83 endpoints, one square each">
             <p className="prose">gamesProcessor is a Flask-RESTful app behind API Gateway, adapted to Lambda with aws-wsgi. Each square below is one <span className="code-inline">/actions/…</span> route, grouped into domains by hand.</p>
           </SecHead>
-          <div className="panel" role="img" aria-label="As you scroll, requests reach API Gateway and the gamesProcessor Lambda, then its 83 endpoints light up domain by domain" style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <div data-float="c" className="panel" role="img" aria-label="As you scroll, requests reach API Gateway and the gamesProcessor Lambda, then its 83 endpoints light up domain by domain" style={{ display: "flex", flexDirection: "column", gap: 24 }}>
             <div className="flow map-flow">
               <div className="stack-col" data-step={0}><span className="dp-pill">sukoon app</span><span className="dp-pill">admin desk</span><span className="dp-pill">whatsapp · calls · cashfree</span></div>
               <Wire color="var(--sky)" />
@@ -98,7 +98,7 @@ export default function BackBone() {
           <SecHead eyebrow="02 — the scheduler" title="Every five minutes, the jobs run side by side">
             <p className="prose">A <span className="code-inline">rate(5 minutes)</span> rule fires the scheduler Lambda. A thread pool runs its jobs in parallel, and due calls and messages go back through the API&rsquo;s own <span className="code-inline">/actions/call</span> and <span className="code-inline">/actions/send_whatsapp</span>, so there is one path for everything.</p>
           </SecHead>
-          <div className="panel" role="img" aria-label="As you scroll, the scheduler fires and its job groups fill side by side: schedules, event reminders, expert status, and email reading with database backup" style={{ display: "flex", flexWrap: "wrap", gap: 32, alignItems: "center" }}>
+          <div data-float="c" className="panel" role="img" aria-label="As you scroll, the scheduler fires and its job groups fill side by side: schedules, event reminders, expert status, and email reading with database backup" style={{ display: "flex", flexWrap: "wrap", gap: 32, alignItems: "center" }}>
             <div className="node-col" style={{ gap: 12, margin: "0 auto" }}>
               <div className="clock"><div className="hand-wrap"><div className="hand" /></div><div className="hub" /></div>
               <span className="dp-pill dp-pill--gold">rate(5 minutes)</span>
@@ -118,12 +118,12 @@ export default function BackBone() {
         <Stage mode="pin" length={1.6} className="sec sec--pin" label="One call across the platform">
           <SecHead eyebrow="03 — one call, across the platform" title="Booked here, placed here, scored by mark8" />
           <div className="life">
-            <ol className="dp-graph panel">
+            <ol data-float="l" className="dp-graph panel">
               {steps.map(([c, h, p], i) => (
                 <li key={h} data-step={i} data-fx="state" style={v({ "--node": c })}><h3>{h}</h3><p>{p}</p></li>
               ))}
             </ol>
-            <div className="panel" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <div data-float="c" className="panel" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <span className="dp-label">the sukoon platform</span>
               <div className="platform">
                 <Link className="dp-card" href="/ark-i" style={{ padding: "14px 18px", gap: 4 }} data-step={0}><span className="mono c-purple" style={{ fontWeight: 600, fontSize: 14 }}>ARK-I</span><span className="small">talks to seniors on WhatsApp</span></Link>

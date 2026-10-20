@@ -53,7 +53,7 @@ export default function ArkI() {
 
         <Stage mode="pin" length={1.6} className="sec sec--pin" label="Architecture">
           <SecHead eyebrow="01 — architecture" title="A kernel with six specialists" />
-          <div className="panel panel--pad-lg" role="img" aria-label="As you scroll, WhatsApp traffic reaches Flask, then MainGPT, which keeps history in MongoDB and alerts Slack, then the controller, which routes to six sub-models one by one" style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <div data-float="c" className="panel panel--pad-lg" role="img" aria-label="As you scroll, WhatsApp traffic reaches Flask, then MainGPT, which keeps history in MongoDB and alerts Slack, then the controller, which routes to six sub-models one by one" style={{ display: "flex", flexDirection: "column", gap: 24 }}>
             <div className="flow arch-flow">
               <div className="node-col" data-step={0}>
                 <div className="wa"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" /></svg></div>
@@ -84,12 +84,12 @@ export default function ArkI() {
         <Stage id="flow" mode="pin" length={2} className="sec sec--pin" label="One query">
           <SecHead eyebrow="02 — one query, end to end" title="Seven hops, one reply" />
           <div className="query">
-            <ol className="dp-graph panel">
+            <ol data-float="l" className="dp-graph panel">
               {steps.map(([c, h, p], i) => (
                 <li key={h} data-step={i} data-fx="state" style={{ ["--node" as string]: c }}><h3>{h}</h3><p>{p}</p></li>
               ))}
             </ol>
-            <div className="panel" style={{ padding: 24, display: "flex", flexDirection: "column", gap: 14 }}>
+            <div data-float="c" className="panel" style={{ padding: 24, display: "flex", flexDirection: "column", gap: 14 }}>
               <div className="tags" style={{ justifyContent: "space-between", alignItems: "center" }}><span className="dp-label">example thread</span><span className="dp-pill dp-pill--sky">illustrative</span></div>
               <div className="msg msg--me" data-step={0}>Can I talk to a yoga expert tomorrow evening?</div>
               <div data-step={2} style={{ alignSelf: "flex-start" }}><span className="dp-pill dp-pill--purple">tool → ExpertsGPT</span></div>
@@ -103,7 +103,7 @@ export default function ArkI() {
 
         <Stage mode="scrub" className="sec" label="Design choice">
           <SecHead eyebrow="03 — the design choice" title="Why only one model keeps state" />
-          <div className="choice">
+          <div data-float="c" className="choice">
             <div className="panel" data-step={0} style={{ borderColor: "var(--brand)" }}>
               <span className="dp-pill dp-pill--brand" style={{ alignSelf: "flex-start" }}>stateful · long-lived</span>
               <h3>MainGPT</h3>

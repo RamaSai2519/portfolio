@@ -81,7 +81,7 @@ export default function Mark8() {
 
         <Stage id="pipeline" mode="pin" length={2} className="sec sec--pin" label="Pipeline">
           <SecHead eyebrow="01 — the pipeline" title="From hang-up to score" />
-          <div className="panel" role="img" aria-label="As you scroll, a finished call is validated, analysed against topics, given user and expert personas, scored on seven parameters and written back to MongoDB" style={{ display: "flex", flexDirection: "column", gap: 28, overflow: "hidden" }}>
+          <div data-float="c" className="panel" role="img" aria-label="As you scroll, a finished call is validated, analysed against topics, given user and expert personas, scored on seven parameters and written back to MongoDB" style={{ display: "flex", flexDirection: "column", gap: 28, overflow: "hidden" }}>
             <div className="ticker-wrap"><div className="m-ticker">{ticker}{ticker}</div></div>
             <div className="flow pipe-flow">
               {pipeline.map(([n, l, c], i) => (
@@ -110,7 +110,7 @@ export default function Mark8() {
           <SecHead eyebrow="02 — what members talk about" title="Twelve topic families, every call tagged">
             <p className="prose">Each scored call is tagged against the topic families in <span className="code-inline">mark/texts/topics.txt</span>.</p>
           </SecHead>
-          <div className="topics">
+          <div data-float="c" className="topics">
             {topics.map((t, i) => (
               <div key={t} className="topic" data-step={i} data-fx="state">
                 <h3>{t}</h3>
@@ -125,7 +125,7 @@ export default function Mark8() {
             <p className="prose">Starlette mounts a sync Flask app and an async Quart app together. Besides scoring calls, the same server ran Sukoon&rsquo;s operations: bulk users and schedules, WhatsApp queues, push notifications and PDF invoices.</p>
           </SecHead>
           <div className="split">
-            <div className="routes">
+            <div data-float="c" className="routes">
               {routes.map(([r, note], i) => (
                 <div key={r} className="route" data-step={i}><b className={i === 0 ? "c-gold" : undefined}>{r}</b><span>{note}</span></div>
               ))}

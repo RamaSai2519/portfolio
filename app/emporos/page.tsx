@@ -88,7 +88,7 @@ export default function Emporos() {
             <p className="prose">The setup detector sees each Nifty 1-minute candle only after it closes, so it cannot look ahead. The live book then waits for Nifty&rsquo;s live price to reach the breakout candle&rsquo;s peak before it buys. It has traded real money since 2026-10-12.</p>
           </SecHead>
           <div className="engine">
-            <div className="panel" role="img" aria-label="As you scroll, five rising candles form a move, five sideways candles form a build-up, a breakout candle closes above it, the option is bought when price reaches that candle's peak, a Rs 2,000 floor locks in, and a trailing stop exits after the peak" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <div data-float="l" className="panel" role="img" aria-label="As you scroll, five rising candles form a move, five sideways candles form a build-up, a breakout candle closes above it, the option is bought when price reaches that candle's peak, a Rs 2,000 floor locks in, and a trailing stop exits after the peak" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <div className="tags" style={{ justifyContent: "space-between" }}><span className="dp-label">nifty · 1 min</span><span className="dp-label">09:15 → last entry 15:12 → out by 15:15</span></div>
               <CandleChart from={0} />
               <div className="tags" data-step={15}>
@@ -99,7 +99,7 @@ export default function Emporos() {
                 <span className="dp-pill dp-pill--purple">trail · keeps 80%</span>
               </div>
             </div>
-            <ol className="dp-graph panel" style={{ padding: 28 }}>
+            <ol data-float="r" className="dp-graph panel" style={{ padding: 28 }}>
               <li data-step={10} style={{ ["--node" as string]: "var(--sky)" }}><h3>Pick the option</h3><p>Nearest expiry, highest open interest within ATM ± 2 strikes.</p></li>
               <li data-step={11} style={{ ["--node" as string]: "var(--purple)" }}><h3>Wait for the peak</h3><p>No depth gate on this book. It buys when Nifty&rsquo;s live price reaches the breakout candle&rsquo;s peak, up to 15:12.</p></li>
               <li data-step={12} style={{ ["--node" as string]: "var(--brand)" }}><h3>Size and buy</h3><p>Whole lots within 90% of available cash, as a limit order.</p></li>
@@ -114,7 +114,7 @@ export default function Emporos() {
           <SecHead eyebrow="02 — research" title="The live book against the paper rule">
             <p className="prose">The declared research rule, O-main, still runs on paper with the other books. The live book drops the width limit and the depth gate, enters on the peak instead of the close, keeps entering until 15:12 and trails its profit.</p>
           </SecHead>
-          <div className="panel" style={{ padding: 8 }}>
+          <div data-float="c" className="panel" style={{ padding: 8 }}>
             <table className="compare">
               <thead><tr><th scope="col">rule</th><th scope="col">live · O-N5-B5</th><th scope="col">research · O-main (paper)</th></tr></thead>
               <tbody>
@@ -129,7 +129,7 @@ export default function Emporos() {
         {/* ORDER PATH */}
         <Stage mode="pin" length={1.4} className="sec sec--pin" label="Order path">
           <SecHead eyebrow="03 — the order path" title="Intent first, broker second, never a blind retry" />
-          <div className="panel" role="img" aria-label="As you scroll, a signal moves from the recorder through the setup detector, option picker, risk engine and executor to Angel One, and a reconciler compares broker state every 30 seconds" style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+          <div data-float="c" className="panel" role="img" aria-label="As you scroll, a signal moves from the recorder through the setup detector, option picker, risk engine and executor to Angel One, and a reconciler compares broker state every 30 seconds" style={{ display: "flex", flexDirection: "column", gap: 28 }}>
             <div className="flow order-flow">
               {path.map(([n, l, c], i) => (
                 <div key={n} style={{ display: "contents" }}>
@@ -151,7 +151,7 @@ export default function Emporos() {
           <SecHead eyebrow="04 — risk engine" title="Sixteen rules, checked in order, every order">
             <p className="prose">A pure, ordered list over an immutable snapshot of the account, so every rule is unit-testable. A rejection is always stored with its full context: a signal that silently vanished could not be audited.</p>
           </SecHead>
-          <div className="guards" role="img" aria-label="As you scroll, the sixteen risk rules pass one after another">
+          <div data-float="c" className="guards" role="img" aria-label="As you scroll, the sixteen risk rules pass one after another">
             {guards.map((g, i) => <span key={g} className="guard" data-step={i} data-fx="state">{g}</span>)}
           </div>
         </Stage>
@@ -159,7 +159,7 @@ export default function Emporos() {
         {/* LIVE GATE */}
         <Stage mode="pin" length={1.2} className="sec sec--pin" label="Live gate">
           <SecHead eyebrow="05 — the live gate" title="Real money needs five yeses" />
-          <div className="locks">
+          <div data-float="c" className="locks">
             {locks.map((l, i) => (
               <div key={l.name} className="lock" data-step={i} data-fx="state">
                 <LockIcon />
@@ -201,7 +201,7 @@ export default function Emporos() {
         <Stage mode="scrub" className="sec" label="Where it runs">
           <SecHead eyebrow="07 — where it runs" title="Only one process can touch the broker" />
           <div className="split">
-            <div className="hosts">
+            <div data-float="c" className="hosts">
               <div className="host host--key" data-step={0}><span className="dp-label c-brand">ec2 · systemd</span><h3>Trader + recorder</h3><p>The only holder of broker credentials.</p></div>
               <div className="host" data-step={1}><span className="dp-label">lambda · api gateway</span><h3>Control API</h3><p>Overview, live page, orders, command bus.</p></div>
               <div className="host" data-step={2}><span className="dp-label">vercel · next.js</span><h3>Dashboard</h3><p>Reads the API only, holds no secrets.</p></div>
