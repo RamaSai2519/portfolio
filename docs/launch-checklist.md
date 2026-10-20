@@ -4,11 +4,9 @@ Open items before the portfolio goes to production. Tick them off here as they c
 
 ## Must fix before going live
 
-- [ ] **Emporos demo goes live.** The portfolio side is done: `/emporos/demo` and the "desk" section on
-      `/emporos` show screenshots until the demo is served from the Emporos project at
-      `https://emporos.journeymen.in/demo` (override with `NEXT_PUBLIC_EMPOROS_DEMO_URL`). Then set
-      `NEXT_PUBLIC_EMPOROS_DEMO_LIVE=1` in this project's Vercel env and redeploy. The demo route must send
-      `frame-ancestors 'self' https://rama.journeymen.in` and nothing real may be reachable from it.
+- [x] **Emporos demo.** Live at `https://emporos.journeymen.in/demo`, framed on `/emporos` and
+      `/emporos/demo`. The demo route is the only frameable path on that domain, and only by
+      `https://rama.journeymen.in`; previews and localhost show screenshots instead.
 - [x] **ARK-I example thread.** The assistant's reply bubble on `/ark-i` (`app/ark-i/page.tsx`) is still
       `[reply naming an available expert and open slots]`. Use a real anonymised reply or a generic one;
       the thread is already labelled "illustrative".

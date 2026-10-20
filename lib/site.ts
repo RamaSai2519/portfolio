@@ -25,9 +25,9 @@ export const repos = {
   resume: "https://github.com/RamaSai2519/resume_builder",
 };
 
-// Public Emporos demo: fixtures-only, served from the Emporos project at emporos.journeymen.in.
-// Until it is live, the pages show screenshots. Set NEXT_PUBLIC_EMPOROS_DEMO_LIVE=1 in Vercel to switch to the iframe,
-// and NEXT_PUBLIC_EMPOROS_DEMO_URL if the demo's path differs from the default.
-// The demo must send `frame-ancestors 'self' https://rama.journeymen.in` and nothing real may sit behind it.
+// Public Emporos demo: fixtures-only, served from the Emporos project at emporos.journeymen.in/demo.
+// Only rama.journeymen.in may frame it, so previews and localhost cannot show the iframe: they show screenshots.
+// Set NEXT_PUBLIC_EMPOROS_DEMO_LIVE=0 to force the screenshots everywhere.
+// Never link to emporos.journeymen.in itself: that is the private desk.
 export const EMPOROS_DEMO_URL = process.env.NEXT_PUBLIC_EMPOROS_DEMO_URL ?? "https://emporos.journeymen.in/demo";
-export const EMPOROS_DEMO_LIVE = process.env.NEXT_PUBLIC_EMPOROS_DEMO_LIVE === "1";
+export const EMPOROS_DEMO_LIVE = process.env.NEXT_PUBLIC_EMPOROS_DEMO_LIVE !== "0";
