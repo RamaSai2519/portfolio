@@ -23,9 +23,9 @@
   --link: #8ab4ff;
   --selection: #243263;
   --accent-rgb: 124, 156, 255; /* --accent as channels, for translucent uses */
-  --font-display: "Mona Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-sans: "Mona Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
+  --font-display: var(--font-mona), "Mona Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: var(--font-mona), "Mona Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;

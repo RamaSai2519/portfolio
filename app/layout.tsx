@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { JetBrains_Mono, Mona_Sans } from "next/font/google";
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, jsonLd, siteJsonLd } from "@/lib/seo";
@@ -22,21 +23,18 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#080809", colorScheme: "dark" };
 
+// Self-hosted at build time: no render-blocking request to Google, and the fonts are preloaded from our own origin.
+const mona = Mona_Sans({ subsets: ["latin"], axes: ["wdth"], display: "swap", variable: "--font-mona" });
+const jetbrains = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-jetbrains" });
+
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" data-theme="dark" className={`${mona.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <head>
         {/* Marks that JS runs, so scroll-step styles never hide content for visitors without it */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@100..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap"
-        />
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(siteJsonLd)} />
       </head>
       <body>

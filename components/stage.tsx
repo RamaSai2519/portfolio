@@ -1,11 +1,31 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger);
+
+/**
+ * Stage setup measures layout and inserts pin spacers, so doing every stage inside hydration made one long,
+ * reflow-heavy task. Setups instead run one per task, in document order (pins must be created top to bottom),
+ * which keeps the page responsive while they finish.
+ */
+type Job = { run: () => void; cancelled: boolean };
+const queue: Job[] = [];
+let flushing = false;
+const flush = () => {
+  const job = queue.shift();
+  if (job && !job.cancelled) job.run();
+  if (queue.length) setTimeout(flush, 0);
+  else flushing = false;
+};
+const schedule = (run: () => void): Job => {
+  const job = { run, cancelled: false };
+  queue.push(job);
+  if (!flushing) { flushing = true; setTimeout(flush, 0); }
+  return job;
+};
 
 export type StageAction = { href: string; label: string; external?: boolean };
 
@@ -42,10 +62,11 @@ const PACE = 1.35;
 export function Stage({ id, className = "", children, mode = "pin", length = 1.6, name, num, action, label, space = "field" }: Props) {
   const ref = useRef<HTMLElement>(null);
 
-  useGSAP(
-    () => {
-      const el = ref.current;
-      if (!el) return;
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let mm: gsap.MatchMedia | undefined;
+    const job = schedule(() => {
       const steps = Array.from(el.querySelectorAll<HTMLElement>("[data-step]"));
       const count = steps.reduce((m, s) => Math.max(m, Number(s.dataset.step) + 1), 1);
       const setAll = (on: boolean) => steps.forEach((s) => s.classList.toggle("on", on));
@@ -63,7 +84,11 @@ export function Stage({ id, className = "", children, mode = "pin", length = 1.6
         }
       };
 
-      const mm = gsap.matchMedia();
+      // A section already on screen at load (the hero) skips its fly-in, so its content paints with the first frame
+      // instead of waiting for hydration and a scrubbed fade. That paint is the page's LCP.
+      const onScreenAtLoad = el.getBoundingClientRect().top < window.innerHeight * 0.9;
+
+      mm = gsap.matchMedia();
       mm.add(DESKTOP, () => {
         const fits = el.offsetHeight <= window.innerHeight + 2;
         const pin = mode === "pin" && fits;
@@ -90,7 +115,7 @@ export function Stage({ id, className = "", children, mode = "pin", length = 1.6
           const bare = !f.querySelector(":scope > .tilt");
           const restX = bare && side === 0 ? 8 : 0;
           const restY = bare ? side * 6 : 0;
-          gsap.fromTo(
+          if (!onScreenAtLoad) gsap.fromTo(
             f,
             { opacity: 0, z: -520, y: 90, rotationX: 24, rotationY: side * 26 },
             { opacity: 1, z: 0, y: 0, rotationX: restX, rotationY: restY, transformOrigin: "50% 0%", ease: "none", scrollTrigger: { trigger: el, start: `top ${92 - i * 4}%`, end: pin ? "top 8%" : "top 30%", scrub: 1.2 } },
@@ -111,7 +136,7 @@ export function Stage({ id, className = "", children, mode = "pin", length = 1.6
       mm.add(MOBILE, () => {
         steps.forEach((s, i) => (s.style.transitionDelay = `${Math.min(Number(s.dataset.step), 12) * 90 + (i % 2) * 10}ms`));
         ScrollTrigger.create({ trigger: el, start: "top 75%", once: true, onEnter: () => { setAll(true); el.style.setProperty("--p", "1"); } });
-        el.querySelectorAll<HTMLElement>("[data-float]").forEach((f) =>
+        if (!onScreenAtLoad) el.querySelectorAll<HTMLElement>("[data-float]").forEach((f) =>
           gsap.from(f, { opacity: 0, y: 60, rotationX: 14, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: f, start: "top 88%", once: true } }),
         );
         ScrollTrigger.create({ trigger: el, start: "top 60%", end: "bottom 40%", onToggle: (self) => activate(self.isActive) });
@@ -122,10 +147,9 @@ export function Stage({ id, className = "", children, mode = "pin", length = 1.6
         el.style.setProperty("--p", "1");
         ScrollTrigger.create({ trigger: el, start: "top 60%", end: "bottom 40%", onToggle: (self) => activate(self.isActive) });
       });
-      return () => mm.revert();
-    },
-    { scope: ref, dependencies: [] },
-  );
+    });
+    return () => { job.cancelled = true; mm?.revert(); };
+  }, []);
 
   return (
     <section ref={ref} id={id} className={`scene ${className}`} data-stage={mode} data-space={space} aria-label={label}>
