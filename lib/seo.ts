@@ -23,6 +23,7 @@ export function pageMetadata({ title, description, path }: { title: string; desc
 }
 
 const personId = `${SITE_URL}/#person`;
+const orgId = `${SITE_URL}/#journeymen`;
 
 /** Site-wide structured data: who the site is about, and the site itself. */
 export const siteJsonLd = {
@@ -34,10 +35,19 @@ export const siteJsonLd = {
       name: SITE_NAME,
       url: SITE_URL,
       email: `mailto:${contact.email}`,
-      jobTitle: "Founder",
-      worksFor: { "@type": "Organization", name: "Journeymen", url: sites.journeymen },
+      image: `${SITE_URL}/rama-sathya-sai.jpg`,
+      jobTitle: "Full Stack Engineer",
+      address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressRegion: "Karnataka", addressCountry: "IN" },
+      worksFor: { "@id": orgId },
       sameAs: [contact.github, contact.linkedin],
       knowsAbout: ["Web development", "Next.js", "TypeScript", "Python", "AWS", "LLM applications", "Algorithmic trading systems"],
+    },
+    {
+      "@type": "Organization",
+      "@id": orgId,
+      name: "Journeymen",
+      url: sites.journeymen,
+      founder: { "@id": personId },
     },
     {
       "@type": "WebSite",
