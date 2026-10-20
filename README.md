@@ -17,3 +17,4 @@ npm run lint     # tsc --noEmit
 - Live sites are iframes (`components/live-frame.tsx`). Framing and auto-scroll need a change on each site: see `docs/live-embed.md`.
 - `/emporos/demo` is a labelled placeholder until the public Emporos demo exists.
 - `public/rama-sathya-sai-resume.pdf` is built by `resume_builder` (google theme) from its example YAML, with the phone number removed and the contact email set.
+- Open items before launch: `docs/launch-checklist.md`.
