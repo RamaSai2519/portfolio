@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
+import { SpaceField } from "@/components/space-field";
+import { SmoothScroll } from "@/components/smooth-scroll";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -15,8 +17,10 @@ export const viewport: Viewport = { themeColor: "#0a0a14", colorScheme: "dark" }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
       <head>
+        {/* Marks that JS runs, so scroll-step styles never hide content for visitors without it */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
@@ -26,6 +30,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <SpaceField />
+        <SmoothScroll />
         <a className="dp-btn dp-btn--primary skip" href="#main">Skip to content</a>
         {children}
       </body>
