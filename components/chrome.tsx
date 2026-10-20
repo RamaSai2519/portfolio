@@ -42,7 +42,7 @@ export function PageFooter({ prev, next }: { prev: NavItem; next: NavItem }) {
 export function Colophon() {
   return (
     <p className="wrap colophon">
-      rama sathya sai · <a href={`mailto:${contact.email}`}>{contact.email}</a> · <a href={contact.github}>github</a> · <a href={contact.linkedin}>linkedin</a>
+      rama sathya sai · <a href={`mailto:${contact.email}`}>{contact.email}</a> · <a rel="me" href={contact.github}>github</a> · <a rel="me" href={contact.linkedin}>linkedin</a>
     </p>
   );
 }

@@ -31,7 +31,7 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark" className={`${mona.variable} ${jetbrains.variable}`} suppressHydrationWarning>
+    <html lang="en-IN" data-theme="dark" className={`${mona.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <head>
         {/* Marks that JS runs, so scroll-step styles never hide content for visitors without it */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
