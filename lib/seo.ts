@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SITE_URL, contact, sites } from "@/lib/site";
 
 export const SITE_NAME = "Rama Sathya Sai";
-export const SITE_TITLE = "Rama Sathya Sai · websites and the systems behind them";
+export const SITE_TITLE = "Rama Sathya Sai · Full Stack Engineer in Bengaluru";
 export const SITE_DESCRIPTION =
   "I ship websites and the systems behind them: Journeymen, Emporos, ARK-I, mark8, back_bone and resume_builder.";
 

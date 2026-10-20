@@ -103,7 +103,7 @@ export default function Home() {
                 </h1>
                 <p className="lede">Five sites live in production, and the systems behind them: a trading engine, an LLM assistant, a call scorer, a platform backend and a résumé typesetter.</p>
                 <div className="hero-cta">
-                  <a className="tlink" href={contact.github}>github.com/RamaSai2519 ↗</a>
+                  <a className="tlink" rel="me" href={contact.github}>github.com/RamaSai2519 ↗</a>
                 </div>
               </div>
             </Float>
@@ -405,8 +405,8 @@ export default function Home() {
           </div>
           <div className="row" style={{ alignItems: "center", gap: "12px 24px" }}>
             <a className="dp-btn dp-btn--primary" href={`mailto:${contact.email}`}>Email me</a>
-            <a className="tlink" href={contact.github}>GitHub ↗</a>
-            <a className="tlink" href={contact.linkedin}>LinkedIn ↗</a>
+            <a className="tlink" rel="me" href={contact.github}>GitHub ↗</a>
+            <a className="tlink" rel="me" href={contact.linkedin}>LinkedIn ↗</a>
             <a className="tlink" href={contact.resume} download>Résumé (PDF) ↓</a>
           </div>
         </div>
