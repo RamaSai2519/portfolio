@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export const viewport: Viewport = { themeColor: "#0a0a14", colorScheme: "dark" };
+export const viewport: Viewport = { themeColor: "#080809", colorScheme: "dark" };
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 

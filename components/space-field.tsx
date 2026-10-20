@@ -11,7 +11,7 @@ import { useEffect, useRef } from "react";
 type Mode = "globe" | "lattice" | "field";
 type V3 = [number, number, number];
 
-const BASE = [232, 230, 240];
+const BASE = [232, 232, 234];
 const BRAND = [63, 200, 78];
 const DEPTH = 1600;
 

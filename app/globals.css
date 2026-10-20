@@ -1,18 +1,18 @@
 /* Commit design system: tokens from design/canvas/ds/commit/tokens.json. Dark only. */
 :root {
-  --bg: #0a0a14;
-  --surface: #12121f;
-  --raised: #1b1b2e;
-  --overlay: #23233a;
-  --line: #2a2a40;
-  --line-strong: #666884;
+  --bg: #080809;
+  --surface: #101011;
+  --raised: #19191b;
+  --overlay: #212124;
+  --line: #29292d;
+  --line-strong: #626268;
   --text: #f2f3f7;
-  --text-muted: #b6b8c8;
-  --text-subtle: #8c8ea6;
+  --text-muted: #b8b9bf;
+  --text-subtle: #8d8e94;
   --brand: #3fc84e;
   --brand-hover: #5ee06b;
   --brand-soft: #10301a;
-  --on-brand: #0a0a14;
+  --on-brand: #080809;
   --accent: #7c9cff; /* secondary accent (blue): tags, graph branches, highlights */
   --accent-soft: #17203f;
   --sky: #8fcdf0;
@@ -208,7 +208,7 @@ a.dp-card:active { transform: translate(-1px, -1px); box-shadow: var(--shadow-pr
 .frame__bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
 .frame__bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-strong); flex: none; }
 .frame__url { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-left: 8px; padding: 4px 12px; border-radius: var(--radius-pill); background: var(--bg); font: 500 12px/16px var(--font-mono); color: var(--text-subtle); }
-.frame__view { height: var(--frame-h, 300px); overflow: hidden; background: #0e0e1a; position: relative; }
+.frame__view { height: var(--frame-h, 300px); overflow: hidden; background: #0b0b0c; position: relative; }
 .frame__view > .dp-pill { position: absolute; right: 12px; bottom: 12px; }
 .frame__shot { width: 100%; height: auto; }
 .frame__body { padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
@@ -288,7 +288,7 @@ a.dp-card:active { transform: translate(-1px, -1px); box-shadow: var(--shadow-pr
 @media (max-width: 1099px) { .rail { display: none; } }
 @media (min-width: 1100px) { .scene { --rail-room: 72px; } }
 
-.actbar { position: fixed; left: 50%; bottom: 16px; z-index: 30; display: flex; align-items: center; gap: 16px; padding: 8px 8px 8px 20px; border-radius: var(--radius-pill); background: rgba(18, 18, 31, 0.92); border: 1px solid var(--line-strong); box-shadow: var(--shadow-menu); backdrop-filter: blur(8px); transform: translate(-50%, 140%); opacity: 0; transition: transform 300ms var(--ease), opacity 200ms; max-width: calc(100vw - 32px); }
+.actbar { position: fixed; left: 50%; bottom: 16px; z-index: 30; display: flex; align-items: center; gap: 16px; padding: 8px 8px 8px 20px; border-radius: var(--radius-pill); background: rgba(16, 16, 17, 0.92); border: 1px solid var(--line-strong); box-shadow: var(--shadow-menu); backdrop-filter: blur(8px); transform: translate(-50%, 140%); opacity: 0; transition: transform 300ms var(--ease), opacity 200ms; max-width: calc(100vw - 32px); }
 .actbar--on { transform: translate(-50%, 0); opacity: 1; }
 .actbar__where { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
 .actbar__where b { font-family: var(--font-display); font-stretch: 105%; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -297,7 +297,7 @@ a.dp-card:active { transform: translate(-1px, -1px); box-shadow: var(--shadow-pr
 
 /* ---------- live site frame ---------- */
 .lf { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-xl); overflow: hidden; display: flex; flex-direction: column; min-width: 0; height: 100%; }
-.lf__view { position: relative; flex: 1; min-height: 260px; overflow: hidden; background: #0e0e1a; container-type: size; }
+.lf__view { position: relative; flex: 1; min-height: 260px; overflow: hidden; background: #0b0b0c; container-type: size; }
 .lf__view iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; pointer-events: none; background: #fff; }
 .lf__view.is-using iframe { pointer-events: auto; }
 .lf__view.is-using { outline: 2px solid var(--brand); outline-offset: -2px; }
@@ -336,22 +336,19 @@ a.dp-card:active { transform: translate(-1px, -1px); box-shadow: var(--shadow-pr
 /* ---------- space background ---------- */
 .space { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
 .space canvas { position: absolute; inset: 0; width: 100vw; height: 100vh; }
-.space__nebula { position: absolute; inset: -20%; opacity: 0.55;
-  background:
-    radial-gradient(40% 35% at 75% 30%, rgba(var(--accent-rgb), 0.16), transparent 70%),
-    radial-gradient(35% 30% at 15% 75%, rgba(143, 205, 240, 0.10), transparent 70%),
-    radial-gradient(30% 25% at 55% 95%, rgba(63, 200, 78, 0.07), transparent 70%);
+.space__nebula { position: absolute; inset: -20%; opacity: 0.4;
+  background: radial-gradient(30% 25% at 55% 95%, rgba(63, 200, 78, 0.05), transparent 70%);
   animation: nebula 40s ease-in-out infinite alternate; }
 @keyframes nebula { to { transform: translate3d(-4%, 3%, 0) rotate(4deg) scale(1.06); } }
-.space__vignette { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 80% at 50% 50%, transparent 45%, rgba(10, 10, 20, 0.85) 100%); }
+.space__vignette { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 80% at 50% 50%, transparent 45%, rgba(8, 8, 9, 0.85) 100%); }
 
 /* glass: surfaces float over the field */
 .dp-card, .panel, .canvas-box, .lf, .dp-code, .stat, .demo, .host, .tile, .route, .topic, .guard, .lock, .sub {
-  background-color: rgba(18, 18, 31, 0.66);
+  background-color: rgba(16, 16, 17, 0.66);
   backdrop-filter: blur(10px) saturate(1.2);
   -webkit-backdrop-filter: blur(10px) saturate(1.2);
 }
-a.dp-card:hover { background-color: rgba(27, 27, 46, 0.85); }
+a.dp-card:hover { background-color: rgba(25, 25, 27, 0.85); }
 
 /* ---------- floating 3D elements ---------- */
 .float { transform-style: preserve-3d; will-change: transform, opacity; min-width: 0; }
@@ -388,6 +385,6 @@ a.dp-card:hover { background-color: rgba(27, 27, 46, 0.85); }
 /* emporos demo frame */
 .ed { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-2xl); overflow: hidden; }
 .ed .frame__bar { padding: 14px 18px; }
-.ed__frame { display: block; width: 100%; height: 760px; border: 0; background: #0e0e1a; }
-.ed__shot { display: block; width: 100%; height: auto; background: #0e0e1a; }
+.ed__frame { display: block; width: 100%; height: 760px; border: 0; background: #0b0b0c; }
+.ed__shot { display: block; width: 100%; height: auto; background: #0b0b0c; }
 @media (max-width: 899px) { .ed__frame { height: 80vh; } }
