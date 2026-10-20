@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
-  keywords: ["Rama Sathya Sai", "portfolio", "web developer", "full-stack developer", "Next.js", "Journeymen", "Emporos", "ARK-I", "mark8", "back_bone"],
+  keywords: ["Rama Sathya Sai", "portfolio", "full stack engineer", "Bengaluru", "web developer", "Next.js", "Journeymen", "Emporos", "ARK-I", "mark8", "back_bone"],
   openGraph: { type: "website", siteName: SITE_NAME, locale: "en_IN", title: SITE_TITLE, description: SITE_DESCRIPTION },
   twitter: { card: "summary_large_image", title: SITE_TITLE, description: SITE_DESCRIPTION },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
