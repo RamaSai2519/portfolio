@@ -96,7 +96,6 @@ export default function Home() {
                 </h1>
                 <p className="lede">Five sites live in production, and the systems behind them: a trading engine, an LLM assistant, a call scorer, a platform backend and a résumé typesetter.</p>
                 <div className="hero-cta">
-                  <a className="dp-btn dp-btn--primary" href="#index">Start the tour</a>
                   <a className="tlink" href={contact.github}>github.com/RamaSai2519 ↗</a>
                 </div>
               </div>
@@ -108,6 +107,11 @@ export default function Home() {
               <div className="chip3d c4"><span className="dp-label c-text" style={{ display: "flex", gap: 8, alignItems: "center" }}><i className="live-dot" />9 projects · 5 live sites</span></div>
             </div>
           </div>
+          <a className="scroll-hint" href="#index" aria-label="Scroll to explore the projects">
+            <span className="scroll-hint__mouse" aria-hidden="true" />
+            <span className="dp-label">scroll to explore</span>
+            <span className="scroll-hint__chev" aria-hidden="true"><i /><i /></span>
+          </a>
         </Stage>
 
         {/* INDEX: overview at the start */}
@@ -350,7 +354,7 @@ export default function Home() {
               <div className="rb-flag rb-flag--ok" data-step={3} data-fx="fade">1 page</div>
             </div>
             <div className="node-col ats" data-step={2}>
-              <svg aria-hidden="true" width="110" height="110" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#1b1b2e" strokeWidth="10" /><circle className="prog" cx="50" cy="50" r="42" fill="none" stroke="#b48be6" strokeWidth="10" strokeLinecap="round" strokeDasharray="264" transform="rotate(-90 50 50)" /></svg>
+              <svg aria-hidden="true" width="110" height="110" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#1b1b2e" strokeWidth="10" /><circle className="prog" cx="50" cy="50" r="42" fill="none" style={{ stroke: "var(--purple)" }} strokeWidth="10" strokeLinecap="round" strokeDasharray="264" transform="rotate(-90 50 50)" /></svg>
               <span className="dp-label">ats check</span>
             </div>
           </div>

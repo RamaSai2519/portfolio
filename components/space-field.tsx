@@ -81,6 +81,7 @@ export function SpaceField() {
     let from: Mode = "field", to: Mode = "field", mix = 0, travel = 0;
     const readScroll = () => {
       travel = window.scrollY;
+      root.style.setProperty("--sy", Math.min(1, window.scrollY / h).toFixed(3));
       const secs = Array.from(document.querySelectorAll<HTMLElement>("[data-space]"));
       if (!secs.length) { from = to = "field"; return; }
       const mid = h * 0.5;

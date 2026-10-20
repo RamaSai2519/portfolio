@@ -31,6 +31,8 @@ type Props = {
 const DESKTOP = "(min-width: 900px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)";
 const MOBILE = "(max-width: 899px), (max-height: 639px)";
 const REDUCED = "(prefers-reduced-motion: reduce)";
+// More scroll per step, so each element has time to glide into frame.
+const PACE = 1.35;
 
 /**
  * A scroll-driven section. Every descendant with data-step="n" gets the class "on" once the scroll reaches step n.
@@ -68,7 +70,7 @@ export function Stage({ id, className = "", children, mode = "pin", length = 1.6
         const main = ScrollTrigger.create({
           trigger: el,
           start: pin ? "top top" : "top 75%",
-          end: pin ? `+=${Math.round(length * 100)}%` : "bottom 55%",
+          end: pin ? `+=${Math.round(length * PACE * 100)}%` : "bottom 55%",
           pin,
           pinSpacing: true,
           anticipatePin: 1,
@@ -78,7 +80,7 @@ export function Stage({ id, className = "", children, mode = "pin", length = 1.6
         ScrollTrigger.create({
           trigger: el,
           start: "top 60%",
-          end: pin ? `+=${Math.round(length * 100 + 50)}%` : "bottom 40%",
+          end: pin ? `+=${Math.round(length * PACE * 100 + 50)}%` : "bottom 40%",
           onToggle: (self) => activate(self.isActive),
         });
         // floating 3D elements: fly in from deep space as the section arrives, drift past the camera as it leaves
@@ -91,7 +93,7 @@ export function Stage({ id, className = "", children, mode = "pin", length = 1.6
           gsap.fromTo(
             f,
             { opacity: 0, z: -520, y: 90, rotationX: 24, rotationY: side * 26 },
-            { opacity: 1, z: 0, y: 0, rotationX: restX, rotationY: restY, transformOrigin: "50% 0%", ease: "none", scrollTrigger: { trigger: el, start: `top ${92 - i * 4}%`, end: pin ? "top 8%" : "top 30%", scrub: 0.8 } },
+            { opacity: 1, z: 0, y: 0, rotationX: restX, rotationY: restY, transformOrigin: "50% 0%", ease: "none", scrollTrigger: { trigger: el, start: `top ${92 - i * 4}%`, end: pin ? "top 8%" : "top 30%", scrub: 1.2 } },
           );
           gsap.fromTo(
             f,
@@ -99,8 +101,8 @@ export function Stage({ id, className = "", children, mode = "pin", length = 1.6
             {
               opacity: 0, z: 260, rotationX: -16, ease: "none", immediateRender: false,
               scrollTrigger: pin
-                ? { start: () => main.end - window.innerHeight * 0.05, end: () => main.end + window.innerHeight * 0.7, scrub: 0.8 }
-                : { trigger: el, start: "bottom 35%", end: "bottom top", scrub: 0.8 },
+                ? { start: () => main.end - window.innerHeight * 0.05, end: () => main.end + window.innerHeight * 0.7, scrub: 1.2 }
+                : { trigger: el, start: "bottom 35%", end: "bottom top", scrub: 1.2 },
             },
           );
         });
