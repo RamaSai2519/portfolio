@@ -3,11 +3,13 @@ import "./mark8.css";
 import { PageFooter, SecHead, SiteHeader, Stat, Wire } from "@/components/chrome";
 import { Stage } from "@/components/stage";
 import { repos } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "mark8",
   description: "mark8 read and scored Sukoon Unlimited's support calls in real time, 100–500 a day, on a seven-part, 100-point rubric.",
-};
+  path: "/mark8",
+});
 
 // mark/helper/prompts.py: seven parameters, 100 points in total
 const rubric = [

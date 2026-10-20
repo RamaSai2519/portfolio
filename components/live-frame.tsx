@@ -79,7 +79,7 @@ export function LiveFrame({ src, title, url, poster }: Props) {
         )}
       </div>
       <div ref={box} className={`lf__view ${using ? "is-using" : ""}`}>
-        <Image className={`lf__poster ${loaded ? "is-hidden" : ""}`} src={poster} alt="" aria-hidden="true" sizes="(max-width: 899px) 100vw, 60vw" quality={70} />
+        <Image className={`lf__poster ${loaded ? "is-hidden" : ""}`} src={poster} alt="" aria-hidden="true" sizes="(max-width: 899px) 100vw, 60vw" quality={70} placeholder="blur" />
         {load && (
           <iframe
             ref={frame}

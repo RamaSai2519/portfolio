@@ -2,16 +2,22 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, jsonLd, siteJsonLd } from "@/lib/seo";
 import { SpaceField } from "@/components/space-field";
 import { SmoothScroll } from "@/components/smooth-scroll";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Rama Sathya Sai · websites and the systems behind them", template: "%s · Rama Sathya Sai" },
-  description:
-    "I ship websites and the systems behind them: Journeymen, Emporos, ARK-I, mark8, back_bone and resume_builder.",
-  openGraph: { type: "website", siteName: "Rama Sathya Sai", locale: "en_IN" },
-  twitter: { card: "summary_large_image" },
+  title: { default: SITE_TITLE, template: `%s · ${SITE_NAME}` },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  keywords: ["Rama Sathya Sai", "portfolio", "web developer", "full-stack developer", "Next.js", "Journeymen", "Emporos", "ARK-I", "mark8", "back_bone"],
+  openGraph: { type: "website", siteName: SITE_NAME, locale: "en_IN", title: SITE_TITLE, description: SITE_DESCRIPTION },
+  twitter: { card: "summary_large_image", title: SITE_TITLE, description: SITE_DESCRIPTION },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  formatDetection: { email: false, telephone: false, address: false },
 };
 
 export const viewport: Viewport = { themeColor: "#080809", colorScheme: "dark" };
@@ -31,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@100..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap"
         />
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(siteJsonLd)} />
       </head>
       <body>
         <SpaceField />

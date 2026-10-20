@@ -6,11 +6,18 @@ import { JourneyChrome } from "@/components/journey";
 import { LiveFrame } from "@/components/live-frame";
 import { Float } from "@/components/float";
 import { Stage, type StageAction } from "@/components/stage";
+import type { Metadata } from "next";
 import { contact, repos, sites } from "@/lib/site";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from "@/lib/seo";
 import shotJourneymen from "@/design/content/assets/screenshots/journeymen.png";
 import shotLedger from "@/design/content/assets/screenshots/ledger.png";
 import shotMohan from "@/design/content/assets/screenshots/mohan-visweswar.png";
 import shotEpoch from "@/design/content/assets/screenshots/gitam-epoch.png";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { type: "profile", siteName: SITE_NAME, locale: "en_IN", url: "/", title: SITE_TITLE, description: SITE_DESCRIPTION, firstName: "Rama Sathya", lastName: "Sai" },
+};
 
 type Project = { id: string; num: string; name: string; tag: string; line: string; action: StageAction; color?: string };
 

@@ -5,11 +5,13 @@ import "./bb.css";
 import { PageFooter, SecHead, SiteHeader, Stat, Wire } from "@/components/chrome";
 import { Stage } from "@/components/stage";
 import { repos } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "back_bone",
   description: "back_bone: the Flask-on-Lambda backend behind Sukoon Unlimited. 83 endpoints and a scheduler that runs every five minutes.",
-};
+  path: "/back-bone",
+});
 
 // Hand grouping of the 83 /actions/* routes registered in gamesProcessor's index.py. The split is not in the code.
 const domains: [string, number, string, string][] = [
