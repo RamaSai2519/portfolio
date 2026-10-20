@@ -1,0 +1,153 @@
+# Source for public/rama-sathya-sai-resume.pdf. Build with RamaSai2519/resume_builder:
+#   resume-builder build --resume resume/resume.yaml --theme google --output public/rama-sathya-sai-resume.pdf
+contact:
+  name: Rama Sathya Sai
+  title: Full Stack Software Engineer
+  email: founder@journeymen.in
+  phone: "+91 93980 36558"
+  location: "Bengaluru, Karnataka, India"
+  links:
+    - label: Portfolio
+      url: https://rama.journeymen.in
+    - label: Journeymen
+      url: https://journeymen.in
+    - label: GitHub
+      url: "github.com/RamaSai2519"
+    - label: LinkedIn
+      url: "linkedin.com/in/rama-sathya-sai-82140a293/"
+
+summary: >
+  Full-stack software engineer who builds systems that verify real
+  engineering work instead of relying on credentials alone. Creator of
+  Journeymen, a platform that evaluates GitHub activity to generate
+  server-backed developer certifications, and Emporos, a live options trading
+  desk guarded by a sixteen-rule risk engine. Comfortable across the stack:
+  Python/Flask and Node.js services, React/Next.js frontends, AWS serverless
+  infrastructure, and applied LLM systems.
+
+experience:
+  - company: Sukoon Unlimited
+    role: Full Stack Engineer
+    location: "Bengaluru, Karnataka, India"
+    start_date: "April 2024"
+    end_date: "April 2025"
+    bullets:
+      - text: Built back_bone, the platform backend for an agetech startup, as a Flask-RESTful API on AWS Lambda and API Gateway with 83 endpoints covering users, experts, calls, payments, WhatsApp, events and games.
+      - text: Designed a scheduler Lambda that runs every five minutes to book calls, send WhatsApp and push reminders, and update expert status, routing every action through the same API.
+      - text: Built ARK-I, the company's WhatsApp assistant, where one stateful gpt-4o model holds the conversation and delegates through function calling to six stateless sub-models that each call one API.
+      - text: Built mark8, a real-time call analyst that scored 100 to 500 support calls a day on a 100-point rubric, tagging topics and keeping personas for both sides of each call in MongoDB.
+    technologies:
+      - Python
+      - Flask
+      - Node.js
+      - React.js
+      - Next.js
+      - AWS Lambda
+      - API Gateway
+      - MongoDB
+      - SQL
+      - Docker
+      - OpenAI
+
+  - company: Accenture
+    role: Inbound Sales Representative Associate
+    location: "Bengaluru, Karnataka, India"
+    start_date: "December 2025"
+    end_date: "Present"
+    brief: true
+    bullets: []
+    technologies: []
+
+projects:
+  - name: Journeymen
+    role: Founder & Full Stack Engineer
+    website: https://journeymen.in
+    github: "https://github.com/RamaSai2519/Journeymen"
+    start_date: "July 2026"
+    end_date: "Present"
+    description: >
+      Verifiable, server-backed developer certifications based on real GitHub
+      engineering work rather than resume claims.
+    bullets:
+      - text: Designed Python and Flask services that use the GitHub API and GitHub OAuth to ingest repositories, commit history and merged pull requests for automated evaluation.
+      - text: Integrated OpenAI LLMs with RAG, vector embeddings and semantic search to evaluate code quality and architecture.
+      - text: Built the React and Next.js (TypeScript) frontend and deployed the backend serverless on AWS Lambda and API Gateway, with data in MongoDB and PostgreSQL.
+    technologies:
+      - Python
+      - Flask
+      - Next.js
+      - TypeScript
+      - AWS Lambda
+      - MongoDB
+      - PostgreSQL
+      - OpenAI
+      - RAG
+
+  - name: Emporos
+    role: Creator
+    description: >
+      A Nifty weekly options trading desk on Angel One that records the market
+      every minute, paper-trades 24 strategy books and trades one book with
+      real money.
+    bullets:
+      - text: Built a risk engine of sixteen ordered, unit-testable rules over an immutable account snapshot, so a live order goes out only when five separate locks agree and every rule passes.
+      - text: Reconciles broker orders, fills and positions every 30 seconds and halts new entries on any mismatch; every rejected signal is stored with its full context for audit.
+      - text: Runs an async Python trader on EC2, a control API on Lambda, minute-level market data in S3 Parquet, and a Next.js dashboard on Vercel that holds no secrets.
+    technologies:
+      - Python
+      - asyncio
+      - AWS EC2
+      - Lambda
+      - S3
+      - MongoDB Atlas
+      - Next.js
+
+  - name: Ledger
+    website: https://ledger.journeymen.in
+    description: >
+      A shared expense ledger for a couple or roommates. Bank SMS turns into
+      categorized transactions, budgets track what's left, and every entry
+      shows who logged it.
+    technologies:
+      - AWS Lambda
+      - API Gateway
+      - MongoDB Atlas
+      - Firebase FCM
+
+skills:
+  - category: Languages
+    items: [Python, JavaScript, TypeScript, SQL]
+  - category: Frontend
+    items: [React, Next.js, HTML, CSS]
+  - category: Backend
+    items: [Flask, Node.js, REST APIs, asyncio]
+  - category: Cloud
+    items: [AWS Lambda, API Gateway, EC2, S3, Docker]
+  - category: Databases
+    items: [MongoDB, PostgreSQL]
+  - category: AI/ML
+    items: [OpenAI, LLMs, Function Calling, RAG, Vector Embeddings, Semantic Search]
+  - category: Tools
+    items: [Git, GitHub API, GitHub OAuth]
+
+education: []
+
+certifications: []
+
+section_order:
+  [summary, experience, projects, skills, education, certifications]
+
+meta:
+  title: Rama Sathya Sai — Resume
+  author: Rama Sathya Sai
+  subject: Résumé of Rama Sathya Sai, Full Stack Software Engineer
+  keywords:
+    - Full Stack Engineer
+    - Python
+    - Flask
+    - React
+    - Next.js
+    - AWS
+    - REST APIs
+    - LLM
+    - RAG

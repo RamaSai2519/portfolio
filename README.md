@@ -16,5 +16,5 @@ npm run lint     # tsc --noEmit
 - The home page is a pinned scroll tour (GSAP ScrollTrigger, `components/stage.tsx`). Elements with `data-step="n"` get the class `on` as the scroll reaches step n; phones get simple reveals, reduced motion gets the finished state.
 - Live sites are iframes (`components/live-frame.tsx`). Framing and auto-scroll need a change on each site: see `docs/live-embed.md`.
 - `/emporos/demo` is a labelled placeholder until the public Emporos demo exists.
-- `public/rama-sathya-sai-resume.pdf` is built by `resume_builder` (google theme) from its example YAML, with the phone number removed and the contact email set.
+- `public/rama-sathya-sai-resume.pdf` is built by `resume_builder` (google theme) from `resume/resume.yaml`; the build command is at the top of that file.
 - Open items before launch: `docs/launch-checklist.md`.
