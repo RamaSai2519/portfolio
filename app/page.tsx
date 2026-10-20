@@ -1,6 +1,6 @@
 import Link from "next/link";
 import "./home.css";
-import { Colophon, Ph, Wire, Wordmark } from "@/components/chrome";
+import { Colophon, Wire, Wordmark } from "@/components/chrome";
 import { CandleChart } from "@/components/candle-chart";
 import { JourneyChrome } from "@/components/journey";
 import { LiveFrame } from "@/components/live-frame";
@@ -179,7 +179,7 @@ export default function Home() {
               <h2>A résumé is a claim. This is the record<span className="dotg">.</span></h2>
               <p>GitHub-verified developer certification. A submitted project is checked against its GitHub commit history, run through AI consistency checks and graded; anything odd goes to a human review queue.</p>
               <div className="tags" data-step={1}><span className="dp-pill">next.js</span><span className="dp-pill">python cli</span><span className="dp-pill">flask on lambda</span><span className="dp-pill">sqs grading worker</span><span className="dp-pill">terraform</span></div>
-              <p className="small" data-step={2}>Built by a two-person team.</p>
+              <p className="small" data-step={2}>Designed and built by me, end to end.</p>
             </>
           }
         >
@@ -318,7 +318,7 @@ export default function Home() {
           copy={
             <>
               <h2>A club site and its fest<span className="dotg">.</span></h2>
-              <p>The GitHub Community Club at GITAM Bengaluru and Epoch, its annual fest: registration, Epoch Coins, QR scanning, a shop and a live leaderboard, built by students in the open. I&rsquo;m a core contributor.</p>
+              <p>The GitHub Community Club at GITAM Bengaluru and Epoch, its annual fest: registration, Epoch Coins, QR scanning, a shop and a live leaderboard. I designed and built it.</p>
               <div className="tags" data-step={1}><span className="dp-pill">supabase</span><span className="dp-pill">qr scanning</span><span className="dp-pill">live leaderboard</span></div>
             </>
           }
@@ -403,7 +403,6 @@ export default function Home() {
             <a className="tlink" href={contact.resume} download>Résumé (PDF) ↓</a>
           </div>
         </div>
-        <p className="wrap colophon"><Ph>résumé PDF is a placeholder: built by resume_builder from its example YAML, phone number removed</Ph></p>
         <Colophon />
       </footer>
     </div>
