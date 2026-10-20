@@ -32,4 +32,9 @@ Open items before the portfolio goes to production. Tick them off here as they c
 ## Optional
 
 - [x] `robots.txt` and `sitemap.xml` (`app/robots.ts`, `app/sitemap.ts`).
+- [x] SEO: canonical URLs, Open Graph and Twitter tags per page (`pageMetadata` in `lib/seo.ts`), a share image per
+      page (`opengraph-image.tsx`, drawn by `lib/og.tsx`), Person and WebSite JSON-LD (`app/layout.tsx`), web manifest
+      and apple icon, AVIF/WebP images (`next.config.ts`).
+- [ ] Search Console: verify `rama.journeymen.in` and submit `/sitemap.xml`. Check a page with the Rich Results Test
+      and a share preview (LinkedIn Post Inspector) after deploy.
 - [ ] Analytics: GA4 chosen. Add the measurement ID to the Vercel env when available (wired in `app/layout.tsx`; set `NEXT_PUBLIC_GA_ID` in Vercel, it is a no-op until then).

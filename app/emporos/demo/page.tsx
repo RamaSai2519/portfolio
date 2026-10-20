@@ -3,11 +3,13 @@ import Link from "next/link";
 import { Colophon, SiteHeader } from "@/components/chrome";
 import { EmporosDemoFrame } from "@/components/emporos-demo-frame";
 import { EMPOROS_DEMO_LIVE, EMPOROS_DEMO_URL } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Emporos demo dashboard",
   description: "The Emporos trading dashboard replaying an invented Nifty options day. Simulated data, every control switched off.",
-};
+  path: "/emporos/demo",
+});
 
 const pages = [
   ["Overview", "A 1-minute candle chart with the move, the build-up range and the breakout levels, the day's net against a +Rs 8,000 target and a −Rs 5,000 loss stop, the closed-net curve, and the open trade with its floor, stop and peak."],

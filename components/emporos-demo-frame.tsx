@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import { EMPOROS_DEMO_LIVE, EMPOROS_DEMO_URL } from "@/lib/site";
 
 const host = new URL(EMPOROS_DEMO_URL).host;
@@ -9,6 +9,11 @@ const host = new URL(EMPOROS_DEMO_URL).host;
  * more than allow-scripts and allow-same-origin.
  */
 export function EmporosDemoFrame({ shot = "open-trade" }: { shot?: "open-trade" | "trades" | "history" }) {
+  // Art direction through the image optimizer: both sources are served as AVIF/WebP at the right width.
+  const alt = "The Emporos demo dashboard replaying a simulated trading day";
+  const common = { alt, quality: 80 };
+  const { props: { srcSet: mobileSrcSet } } = getImageProps({ ...common, src: "/emporos-demo/mobile.png", width: 390, height: 844, sizes: "100vw" });
+  const { props: desktop } = getImageProps({ ...common, src: `/emporos-demo/${shot}.png`, width: 1200, height: 760, sizes: "(max-width: 899px) 100vw, 1100px" });
   return (
     <div className="ed">
       <div className="frame__bar">
@@ -27,8 +32,8 @@ export function EmporosDemoFrame({ shot = "open-trade" }: { shot?: "open-trade" 
         />
       ) : (
         <picture>
-          <source media="(max-width: 640px)" srcSet="/emporos-demo/mobile.png" />
-          <Image className="ed__shot" src={`/emporos-demo/${shot}.png`} alt="The Emporos demo dashboard replaying a simulated trading day" width={1200} height={760} sizes="(max-width: 899px) 100vw, 1100px" quality={80} />
+          <source media="(max-width: 640px)" srcSet={mobileSrcSet} width={390} height={844} />
+          <img {...desktop} className="ed__shot" alt={alt} />
         </picture>
       )}
     </div>

@@ -5,11 +5,13 @@ import { PageFooter, SecHead, SiteHeader, Stat, Wire } from "@/components/chrome
 import { CandleChart } from "@/components/candle-chart";
 import { Stage } from "@/components/stage";
 import { EmporosDemoFrame } from "@/components/emporos-demo-frame";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Emporos",
   description: "Emporos trades Nifty weekly options through Angel One: 24 paper books, one live book, five locks and sixteen risk rules.",
-};
+  path: "/emporos",
+});
 
 const guards = [
   "TradingModeGuard", "KillSwitchGuard", "MarketSessionGuard", "StaleDataGuard", "BrokerHealthGuard", "ReconciliationGuard",

@@ -3,11 +3,13 @@ import "./ark.css";
 import { PageFooter, SecHead, SiteHeader, Stat, Wire } from "@/components/chrome";
 import { Stage } from "@/components/stage";
 import { repos } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "ARK-I",
   description: "ARK-I: one stateful gpt-4o model holds the conversation and calls six stateless sub-models. Sukoon Unlimited's WhatsApp assistant.",
-};
+  path: "/ark-i",
+});
 
 const subs = [
   ["ExpertsGPT", "experts api"],
