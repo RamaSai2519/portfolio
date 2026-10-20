@@ -6,7 +6,9 @@ import { useEffect, useRef } from "react";
  * The site's background: a fixed canvas of 3D star-nodes joined by constellation lines (after the
  * journeymen.in particle network). Sections choose a formation with data-space="globe|lattice|field";
  * the formation morphs as each section scrolls past, and the camera flies forward with the scroll.
- * The cursor tilts the camera and lights nearby links. Reduced motion draws one still frame.
+ * Alongside the formation, a layer of ambient stars always drifts toward the camera and twinkles, so the
+ * very first frame is alive before any scrolling. The cursor tilts the camera and lights nearby links.
+ * Reduced motion draws one still frame.
  */
 type Mode = "globe" | "lattice" | "field";
 type V3 = [number, number, number];
@@ -36,7 +38,9 @@ export function SpaceField() {
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.matchMedia("(max-width: 899px)").matches;
-    const N = small ? 90 : 170;
+    const NG = small ? 90 : 170; // formation nodes
+    const NA = small ? 90 : 190; // ambient stars, always drifting
+    const N = NG + NA;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let w = 0, h = 0;
     const resize = () => {
@@ -50,15 +54,16 @@ export function SpaceField() {
     window.addEventListener("resize", resize);
 
     // formations, in world units (screen-ish pixels at depth 0)
-    const globe = fibSphere(N, 260);
+    const globe = fibSphere(NG, 260);
     const field: V3[] = Array.from({ length: N }, () => [(Math.random() - 0.5) * 2400, (Math.random() - 0.5) * 1500, Math.random() * DEPTH]);
     const cols = small ? 10 : 17;
-    const lattice: V3[] = Array.from({ length: N }, (_, i) => {
+    const lattice: V3[] = Array.from({ length: NG }, (_, i) => {
       const c = i % cols, r = Math.floor(i / cols);
       return [(c - (cols - 1) / 2) * 90, 120 + r * 26, (r - 5) * 110];
     });
     const pos: V3[] = field.map((p) => [...p] as V3);
     const size = Array.from({ length: N }, () => 0.8 + Math.random() * 1.4);
+    const phase = Array.from({ length: N }, () => Math.random() * Math.PI * 2);
 
     // mouse: drives camera tilt and the link glow; also published as --mx/--my for CSS tilt
     const mouse = { x: -9999, y: -9999, nx: 0, ny: 0 };
@@ -100,6 +105,12 @@ export function SpaceField() {
     window.addEventListener("scroll", readScroll, { passive: true });
 
     const targetOf = (m: Mode, i: number, t: number): V3 => {
+      if (i >= NG) {
+        // ambient star: drifts toward the camera and sways, whatever the formation
+        const [x, y, z] = field[i];
+        const zz = (((z - travel * 0.6 - t * 0.08) % DEPTH) + DEPTH) % DEPTH;
+        return [x + Math.sin(t * 0.0003 + phase[i]) * 40, y + Math.cos(t * 0.00025 + phase[i]) * 30, zz + 150];
+      }
       if (m === "globe") {
         const [x, y, z] = globe[i];
         const a = t * 0.00012;
@@ -123,7 +134,8 @@ export function SpaceField() {
       const proj: [number, number, number][] = [];
       for (let i = 0; i < N; i++) {
         const a = targetOf(from, i, t), b = targetOf(to, i, t);
-        const tg: V3 = [a[0] + (b[0] - a[0]) * mix, a[1] + (b[1] - a[1]) * mix, a[2] + (b[2] - a[2]) * mix];
+        const m = i >= NG ? 0 : mix;
+        const tg: V3 = [a[0] + (b[0] - a[0]) * m, a[1] + (b[1] - a[1]) * m, a[2] + (b[2] - a[2]) * m];
         const p = pos[i];
         // ease toward the formation; field wrap-around jumps instead of sweeping across the screen
         const jump = Math.abs(tg[2] - p[2]) > DEPTH * 0.6;
@@ -153,7 +165,8 @@ export function SpaceField() {
         }
         const near = Math.max(0, 1 - Math.hypot(ax - mouse.x, ay - mouse.y) / 220);
         const c = near > 0.05 ? BRAND : BASE;
-        ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${Math.min(0.9, 0.22 + af * 0.25 + near * 0.5)})`;
+        const tw = 0.75 + 0.25 * Math.sin(t * 0.002 + phase[i]);
+        ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${Math.min(0.9, (0.22 + af * 0.25 + (i >= NG ? 0.18 : 0)) * tw + near * 0.5)})`;
         ctx.beginPath(); ctx.arc(ax, ay, size[i] * Math.min(2.2, af) + near, 0, Math.PI * 2); ctx.fill();
       }
       if (!reduce) raf = requestAnimationFrame(draw);
