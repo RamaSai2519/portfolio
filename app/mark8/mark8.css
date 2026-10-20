@@ -12,7 +12,7 @@
 .p-mark8 .topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; }
 .p-mark8 .topic { border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius-lg); padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--text); }
 .p-mark8 .topic h3 { font-size: 17px; color: inherit; }
-.js .p-mark8 .topic.on { border-color: var(--purple); background: var(--purple-soft); }
+.js .p-mark8 .topic.on { border-color: var(--accent); background: var(--accent-soft); }
 .p-mark8 .route { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; background: var(--surface); }
 .p-mark8 .route b { font: 600 13px/18px var(--font-mono); color: var(--text); overflow-wrap: anywhere; }
 .p-mark8 .route span { font-size: 12px; line-height: 16px; color: var(--text-subtle); }

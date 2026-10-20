@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 // Hand grouping of the 83 /actions/* routes registered in gamesProcessor's index.py. The split is not in the code.
 const domains: [string, number, string, string][] = [
   ["Payments", 11, "var(--sky)", "cashfree orders and webhooks, plans, balance, offers"],
-  ["Content and AI", 10, "var(--purple)", "chat, blog, songs, photos, shorts, dall-e, prompts"],
+  ["Content and AI", 10, "var(--accent)", "chat, blog, songs, photos, shorts, dall-e, prompts"],
   ["Games", 10, "var(--gold)", "quiz and card games, leaderboard, winners, rewards"],
   ["Experts", 9, "var(--brand)", "profiles, applicants, slots, schedules, scores, vacations"],
   ["Users", 8, "var(--link)", "profiles, engagement, referrals, clubs, beta testers"],
   ["Calls and escalation", 7, "var(--danger)", "place calls, call-platform webhooks, escalations"],
   ["Events", 7, "var(--sky)", "workshops, registrations, contributions, interests"],
-  ["Admin and analytics", 7, "var(--purple)", "dashboard stats, leads, logs, remarks, histories"],
+  ["Admin and analytics", 7, "var(--accent)", "dashboard stats, leads, logs, remarks, histories"],
   ["WhatsApp", 6, "var(--brand)", "send, templates, webhooks, history"],
   ["Push", 5, "var(--gold)", "fcm tokens and templates"],
   ["Auth", 3, "var(--link)", "otp send and verify, admin login"],
@@ -29,7 +29,7 @@ const domains: [string, number, string, string][] = [
 const lanes: [string, string, string][] = [
   ["schedules", "var(--brand)", "recurring_schedules → schedules → handle_call_job · handle_wa_job"],
   ["event reminders", "var(--sky)", "events_reminders_lister → event_reminder"],
-  ["expert status", "var(--purple)", "auto_online_job · experts_status_job"],
+  ["expert status", "var(--accent)", "auto_online_job · experts_status_job"],
   ["emails · db backup", "var(--gold)", "emails_reader · db_backup"],
 ];
 
@@ -38,7 +38,7 @@ const steps: [string, string, string][] = [
   ["var(--brand)", "The schedule is stored", "Recurring bookings expand into one-off schedules."],
   ["var(--gold)", "A scheduler tick finds it due", "Nudges both people on WhatsApp and pings Slack."],
   ["var(--danger)", "The call is placed", "Through /actions/call; the call platform reports back over webhooks."],
-  ["var(--purple)", "mark8 reads and scores it", "Topics, personas and a conversation score land on the call."],
+  ["var(--accent)", "mark8 reads and scores it", "Topics, personas and a conversation score land on the call."],
   ["var(--sky)", "Problems escalate", "Escalations reach the team before anyone has to ask."],
 ];
 
@@ -63,7 +63,7 @@ export default function BackBone() {
             <Stat n="83" label="api endpoints" color="var(--sky)" />
             <Stat n="2" label="lambda functions" color="var(--brand)" />
             <Stat n="5 min" label="scheduler heartbeat" color="var(--gold)" />
-            <Stat n="10k" label="active users served" color="var(--purple)" />
+            <Stat n="10k" label="active users served" color="var(--accent)" />
           </div>
         </section>
 
@@ -126,7 +126,7 @@ export default function BackBone() {
             <div data-float="c" className="panel" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <span className="dp-label">the sukoon platform</span>
               <div className="platform">
-                <Link className="dp-card" href="/ark-i" style={{ padding: "14px 18px", gap: 4 }} data-step={0}><span className="mono c-purple" style={{ fontWeight: 600, fontSize: 14 }}>ARK-I</span><span className="small">talks to seniors on WhatsApp</span></Link>
+                <Link className="dp-card" href="/ark-i" style={{ padding: "14px 18px", gap: 4 }} data-step={0}><span className="mono c-accent" style={{ fontWeight: 600, fontSize: 14 }}>ARK-I</span><span className="small">talks to seniors on WhatsApp</span></Link>
                 <div className="stem" />
                 <div className="node lit lit--sky node--strong" data-step={1} data-fx="state" style={{ padding: 18, borderRadius: 14, whiteSpace: "normal", display: "flex", flexDirection: "column", gap: 4 }}><span style={{ fontSize: 15, fontWeight: 600 }}>back_bone</span><span className="small" style={{ fontFamily: "var(--font-sans)" }}>the data and every action</span></div>
                 <div className="stem" />

@@ -74,7 +74,7 @@ export default function Mark8() {
           <div className="stats rise rise--d">
             <Stat n="100–500" label="calls handled a day" color="var(--gold)" />
             <Stat n="all day" label="realtime, not batch" color="var(--brand)" />
-            <Stat n="12" label="topic families tracked" color="var(--purple)" />
+            <Stat n="12" label="topic families tracked" color="var(--accent)" />
             <Stat n="7" label="scoring parameters" color="var(--sky)" />
           </div>
         </section>
@@ -99,7 +99,7 @@ export default function Mark8() {
               {rubric.map((r, i) => (
                 <div key={r.name} className="bar">
                   <div className="bar__head"><span className="dp-label">{r.name}</span><span className="dp-label c-text">{r.pts} pts</span></div>
-                  <div className="bar__track"><div className="bar__fill" data-step={5 + i} data-fx="fill" style={{ ["--w" as string]: `${r.pts * 5}%`, background: r.pts === 20 ? "var(--gold)" : "var(--purple)" }} /></div>
+                  <div className="bar__track"><div className="bar__fill" data-step={5 + i} data-fx="fill" style={{ ["--w" as string]: `${r.pts * 5}%`, background: r.pts === 20 ? "var(--gold)" : "var(--accent)" }} /></div>
                 </div>
               ))}
             </div>

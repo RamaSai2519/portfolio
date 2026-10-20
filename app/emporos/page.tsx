@@ -75,7 +75,7 @@ export default function Emporos() {
           </div>
           <div className="stats rise rise--d">
             <Stat n="1 min" label="quote cadence" color="var(--sky)" />
-            <Stat n="24" label="paper books" color="var(--purple)" />
+            <Stat n="24" label="paper books" color="var(--accent)" />
             <Stat n="1" label="live book" color="var(--brand)" />
             <Stat n="16" label="risk rules" color="var(--gold)" />
             <Stat n="30 s" label="broker reconcile" color="var(--text)" />
@@ -93,15 +93,15 @@ export default function Emporos() {
               <CandleChart from={0} />
               <div className="tags" data-step={15}>
                 <span className="dp-pill">move · 5 candles</span>
-                <span className="dp-pill dp-pill--purple">build-up · no width limit</span>
+                <span className="dp-pill dp-pill--accent">build-up · no width limit</span>
                 <span className="dp-pill dp-pill--sky">entry · price hits the peak</span>
                 <span className="dp-pill dp-pill--gold">Rs 2,000 floor</span>
-                <span className="dp-pill dp-pill--purple">trail · keeps 80%</span>
+                <span className="dp-pill dp-pill--accent">trail · keeps 80%</span>
               </div>
             </div>
             <ol data-float="r" className="dp-graph panel" style={{ padding: 28 }}>
               <li data-step={10} style={{ ["--node" as string]: "var(--sky)" }}><h3>Pick the option</h3><p>Nearest expiry, highest open interest within ATM ± 2 strikes.</p></li>
-              <li data-step={11} style={{ ["--node" as string]: "var(--purple)" }}><h3>Wait for the peak</h3><p>No depth gate on this book. It buys when Nifty&rsquo;s live price reaches the breakout candle&rsquo;s peak, up to 15:12.</p></li>
+              <li data-step={11} style={{ ["--node" as string]: "var(--accent)" }}><h3>Wait for the peak</h3><p>No depth gate on this book. It buys when Nifty&rsquo;s live price reaches the breakout candle&rsquo;s peak, up to 15:12.</p></li>
               <li data-step={12} style={{ ["--node" as string]: "var(--brand)" }}><h3>Size and buy</h3><p>Whole lots within 90% of available cash, as a limit order.</p></li>
               <li data-step={13} style={{ ["--node" as string]: "var(--gold)" }}><h3>Lock the floor, then trail</h3><p>A Rs 2,000 floor, then a trailing stop that keeps 80% of the peak gain.</p></li>
               <li data-step={14} style={{ ["--node" as string]: "var(--danger)" }}><h3>Or get out</h3><p>A Rs 10,000 gross hard stop, or 15:15. One position at a time; entries end for the day at net +Rs 8,000 or −Rs 5,000.</p></li>
@@ -187,7 +187,7 @@ export default function Emporos() {
                 </div>
                 <div className="g4"><i style={{ height: 84 }} /><i style={{ height: 84 }} /><i style={{ height: 84, background: "var(--brand-soft)" }} /><i style={{ height: 84 }} /></div>
                 <div className="demo__bars">
-                  {[30, 42, 38, 55, 50, 52, 49, 80, 86, 90].map((h, i) => <i key={i} style={{ height: `${h}%`, ...(i === 7 ? { background: "var(--purple)" } : {}) }} />)}
+                  {[30, 42, 38, 55, 50, 52, 49, 80, 86, 90].map((h, i) => <i key={i} style={{ height: `${h}%`, ...(i === 7 ? { background: "var(--accent)" } : {}) }} />)}
                 </div>
                 <div className="g2"><i style={{ height: 140 }} /><i style={{ height: 140 }} /></div>
                 <i style={{ height: 26, borderRadius: 6 }} /><i style={{ height: 26, borderRadius: 6, background: "var(--surface)" }} /><i style={{ height: 26, borderRadius: 6 }} />

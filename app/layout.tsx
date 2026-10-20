@@ -3,7 +3,6 @@ import "./globals.css";
 import { SITE_URL } from "@/lib/site";
 import { SpaceField } from "@/components/space-field";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { AccentPicker } from "@/components/accent-picker";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -21,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" data-theme="dark" suppressHydrationWarning>
       <head>
         {/* Marks that JS runs, so scroll-step styles never hide content for visitors without it */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js');try{var a=localStorage.getItem('accent-preview');if(a)document.documentElement.dataset.accent=a}catch(e){}" }} />
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
@@ -33,7 +32,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <SpaceField />
         <SmoothScroll />
-        <AccentPicker />
         <a className="dp-btn dp-btn--primary skip" href="#main">Skip to content</a>
         {children}
       </body>

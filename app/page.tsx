@@ -18,8 +18,8 @@ type Project = { id: string; num: string; name: string; tag: string; line: strin
 const projects: Project[] = [
   { id: "emporos", color: "var(--gold)", num: "01", name: "Emporos", tag: "flagship · trading", line: "Nifty options desk with a 16-rule risk engine", action: { href: "/emporos", label: "Deep dive" } },
   { id: "journeymen", color: "var(--gold)", num: "02", name: "Journeymen", tag: "flagship · site", line: "GitHub-verified developer certification.", action: { href: sites.journeymen, label: "Visit journeymen.in", external: true } },
-  { id: "ark-i", color: "var(--purple)", num: "03", name: "ARK-I", tag: "sukoon · ai", line: "WhatsApp assistant, one model plus six specialists", action: { href: "/ark-i", label: "Deep dive" } },
-  { id: "mark8", color: "var(--purple)", num: "04", name: "mark8", tag: "sukoon · ai", line: "Scores 100–500 support calls a day", action: { href: "/mark8", label: "Deep dive" } },
+  { id: "ark-i", color: "var(--accent)", num: "03", name: "ARK-I", tag: "sukoon · ai", line: "WhatsApp assistant, one model plus six specialists", action: { href: "/ark-i", label: "Deep dive" } },
+  { id: "mark8", color: "var(--accent)", num: "04", name: "mark8", tag: "sukoon · ai", line: "Scores 100–500 support calls a day", action: { href: "/mark8", label: "Deep dive" } },
   { id: "back-bone", color: "var(--sky)", num: "05", name: "back_bone", tag: "sukoon · backend", line: "83 endpoints and a 5-minute scheduler", action: { href: "/back-bone", label: "Deep dive" } },
   { id: "ledger", color: "var(--brand)", num: "06", name: "Ledger", tag: "site", line: "One shared ledger for a couple or roommates", action: { href: sites.ledger, label: "Visit Ledger", external: true } },
   { id: "mohan", color: "var(--brand)", num: "07", name: "Mohan Visweswar", tag: "client site", line: "Insurance and financial consultant, built for the client", action: { href: sites.mohan, label: "Visit the site", external: true } },
@@ -40,12 +40,12 @@ const rubric = [
 
 // hand grouping of back_bone's 83 /actions/* routes
 const domains: [string, number, string][] = [
-  ["payments", 11, "var(--sky)"], ["content · ai", 10, "var(--purple)"], ["games", 10, "var(--gold)"], ["experts", 9, "var(--brand)"],
-  ["users", 8, "var(--link)"], ["calls", 7, "var(--danger)"], ["events", 7, "var(--sky)"], ["admin", 7, "var(--purple)"],
+  ["payments", 11, "var(--sky)"], ["content · ai", 10, "var(--accent)"], ["games", 10, "var(--gold)"], ["experts", 9, "var(--brand)"],
+  ["users", 8, "var(--link)"], ["calls", 7, "var(--danger)"], ["events", 7, "var(--sky)"], ["admin", 7, "var(--accent)"],
   ["whatsapp", 6, "var(--brand)"], ["push", 5, "var(--gold)"], ["auth", 3, "var(--link)"],
 ];
 
-const lanes: [string, string][] = [["schedules", "var(--brand)"], ["event reminders", "var(--sky)"], ["expert status", "var(--purple)"], ["emails · db backup", "var(--gold)"]];
+const lanes: [string, string][] = [["schedules", "var(--brand)"], ["event reminders", "var(--sky)"], ["expert status", "var(--accent)"], ["emails · db backup", "var(--gold)"]];
 
 function Scene({ p, flip, children, copy, length }: { p: Project; flip?: boolean; children: React.ReactNode; copy: React.ReactNode; length?: number }) {
   return (
@@ -242,7 +242,7 @@ export default function Home() {
               {rubric.map((r, i) => (
                 <div key={r.name} className="bar">
                   <div className="bar__head"><span className="dp-label">{r.name}</span><span className="dp-label c-text">{r.pts}</span></div>
-                  <div className="bar__track"><div className="bar__fill" data-step={3 + i} data-fx="fill" style={{ ["--w" as string]: `${r.pts * 5}%`, background: r.pts === 20 ? "var(--gold)" : "var(--purple)" }} /></div>
+                  <div className="bar__track"><div className="bar__fill" data-step={3 + i} data-fx="fill" style={{ ["--w" as string]: `${r.pts * 5}%`, background: r.pts === 20 ? "var(--gold)" : "var(--accent)" }} /></div>
                 </div>
               ))}
             </div>
@@ -354,7 +354,7 @@ export default function Home() {
               <div className="rb-flag rb-flag--ok" data-step={3} data-fx="fade">1 page</div>
             </div>
             <div className="node-col ats" data-step={2}>
-              <svg aria-hidden="true" width="110" height="110" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#1b1b2e" strokeWidth="10" /><circle className="prog" cx="50" cy="50" r="42" fill="none" style={{ stroke: "var(--purple)" }} strokeWidth="10" strokeLinecap="round" strokeDasharray="264" transform="rotate(-90 50 50)" /></svg>
+              <svg aria-hidden="true" width="110" height="110" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#1b1b2e" strokeWidth="10" /><circle className="prog" cx="50" cy="50" r="42" fill="none" style={{ stroke: "var(--accent)" }} strokeWidth="10" strokeLinecap="round" strokeDasharray="264" transform="rotate(-90 50 50)" /></svg>
               <span className="dp-label">ats check</span>
             </div>
           </div>

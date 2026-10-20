@@ -23,7 +23,7 @@ const steps: [string, string, string][] = [
   ["var(--brand)", "MainGPT reads the context", "The whole conversation is loaded from MongoDB."],
   ["var(--brand)", "It picks a tool", "A function call names the sub-model it needs."],
   ["var(--line-strong)", "Controller spins it up", "Fresh, stateless, scoped to this one query."],
-  ["var(--purple)", "Sub-model fetches and answers", "Calls its API, returns a structured result, and is gone."],
+  ["var(--accent)", "Sub-model fetches and answers", "Calls its API, returns a structured result, and is gone."],
   ["var(--brand)", "MainGPT writes the reply", "Results are merged into one answer in the user's thread."],
   ["var(--sky)", "Sent back on WhatsApp", "History is saved; Slack hears about anything odd."],
 ];
@@ -35,7 +35,7 @@ export default function ArkI() {
       <main id="main">
         <section className="wrap hero">
           <div className="hero__copy rise">
-            <span className="dp-label c-purple">ARK-I · adaptive resource kernel, implementation</span>
+            <span className="dp-label c-accent">ARK-I · adaptive resource kernel, implementation</span>
             <h1 className="h-hero">One model remembers. Six forget on purpose<span className="dotg">.</span></h1>
             <p className="lede">The WhatsApp assistant behind Sukoon Unlimited, an agetech startup for elderly people seeking guidance, companionship and community. A stateful main model holds every conversation and delegates each task to a short-lived sub-model that does one job and disappears.</p>
             <div className="row" style={{ alignItems: "center", gap: "12px 24px" }}>
@@ -45,7 +45,7 @@ export default function ArkI() {
           </div>
           <div className="stats rise rise--d">
             <Stat n="10k" label="active Sukoon users" color="var(--brand)" />
-            <Stat n="4k" label="paying members" color="var(--purple)" />
+            <Stat n="4k" label="paying members" color="var(--accent)" />
             <Stat n="~100" label="people chatting daily" color="var(--sky)" />
             <Stat n="6" label="stateless sub-models" color="var(--gold)" />
           </div>
@@ -92,8 +92,8 @@ export default function ArkI() {
             <div data-float="c" className="panel" style={{ padding: 24, display: "flex", flexDirection: "column", gap: 14 }}>
               <div className="tags" style={{ justifyContent: "space-between", alignItems: "center" }}><span className="dp-label">example thread</span><span className="dp-pill dp-pill--sky">illustrative</span></div>
               <div className="msg msg--me" data-step={0}>Can I talk to a yoga expert tomorrow evening?</div>
-              <div data-step={2} style={{ alignSelf: "flex-start" }}><span className="dp-pill dp-pill--purple">tool → ExpertsGPT</span></div>
-              <div data-step={4} style={{ alignSelf: "flex-start" }}><span className="dp-pill dp-pill--purple">tool → SchedulesGPT</span></div>
+              <div data-step={2} style={{ alignSelf: "flex-start" }}><span className="dp-pill dp-pill--accent">tool → ExpertsGPT</span></div>
+              <div data-step={4} style={{ alignSelf: "flex-start" }}><span className="dp-pill dp-pill--accent">tool → SchedulesGPT</span></div>
               <div className="msg msg--bot" data-step={5}><Ph>reply naming an available expert and open slots</Ph></div>
               <div className="msg msg--me" data-step={6}>Book the 6 pm one.</div>
               <div data-step={6} style={{ alignSelf: "flex-start" }}><span className="dp-pill dp-pill--brand">tool → SchedulesGPT · booked</span></div>
@@ -109,8 +109,8 @@ export default function ArkI() {
               <h3>MainGPT</h3>
               <p className="small">Owns the conversation. One place reads and writes history, so context never forks across models. Runs on gpt-4o.</p>
             </div>
-            <div className="panel" data-step={1} style={{ borderColor: "var(--purple)" }}>
-              <span className="dp-pill dp-pill--purple" style={{ alignSelf: "flex-start" }}>stateless · one query</span>
+            <div className="panel" data-step={1} style={{ borderColor: "var(--accent)" }}>
+              <span className="dp-pill dp-pill--accent" style={{ alignSelf: "flex-start" }}>stateless · one query</span>
               <h3>Sub-models</h3>
               <p className="small">Get a small prompt and a schema, call one API, return. Short prompts keep them cheap; adding a skill means adding one module.</p>
             </div>

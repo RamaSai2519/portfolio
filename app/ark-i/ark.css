@@ -5,8 +5,8 @@
 .p-ark .sub { border: 1px solid var(--line); background: var(--raised); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
 .p-ark .sub b { font: 600 14px/18px var(--font-mono); color: var(--text-muted); }
 .p-ark .sub span { font-size: 12px; line-height: 16px; color: var(--text-subtle); }
-.js .p-ark .sub.on { background: var(--purple-soft); border-color: var(--purple); }
-.js .p-ark .sub.on b, .p-ark .sub:not([data-step]) b { color: var(--purple); }
+.js .p-ark .sub.on { background: var(--accent-soft); border-color: var(--accent); }
+.js .p-ark .sub.on b, .p-ark .sub:not([data-step]) b { color: var(--accent); }
 .p-ark .msg { max-width: 80%; border-radius: 14px; padding: 12px 14px; font-size: 14px; line-height: 22px; color: var(--text); }
 .p-ark .msg--me { align-self: flex-end; background: var(--brand-soft); border-radius: 14px 14px 4px 14px; }
 .p-ark .msg--bot { align-self: flex-start; background: var(--raised); border-radius: 14px 14px 14px 4px; }
