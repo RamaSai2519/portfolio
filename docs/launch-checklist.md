@@ -12,11 +12,9 @@ Open items before the portfolio goes to production. Tick them off here as they c
 - [x] **ARK-I example thread.** The assistant's reply bubble on `/ark-i` (`app/ark-i/page.tsx`) is still
       `[reply naming an available expert and open slots]`. Use a real anonymised reply or a generic one;
       the thread is already labelled "illustrative".
-- [ ] **Allow the live frames.** Code changes are made, uncommitted, in the sibling repos (Journeymen
-      `apps/web`, Mohan, Ledger `apps/web`, and `deva` = GITAM Epoch): a `frame-ancestors 'self'
-      https://rama.journeymen.in` header and the scroll bridge (`docs/live-embed.md`). Still to do: commit
-      and deploy each site. Ledger is a static export, so its host (S3/CDN/Pages) must send the
-      `Content-Security-Policy: frame-ancestors` header itself; `next.config.mjs` cannot.
+- [x] **Allow the live frames.** Deployed on Journeymen, Mohan, Ledger and GITAM Epoch (`deva`): each sends
+      `frame-ancestors 'self' https://rama.journeymen.in` and has the scroll bridge (`docs/live-embed.md`).
+      Ledger's header comes from `apps/web/vercel.json`.
 
 ## Deploy
 
