@@ -9,6 +9,6 @@ export default function OpengraphImage() {
     eyebrow: "Emporos demo",
     headline: "The trading dashboard, replaying an invented day.",
     footer: "Simulated data · every control switched off",
-    accent: "#ffc933",
+    accent: "#b07cff",
   });
 }

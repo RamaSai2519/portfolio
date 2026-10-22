@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   formatDetection: { email: false, telephone: false, address: false },
 };
 
-export const viewport: Viewport = { themeColor: "#0a0a0a", colorScheme: "dark" };
+export const viewport: Viewport = { themeColor: "#030308", colorScheme: "dark" };
 
 // Self-hosted at build time: no render-blocking request to Google, and the fonts are preloaded from our own origin.
 const mona = Mona_Sans({ subsets: ["latin"], axes: ["wdth"], display: "swap", variable: "--font-mona" });

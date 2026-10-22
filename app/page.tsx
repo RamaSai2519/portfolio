@@ -361,7 +361,7 @@ export default function Home() {
               <div className="rb-flag rb-flag--ok" data-step={3} data-fx="fade">1 page</div>
             </div>
             <div className="node-col ats" data-step={2}>
-              <svg aria-hidden="true" width="110" height="110" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#1a1a1a" strokeWidth="10" /><circle className="prog" cx="50" cy="50" r="42" fill="none" style={{ stroke: "var(--accent)" }} strokeWidth="10" strokeLinecap="round" strokeDasharray="264" transform="rotate(-90 50 50)" /></svg>
+              <svg aria-hidden="true" width="110" height="110" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#10141f" strokeWidth="10" /><circle className="prog" cx="50" cy="50" r="42" fill="none" style={{ stroke: "var(--accent)" }} strokeWidth="10" strokeLinecap="round" strokeDasharray="264" transform="rotate(-90 50 50)" /></svg>
               <span className="dp-label">ats check</span>
             </div>
           </div>

@@ -9,6 +9,6 @@ export default function OpengraphImage() {
     eyebrow: "ARK-I",
     headline: "One stateful model, six stateless specialists.",
     footer: "Sukoon Unlimited's WhatsApp assistant · gpt-4o · Flask · MongoDB",
-    accent: "#ff2d95",
+    accent: "#ff1f45",
   });
 }

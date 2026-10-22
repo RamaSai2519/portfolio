@@ -13,8 +13,8 @@ import { useEffect, useRef } from "react";
 type Mode = "globe" | "lattice" | "field";
 type V3 = [number, number, number];
 
-const BASE = [232, 232, 234];
-const BRAND = [0, 123, 167];
+const BASE = [150, 200, 255]; // icy blue: the resting field
+const HOT = [255, 31, 69]; // neon red: what the cursor lights up
 const DEPTH = 1600;
 
 function fibSphere(n: number, r: number): V3[] {
@@ -146,7 +146,7 @@ export function SpaceField() {
     // strokes and fills are batched by colour and quantised alpha: a few dozen draw calls a frame instead of thousands
     const LEVELS = 200;
     const rgba = (c: number[], l: number) => `rgba(${c[0]},${c[1]},${c[2]},${(l / LEVELS).toFixed(3)})`;
-    const styles = [BASE, BRAND].map((c) => Array.from({ length: LEVELS + 1 }, (_, l) => rgba(c, l)));
+    const styles = [BASE, HOT].map((c) => Array.from({ length: LEVELS + 1 }, (_, l) => rgba(c, l)));
     let lines: (Path2D | undefined)[][] = [[], []], dots: (Path2D | undefined)[][] = [[], []];
     const bucket = (set: (Path2D | undefined)[][], brand: boolean, alpha: number) => {
       const l = Math.min(LEVELS, Math.round(alpha * LEVELS));
@@ -271,6 +271,7 @@ export function SpaceField() {
     <div className="space" aria-hidden="true">
       <canvas ref={ref} />
       <div className="space__nebula" />
+      <div className="space__grid" />
       <div className="space__vignette" />
     </div>
   );
