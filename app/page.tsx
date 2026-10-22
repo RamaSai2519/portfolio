@@ -95,10 +95,7 @@ export default function Home() {
                 <span className="dp-pill dp-pill--brand" style={{ alignSelf: "flex-start" }}><i className="dp-dot dp-dot--live live" />open to work</span>
                 <h1 className="h-home">
                   I ship websites and the{" "}
-                  <span className="ul">
-                    systems
-                    <svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 13 C 70 4, 150 18, 297 7" /></svg>
-                  </span>{" "}
+                  <span className="ul">systems</span>{" "}
                   behind them<span className="dotg">.</span>
                 </h1>
                 <p className="lede">Five sites live in production, and the systems behind them: a trading engine, an LLM assistant, a call scorer, a platform backend and a résumé typesetter.</p>
@@ -361,7 +358,7 @@ export default function Home() {
               <div className="rb-flag rb-flag--ok" data-step={3} data-fx="fade">1 page</div>
             </div>
             <div className="node-col ats" data-step={2}>
-              <svg aria-hidden="true" width="110" height="110" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#19191b" strokeWidth="10" /><circle className="prog" cx="50" cy="50" r="42" fill="none" style={{ stroke: "var(--accent)" }} strokeWidth="10" strokeLinecap="round" strokeDasharray="264" transform="rotate(-90 50 50)" /></svg>
+              <svg aria-hidden="true" width="110" height="110" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#10141f" strokeWidth="10" /><circle className="prog" cx="50" cy="50" r="42" fill="none" style={{ stroke: "var(--accent)" }} strokeWidth="10" strokeLinecap="round" strokeDasharray="264" transform="rotate(-90 50 50)" /></svg>
               <span className="dp-label">ats check</span>
             </div>
           </div>

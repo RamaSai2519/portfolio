@@ -9,6 +9,6 @@ export default function OpengraphImage() {
     eyebrow: "mark8",
     headline: "Scoring 100–500 support calls a day, in real time.",
     footer: "A seven-part, 100-point rubric for Sukoon Unlimited",
-    accent: "#7c9cff",
+    accent: "#39ff14",
   });
 }

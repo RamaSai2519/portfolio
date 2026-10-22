@@ -7,9 +7,9 @@ export const contentType = "image/png";
 export default function AppleIcon() {
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", background: "#080809", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+      <div style={{ width: "100%", height: "100%", background: "#030308", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
         <div style={{ display: "flex", fontSize: 120, fontWeight: 800, color: "#f2f3f7", marginLeft: -36, marginTop: -12 }}>r</div>
-        <div style={{ position: "absolute", left: 106, top: 102, width: 34, height: 34, borderRadius: 17, background: "#3fc84e" }} />
+        <div style={{ position: "absolute", left: 106, top: 102, width: 34, height: 34, borderRadius: 17, background: "#39ff14" }} />
       </div>
     ),
     size,

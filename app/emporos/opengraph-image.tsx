@@ -9,6 +9,6 @@ export default function OpengraphImage() {
     eyebrow: "Emporos",
     headline: "A Nifty options desk with sixteen risk rules.",
     footer: "Angel One · 24 paper books · one live book · five locks",
-    accent: "#ffc933",
+    accent: "#b07cff",
   });
 }
