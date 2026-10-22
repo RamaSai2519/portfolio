@@ -44,8 +44,8 @@
   --radius-xl: 18px;
   --radius-2xl: 24px;
   --radius-pill: 9999px;
-  --shadow-lift: 4px 4px 0 var(--accent), 0 0 32px rgba(var(--brand-rgb), 0.45);
-  --shadow-press: 1px 1px 0 var(--accent), 0 0 16px rgba(var(--brand-rgb), 0.35);
+  --shadow-lift: 4px 4px 0 #0057d9, 0 0 32px rgba(var(--brand-rgb), 0.45);
+  --shadow-press: 1px 1px 0 #0057d9, 0 0 16px rgba(var(--brand-rgb), 0.35);
   --shadow-menu: 0 16px 40px rgba(0, 0, 0, 0.55);
   --shadow-pulse: 0 0 0 6px rgba(var(--brand-rgb), 0.18), 0 0 12px rgba(var(--brand-rgb), 0.9);
   --ease: cubic-bezier(0.23, 1, 0.32, 1);
@@ -262,7 +262,7 @@ a.dp-card:active { transform: translate(-1px, -1px); box-shadow: var(--shadow-pr
 .js [data-step][data-fx="state"].on { opacity: 1; }
 
 /* a node that lights up in its accent colour when its step is reached */
-.lit { --c: var(--accent); --cs: var(--accent-soft); }
+.lit { --c: var(--sky); --cs: var(--sky-soft); }
 .js .lit[data-step] { background: var(--raised); border-color: var(--line); color: var(--text-muted); }
 .js .lit[data-step].on { background: var(--cs); border-color: var(--c); color: var(--c); }
 .lit--brand { --c: var(--brand); --cs: var(--brand-soft); }
@@ -341,9 +341,9 @@ a.dp-card:active { transform: translate(-1px, -1px); box-shadow: var(--shadow-pr
 .space__nebula { position: absolute; inset: -20%; opacity: 1;
   background:
     radial-gradient(45% 38% at 82% 18%, rgba(var(--brand-rgb), 0.22), transparent 70%),
-    radial-gradient(40% 34% at 10% 78%, rgba(var(--accent-rgb), 0.16), transparent 70%),
+    radial-gradient(40% 34% at 10% 78%, rgba(var(--accent-rgb), 0.06), transparent 70%),
     radial-gradient(38% 30% at 60% 100%, rgba(var(--brand-rgb), 0.14), transparent 70%),
-    radial-gradient(26% 22% at 28% 10%, rgba(var(--accent-rgb), 0.08), transparent 70%);
+    radial-gradient(26% 22% at 28% 10%, rgba(var(--brand-rgb), 0.08), transparent 70%);
   animation: nebula 40s ease-in-out infinite alternate; }
 @keyframes nebula { to { transform: translate3d(-4%, 3%, 0) rotate(4deg) scale(1.06); } }
 /* synthwave floor: a perspective grid that runs toward the viewer, fading out before the horizon */
@@ -402,7 +402,7 @@ a.dp-card:hover { background-color: rgba(16, 20, 31, 0.85); }
 @media (max-width: 899px) { .ed__frame { height: 80vh; } }
 
 /* ---------- neon layer: glows, gradient edges and HUD accents ---------- */
-::selection { background: rgba(var(--accent-rgb), 0.4); }
+::selection { background: rgba(var(--brand-rgb), 0.4); }
 .h-home, .h-hero, .h-display { text-shadow: 0 0 40px rgba(var(--brand-rgb), 0.25); }
 .dotg { color: var(--accent); text-shadow: 0 0 12px rgba(var(--accent-rgb), 0.9), 0 0 28px rgba(var(--accent-rgb), 0.5); }
 .dp-label { letter-spacing: 0.14em; }
@@ -421,18 +421,18 @@ a.dp-card:hover { background-color: rgba(16, 20, 31, 0.85); }
 .dp-pill--brand { border: 1px solid rgba(var(--brand-rgb), 0.45); box-shadow: 0 0 14px rgba(var(--brand-rgb), 0.25); }
 .dp-pill--accent { border: 1px solid rgba(var(--accent-rgb), 0.5); box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.25); }
 .node--brand, .lit--brand.on { box-shadow: 0 0 16px rgba(var(--brand-rgb), 0.35); }
-.node--accent, .lit.on:not(.lit--brand):not(.lit--sky):not(.lit--gold) { box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.35); }
+.node--accent { box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.35); }
 .pkt { box-shadow: 0 0 10px var(--pkt, var(--brand)); }
 .cnd { box-shadow: 0 0 8px rgba(var(--brand-rgb), 0.5); }
 .cnd.dn { box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.5); }
 .rail a[aria-current] .rail__num { box-shadow: 0 0 14px rgba(var(--brand-rgb), 0.8); border-color: var(--brand); }
 
-/* glass surfaces: a thin blue-to-red gradient edge that brightens on hover */
+/* glass surfaces: a thin blue gradient edge that brightens on hover */
 .dp-card, .panel, .canvas-box, .lf, .dp-code, .stat, .p-home .orbit .chip3d, .p-home .index a { border-color: rgba(var(--brand-rgb), 0.14); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04); }
 .dp-card, .panel, .canvas-box, .lf, .dp-code, .stat, .p-home .index a { position: relative; }
 .dp-card::before, .panel::before, .canvas-box::before, .lf::before, .dp-code::before, .stat::before, .p-home .orbit .chip3d::before, .p-home .index a::before {
   content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; padding: 1px; pointer-events: none;
-  background: linear-gradient(135deg, rgba(var(--brand-rgb), 0.9), transparent 35%, transparent 65%, rgba(var(--accent-rgb), 0.9));
+  background: linear-gradient(135deg, rgba(var(--brand-rgb), 0.9), transparent 40%, transparent 70%, rgba(var(--brand-rgb), 0.35));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   opacity: 0.55; transition: opacity 250ms;
@@ -444,7 +444,7 @@ a.dp-card:hover::before, .p-home .index a:hover::before { opacity: 1; }
 .p-home .index a:hover .n { box-shadow: 0 0 12px rgba(var(--brand-rgb), 0.8); }
 
 /* section edges glow like light strips */
-.contact, .page-foot, .p-home .recap-wrap { border-top-color: transparent; border-image: linear-gradient(90deg, transparent, rgba(var(--brand-rgb), 0.6), rgba(var(--accent-rgb), 0.6), transparent) 1; }
+.contact, .page-foot, .p-home .recap-wrap { border-top-color: transparent; border-image: linear-gradient(90deg, transparent, rgba(var(--brand-rgb), 0.6), transparent) 1; }
 
 @media (prefers-reduced-motion: reduce) { .ul { background-position: 50% 0; } }
 /* the chips stack statically on phones; keep each one the containing block for its gradient edge */

@@ -14,7 +14,7 @@ type Mode = "globe" | "lattice" | "field";
 type V3 = [number, number, number];
 
 const BASE = [150, 200, 255]; // icy blue: the resting field
-const HOT = [255, 31, 69]; // neon red: what the cursor lights up
+const HOT = [90, 210, 255]; // bright cyan: what the cursor lights up
 const DEPTH = 1600;
 
 function fibSphere(n: number, r: number): V3[] {
