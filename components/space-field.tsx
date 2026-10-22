@@ -14,7 +14,7 @@ type Mode = "globe" | "lattice" | "field";
 type V3 = [number, number, number];
 
 const BASE = [232, 232, 234];
-const BRAND = [63, 200, 78];
+const BRAND = [0, 123, 167];
 const DEPTH = 1600;
 
 function fibSphere(n: number, r: number): V3[] {
