@@ -10,7 +10,7 @@ export function ogImage({ eyebrow, headline, footer, accent = "#00a3ff" }: { eye
       <div style={{ width: "100%", height: "100%", background: "#030308", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 80, color: "#eef4ff" }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 24 }}>
           <div style={{ display: "flex", fontSize: 44, fontWeight: 800, letterSpacing: -1 }}>
-            rama sathya sai<span style={{ color: "#ff1f45" }}>.</span>
+            rama sathya sai<span style={{ color: "#39ff14" }}>.</span>
           </div>
           {eyebrow && <div style={{ display: "flex", fontSize: 28, color: accent }}>/ {eyebrow}</div>}
         </div>

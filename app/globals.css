@@ -13,18 +13,18 @@
   --brand-hover: #3dbbff;
   --brand-soft: #00223a;
   --on-brand: #02060d;
-  --accent: #ff1f45; /* secondary accent (neon red): tags, graph branches, highlights */
-  --accent-soft: #3a0611;
+  --accent: #39ff14; /* secondary accent (neon green): tags, graph branches, highlights */
+  --accent-soft: #0d3306;
   --sky: #7cc8ff;
   --sky-soft: #0c2238;
-  --gold: #b07cff; /* neon violet: the midpoint of blue and red, for a third tag colour */
+  --gold: #b07cff; /* neon violet: a third tag colour */
   --gold-soft: #22113f;
   --danger: #ff4d6a;
   --link: #4cc2ff;
   --selection: #5a0a1c;
   --brand-rgb: 0, 163, 255; /* --brand as channels, for translucent uses */
-  --accent-rgb: 255, 31, 69; /* --accent as channels, for translucent uses */
-  --grad: linear-gradient(100deg, var(--brand) 0%, #7a5cff 50%, var(--accent) 100%);
+  --accent-rgb: 57, 255, 20; /* --accent as channels, for translucent uses */
+  --grad: linear-gradient(100deg, var(--brand) 0%, #00e5c8 50%, var(--accent) 100%);
   --font-display: var(--font-mona), "Mona Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-sans: var(--font-mona), "Mona Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
@@ -336,7 +336,7 @@ a.dp-card:active { transform: translate(-1px, -1px); box-shadow: var(--shadow-pr
 @media (max-width: 899px) { .sec--pin { min-height: 0; padding-block: var(--section-gap); } }
 
 /* ---------- space background ---------- */
-.space { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; background: linear-gradient(180deg, #020208 0%, var(--bg) 50%, #07030a 100%); }
+.space { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; background: linear-gradient(180deg, #020208 0%, var(--bg) 50%, #030806 100%); }
 .space canvas { position: absolute; inset: 0; width: 100vw; height: 100vh; }
 .space__nebula { position: absolute; inset: -20%; opacity: 1;
   background:
@@ -424,7 +424,7 @@ a.dp-card:hover { background-color: rgba(16, 20, 31, 0.85); }
 .node--accent { box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.35); }
 .pkt { box-shadow: 0 0 10px var(--pkt, var(--brand)); }
 .cnd { box-shadow: 0 0 8px rgba(var(--brand-rgb), 0.5); }
-.cnd.dn { box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.5); }
+.cnd.dn { box-shadow: 0 0 8px rgba(255, 77, 106, 0.5); }
 .rail a[aria-current] .rail__num { box-shadow: 0 0 14px rgba(var(--brand-rgb), 0.8); border-color: var(--brand); }
 
 /* glass surfaces: a thin blue gradient edge that brightens on hover */

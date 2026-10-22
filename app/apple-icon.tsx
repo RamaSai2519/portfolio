@@ -9,7 +9,7 @@ export default function AppleIcon() {
     (
       <div style={{ width: "100%", height: "100%", background: "#030308", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
         <div style={{ display: "flex", fontSize: 120, fontWeight: 800, color: "#f2f3f7", marginLeft: -36, marginTop: -12 }}>r</div>
-        <div style={{ position: "absolute", left: 106, top: 102, width: 34, height: 34, borderRadius: 17, background: "#ff1f45" }} />
+        <div style={{ position: "absolute", left: 106, top: 102, width: 34, height: 34, borderRadius: 17, background: "#39ff14" }} />
       </div>
     ),
     size,
