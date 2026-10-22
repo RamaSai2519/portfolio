@@ -95,10 +95,7 @@ export default function Home() {
                 <span className="dp-pill dp-pill--brand" style={{ alignSelf: "flex-start" }}><i className="dp-dot dp-dot--live live" />open to work</span>
                 <h1 className="h-home">
                   I ship websites and the{" "}
-                  <span className="ul">
-                    systems
-                    <svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 13 C 70 4, 150 18, 297 7" /></svg>
-                  </span>{" "}
+                  <span className="ul">systems</span>{" "}
                   behind them<span className="dotg">.</span>
                 </h1>
                 <p className="lede">Five sites live in production, and the systems behind them: a trading engine, an LLM assistant, a call scorer, a platform backend and a résumé typesetter.</p>
