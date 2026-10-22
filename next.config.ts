@@ -11,6 +11,17 @@ const nextConfig: NextConfig = {
     qualities: [70, 75, 80],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
+  // Short links for the WhatsApp assistant demos, e.g. /demo/ycdc. These redirect (not proxy)
+  // so the demo page loads from the Lambda origin and its /chat calls stay same-origin.
+  async redirects() {
+    const demoOrigin = "https://mle6d4x5dvnu7hl63wsytb25ea0tfqrm.lambda-url.ap-south-1.on.aws";
+    const leads = ["ndc", "ycdc", "ayushman", "komali", "shaakya", "nischitha", "properties21"];
+    return leads.map((lead) => ({
+      source: `/demo/${lead}`,
+      destination: `${demoOrigin}/demo/lead_${lead}`,
+      permanent: false,
+    }));
+  },
 };
 
 export default nextConfig;
