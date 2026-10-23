@@ -30,6 +30,16 @@ const steps: [string, string, string][] = [
   ["var(--sky)", "Sent back on WhatsApp", "History is saved; Slack hears about anything odd."],
 ];
 
+// The same kernel, offered to small businesses. "live" means it runs in the public WhatsApp demo today.
+const modules: [string, string, string, boolean][] = [
+  ["Front desk", "Holds the whole first conversation in the customer's language, warmly and one question at a time, answers from the business's own facts and books the visit.", "sub-model · knowledge", true],
+  ["Owner alerts", "A hot lead or an unhappy customer pings the owner on WhatsApp straight away, with the conversation attached.", "tool · notify", true],
+  ["Lead follow-up", "Quiet enquiries get a polite nudge on a schedule until they book or say no, so nobody is forgotten.", "scheduled job", false],
+  ["Bookings and reminders", "Books site visits or consultations into a calendar and reminds both sides before the slot.", "sub-model · schedules", false],
+  ["CRM sync", "Every lead lands in a Google Sheet or the CRM already in use, with source, budget, stage and transcript.", "tool · api", false],
+  ["Reviews and referrals", "After a job is handed over, asks happy customers for a Google review and a referral.", "scheduled job", false],
+];
+
 export default function ArkI() {
   return (
     <div className="p-ark">
@@ -118,6 +128,27 @@ export default function ArkI() {
             </div>
           </div>
           <div className="tags" data-step={2}><span className="dp-pill">python</span><span className="dp-pill">flask</span><span className="dp-pill">gunicorn</span><span className="dp-pill">openai function calling · gpt-4o</span><span className="dp-pill">mongodb</span><span className="dp-pill">whatsapp webhooks</span><span className="dp-pill">slack</span><span className="dp-pill">pm2</span></div>
+        </Stage>
+        <Stage mode="scrub" className="sec" label="For your business">
+          <SecHead eyebrow="04 — the same kernel, for your business" title="One conversation, a module per job">
+            <p className="lede" style={{ maxWidth: 720 }}>I now build this pattern for small businesses on WhatsApp. One model holds the customer&apos;s conversation; each job below is a specialist or a scheduled task added to the same kernel, so a business can start with the front desk and add the rest when it pays for itself.</p>
+          </SecHead>
+          <div data-float="c" className="mods">
+            {modules.map(([n, p, kind, live], i) => (
+              <div key={n} className="panel mod" data-step={i} style={{ borderColor: live ? "var(--brand)" : undefined }}>
+                <div className="tags" style={{ justifyContent: "space-between", alignItems: "center" }}>
+                  <span className="dp-label">{kind}</span>
+                  {live ? <span className="dp-pill dp-pill--brand">live in demo</span> : <span className="dp-pill">add-on</span>}
+                </div>
+                <h3>{n}</h3>
+                <p className="small">{p}</p>
+              </div>
+            ))}
+          </div>
+          <div className="row" data-step={6} style={{ alignItems: "center", gap: "12px 24px" }}>
+            <a className="dp-btn dp-btn--primary" href="https://wa.me/919398036558">Ask for a demo on WhatsApp</a>
+            <span className="small">Runs on AWS Lambda, pay-per-use, so a quiet month costs close to nothing.</span>
+          </div>
         </Stage>
       </main>
       <PageFooter prev={{ href: "/emporos", label: "Previous: Emporos" }} next={{ href: "/mark8", label: "Next: mark8" }} />
