@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
   // so the demo page loads from the Lambda origin and its /chat calls stay same-origin.
   async redirects() {
     const demoOrigin = "https://mle6d4x5dvnu7hl63wsytb25ea0tfqrm.lambda-url.ap-south-1.on.aws";
-    const leads = ["ndc", "ycdc", "ayushman", "komali", "shaakya", "nischitha", "properties21", "aesthetics"];
+    const leads = ["ndc", "ycdc", "ayushman", "komali", "shaakya", "nischitha", "properties21", "aesthetics", "jupiter"];
     return leads.map((lead) => ({
       source: `/demo/${lead}`,
       destination: `${demoOrigin}/demo/lead_${lead}`,
