@@ -11,16 +11,19 @@ const nextConfig: NextConfig = {
     qualities: [70, 75, 80],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
-  // Short links for the WhatsApp assistant demos, e.g. /demo/ycdc. These redirect (not proxy)
-  // so the demo page loads from the Lambda origin and its /chat calls stay same-origin.
+  // Short links for the WhatsApp assistant demos, e.g. /demo/ycdc. One wildcard covers every lead,
+  // so adding a lead (a Mongo config on the Lambda) needs no change here. These redirect (not proxy)
+  // so the demo page loads from the Lambda origin and its /chat calls stay same-origin. Unknown
+  // slugs get the Lambda's friendly not-found page.
   async redirects() {
     const demoOrigin = "https://mle6d4x5dvnu7hl63wsytb25ea0tfqrm.lambda-url.ap-south-1.on.aws";
-    const leads = ["ndc", "ycdc", "ayushman", "komali", "shaakya", "nischitha", "properties21", "aesthetics", "jupiter", "ayathana", "tevvo"];
-    return leads.map((lead) => ({
-      source: `/demo/${lead}`,
-      destination: `${demoOrigin}/demo/lead_${lead}`,
-      permanent: false,
-    }));
+    return [
+      {
+        source: "/demo/:slug",
+        destination: `${demoOrigin}/demo/lead_:slug`,
+        permanent: false,
+      },
+    ];
   },
 };
 
